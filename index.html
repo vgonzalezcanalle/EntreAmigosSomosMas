@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B3058">
+  <meta name="description" content="Red de voluntarios para ayudar a Venezuela.">
+  <title>Entre Amigos por VENEZUELA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ── Tokens ── */
+:root{--azul:#0B3058;--azul-m:#1a4a7a;--azul-c:#2a6099;--amarillo:#FBE07A;--blanco:#fff;--gtxt:#333;--gsub:#666;--gborde:#E0E0E0;--gbg:#F5F6FA;--rojo:#E84040;--verde:#1BAF7A;--r-sm:6px;--r:12px;--r-lg:16px;--shadow:0 2px 12px rgba(11,48,88,.12);--shadow-c:0 1px 4px rgba(11,48,88,.08);--bh:48px;--hh:56px;--nh:46px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ── Ajuste estructural (Padding top para que el banner fijo no tape el header) ── */
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  background:var(--gbg);
+  color:var(--gtxt);
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  overscroll-behavior:none;
+  padding-top: var(--bh);
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,select,textarea{font-family:inherit;font-size:.9rem;width:100%;border:1.5px solid var(--gborde);border-radius:var(--r-sm);padding:.6rem .8rem;background:var(--blanco);color:var(--gtxt);transition:border-color .2s;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--azul-c);box-shadow:0 0 0 3px rgba(42,96,153,.15)}
+textarea{resize:vertical;min-height:80px}
+ 
+/* ── Pantalla bienvenida ── */
+.welcome-screen{position:fixed;inset:0;z-index:500;background:var(--azul);display:flex;align-items:center;justify-content:center;padding:1.5rem;transition:opacity .3s}
+.welcome-inner{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center}
+.welcome-flag{font-size:3rem}
+.welcome-super{font-size:.7rem;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase}
+.welcome-title{font-size:2rem;font-weight:800;color:var(--amarillo);letter-spacing:.06em}
+.welcome-sub{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:280px}
+.welcome-btns{width:100%;display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
+.welcome-btn{width:100%;padding:1rem 1.2rem;border-radius:14px;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.9rem;text-align:left;transition:transform .15s,opacity .15s}
+.welcome-btn:active{transform:scale(.97);opacity:.88}
+.wbtn-emoji{font-size:1.8rem;flex-shrink:0}
+.wbtn-text{display:flex;flex-direction:column}
+.wbtn-label{font-size:1rem;font-weight:700}
+.wbtn-sub{font-size:.75rem;opacity:.8;margin-top:.1rem}
+.welcome-btn--necesito{background:var(--amarillo);color:var(--azul)}
+.welcome-btn--ayudo{background:var(--verde);color:#fff}
+.welcome-btn--local{background:var(--blanco);color:var(--azul)}
+.welcome-or{font-size:.75rem;color:rgba(255,255,255,.35)}
+.welcome-skip{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:underline;cursor:pointer;margin-top:.25rem;background:none;border:none;font-family:inherit}
+ 
+/* ── Banner sticky ── */
+.sticky-banner{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--bh);background:var(--amarillo);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:0 .75rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sticky-banner::-webkit-scrollbar{display:none}
+.banner-btn{flex-shrink:0;font-family:inherit;font-size:.72rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;border:none;cursor:pointer;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .1s;display:inline-flex;align-items:center;gap:.3rem}
+.banner-btn:active{transform:scale(.96);opacity:.85}
+.btn-gofundme{background:#00B964;color:#fff}
+.btn-pagomovil{background:var(--azul);color:var(--amarillo)}
+.btn-psico{background:#7B5EA7;color:#fff}
+ 
+/* ── Header ── */
+.site-header{position:sticky;top:var(--bh);z-index:90;background:var(--azul);color:var(--blanco);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.logo{display:flex;flex-direction:column;line-height:1.1}
+.logo-entre{font-size:.65rem;font-weight:400;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.logo-vzla{font-size:1.1rem;font-weight:700;color:var(--amarillo);letter-spacing:.06em}
+.header-actions{display:flex;align-items:center;gap:.5rem}
+.lang-select{width:auto;padding:.3rem .5rem;font-size:.75rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);border-radius:var(--r-sm);background:rgba(255,255,255,.08);color:var(--blanco);cursor:pointer}
+.lang-select option{background:var(--azul)}
+.ig-btn{display:flex;align-items:center;gap:.3rem;background:var(--amarillo);color:var(--azul);font-size:.72rem;font-weight:700;padding:.35rem .7rem;border-radius:20px;white-space:nowrap;transition:opacity .2s}
+.ig-btn:active{opacity:.8}
+ 
+/* ── Nav ── */
+.main-nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-top:1px solid rgba(255,255,255,.1)}
+.main-nav::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:.75rem .9rem;font-family:inherit;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.65);border-bottom:2.5px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;height:var(--nh)}
+.nav-tab.active{color:var(--amarillo);border-bottom-color:var(--amarillo)}
+ 
+/* ── Filtro geo (Restaurado a STICKY milimétrico) ── */
+.geo-filter{
+  background:var(--blanco);
+  border-bottom:1px solid var(--gborde);
+  padding:.8rem 1rem;
+  position:sticky; /* IMPORTANTE: Mantiene el filtro a la vista */
+  top:calc(var(--bh) + var(--hh) + var(--nh)); /* Calculo exacto de las barras superiores */
+  z-index:80;
+}
+.filter-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end}
+.filter-ciudad{flex:1 1 140px}
+.filter-btn-geo{flex:0 0 auto; margin-bottom: 1px}
+.filter-categoria{flex:1 1 100%}
+.input-group label{display:block;font-size:.68rem;font-weight:600;color:var(--gsub);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.04em}
+.input-group input,.input-group select{font-size:.82rem;padding:.45rem .6rem}
+.btn-geo{background:var(--azul);color:var(--blanco);font-family:inherit;font-size:.72rem;font-weight:600;padding:.45rem .75rem;border-radius:var(--r-sm);white-space:nowrap;transition:opacity .2s;border:none;cursor:pointer}
+.btn-geo:active{opacity:.8}
+@media(min-width:600px){.filter-row{flex-wrap:nowrap}.filter-categoria{flex:1 1 auto}}
+ 
+/* ── Main (Ocupa espacio para empujar footer) ── */
+.main-content{
+  flex: 1; 
+  padding: 1.5rem 1rem 3.5rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.hidden{display:none!important}
+
+/* ── Section Head & Botón Principal Responsive ── */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.section-head h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin: 0;
+}
+.section-hint {
+  font-size: .85rem;
+  color: var(--gsub);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* En Móvil el botón azul queda centrado abajo del título para no cortarse */
+@media(max-width: 600px) {
+  .section-head {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    margin-bottom: 1.8rem;
+  }
+  .section-head h2 {
+    font-size: 1.1rem;
+  }
+  .section-head .btn-primary {
+    width: 100%;
+    max-width: 340px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(11, 48, 88, 0.15);
+  }
+  .section-hint {
+    text-align: center;
+  }
+}
+ 
+/* ── Botones ── */
+.btn-primary{background:var(--azul);color:var(--blanco);font-family:inherit;font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:var(--r-sm);border:none;cursor:pointer;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-primary:active{opacity:.85;transform:scale(.97)}
+.btn-outline{background:transparent;color:var(--azul);font-family:inherit;font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:var(--r-sm);border:1.5px solid var(--azul);cursor:pointer;transition:background .2s}
+.btn-outline:hover{background:rgba(11,48,88,.06)}
+.btn-outline-geo{display:inline-flex;align-items:center;gap:.4rem;font-family:inherit;font-size:.8rem;font-weight:500;color:var(--azul-c);border:1.5px solid var(--azul-c);border-radius:var(--r-sm);padding:.45rem .8rem;background:rgba(42,96,153,.06);cursor:pointer;width:100%;justify-content:center;margin-bottom:.4rem}
+ 
+/* ── Cards ── */
+.cards-list{display:flex;flex-direction:column;gap:.75rem}
+.card{background:var(--blanco);border-radius:var(--r);box-shadow:var(--shadow-c);border:1px solid var(--gborde);overflow:hidden;transition:box-shadow .2s}
+.card:active{box-shadow:var(--shadow)}
+.card-header{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem .5rem}
+.card-icon{font-size:1.4rem;flex-shrink:0}
+.card-meta{flex:1;min-width:0}
+.card-titulo{font-size:.9rem;font-weight:600;color:var(--gtxt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-subtitulo{font-size:.75rem;color:var(--gsub);margin-top:.1rem}
+.estado-badge{flex-shrink:0;font-size:.65rem;font-weight:700;padding:.25rem .6rem;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.estado-necesitado{background:#fde8e8;color:var(--rojo)}
+.estado-comprado{background:#fff5d6;color:#9a6800}
+.estado-en_transito{background:#feebd9;color:#b34900}
+.estado-recibido{background:#d7f5ea;color:#0a6640}
+.card-body{padding:0 1rem .75rem}
+.card-desc{font-size:.82rem;color:var(--gtxt);line-height:1.5;margin-bottom:.5rem}
+.card-location{display:flex;align-items:center;gap:.3rem;font-size:.75rem;color:var(--gsub);margin-bottom:.3rem}
+.match-badge{background:#FBE07A;color:var(--azul);font-size:.72rem;font-weight:700;padding:.4rem .8rem;border-radius:var(--r-sm);margin-bottom:.5rem;display:inline-flex;align-items:center;gap:.35rem}
+.card-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding:.75rem 1rem;border-top:1px solid var(--gborde)}
+.btn-card{flex:1;min-width:110px;font-family:inherit;font-size:.75rem;font-weight:600;padding:.5rem;border-radius:var(--r-sm);border:1.5px solid var(--gborde);background:var(--blanco);color:var(--gtxt);cursor:pointer;text-align:center;transition:background .15s;display:flex;align-items:center;justify-content:center;gap:.3rem}
+.btn-card:active{background:var(--gbg)}
+.btn-card--primary{background:var(--azul);color:var(--blanco);border-color:var(--azul)}
+.btn-card--wapp{background:#25D366;color:#fff;border-color:#25D366}
+.btn-card--maps{background:#4285F4;color:#fff;border-color:#4285F4}
+.conductor-info{display:flex;align-items:center;gap:.5rem;background:#f0f8ff;border:1px solid #c0d8f0;border-radius:var(--r-sm);padding:.5rem .75rem;margin:.5rem 1rem;font-size:.78rem;color:var(--azul)}
+.match-banner{background:var(--amarillo);border-radius:var(--r-sm);padding:.6rem .9rem;margin-bottom:.75rem;font-size:.82rem;font-weight:600;color:var(--azul);display:flex;align-items:center;gap:.4rem}
+.factura-thumb{width:60px;height:60px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--gborde);cursor:pointer;margin-top:.4rem}
+.empty-state{text-align:center;color:var(--gsub);font-size:.85rem;padding:2.5rem 1rem;line-height:1.7}
+ 
+/* ── Local card extras ── */
+.local-header{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem .5rem}
+.local-avatar{width:44px;height:44px;border-radius:50%;background:var(--azul);color:var(--amarillo);font-size:1.2rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vol-avatar{background:#e8f0fe;color:#1a4a9a;font-size:1.2rem}
+.precio-tag{flex-shrink:0;font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:20px;border:1.5px solid;white-space:nowrap}
+.precio-gratis{background:#d7f5ea;color:#0a6640;border-color:#9fe1cb}
+.precio-venta{background:#fff5d6;color:#7a5200;border-color:#f5d77a}
+.productos-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.producto-chip{font-size:.72rem;background:var(--gbg);border:1px solid var(--gborde);border-radius:20px;padding:.2rem .6rem;color:var(--gtxt)}
+.vol-tareas-label{font-size:.7rem;font-weight:700;color:var(--gsub);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+ 
+/* ── Alimentación ── */
+.vol-list{padding:.5rem 1rem;border-top:1px solid var(--gborde)}
+.vol-list-title{font-size:.72rem;font-weight:700;color:var(--gsub);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.vol-item{font-size:.78rem;padding:.3rem 0;border-bottom:1px solid var(--gborde);display:flex;gap:.5rem;align-items:flex-start}
+.vol-item:last-child{border-bottom:none}
+.vol-name{font-weight:600;min-width:80px}
+.vol-what{color:var(--gsub)}
+ 
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: var(--azul);
+  color: var(--blanco);
+  width: 100%;
+  margin-top: auto; 
+}
+.site-footer-sub {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.8rem;
+}
+.site-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--amarillo);
+  color: var(--azul);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.site-footer-btn:active {
+  opacity: 0.8;
+  transform: scale(0.97);
+}
+ 
+/* ── Modales ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(11,48,88,.6);display:flex;align-items:flex-end;justify-content:center;padding:0;backdrop-filter:blur(2px)}
+.modal-card{background:var(--blanco);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:480px;max-height:92dvh;overflow-y:auto;padding:1.4rem 1rem 2rem;-webkit-overflow-scrolling:touch}
+.modal-card::before{content:'';display:block;width:40px;height:4px;background:var(--gborde);border-radius:2px;margin:-0.8rem auto .8rem}
+.modal-card--sm{border-radius:var(--r-lg);max-height:80dvh}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.modal-header h3{font-size:1rem;font-weight:700;color:var(--azul)}
+.modal-close{font-size:1.1rem;color:var(--gsub);padding:.25rem .5rem;border-radius:var(--r-sm);transition:background .2s}
+.modal-close:hover{background:var(--gbg)}
+.form-group{margin-bottom:.85rem}
+.form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--gsub);margin-bottom:.3rem}
+.form-group small{display:block;font-size:.7rem;color:var(--gsub);margin-top:.25rem;line-height:1.4}
+.form-row{display:flex;gap:.6rem}
+.form-row .form-group{flex:1;min-width:0}
+.modal-actions{display:flex;gap:.6rem;margin-top:1.2rem}
+.modal-actions button{flex:1}
+.pin-msg{font-size:.85rem;color:var(--gtxt);margin-bottom:.75rem;line-height:1.5}
+.pin-input{font-size:1.8rem;text-align:center;letter-spacing:.5rem}
+.pin-error{background:#fde8e8;color:var(--rojo);font-size:.78rem;padding:.4rem .7rem;border-radius:var(--r-sm);margin-top:.5rem}
+.pago-movil-info{margin:.5rem 0}
+.pago-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--gborde);font-size:.88rem}
+.pago-row:last-child{border-bottom:none}
+.pago-label{color:var(--gsub);font-weight:500}
+.pago-val{font-weight:700;color:var(--azul)}
+.geo-status{display:block;font-size:.72rem;color:var(--verde);margin-top:.25rem;min-height:1em}
+ 
+/* ── Donor panel ── */
+.donor-panel{position:fixed;inset:0;z-index:300;background:rgba(11,48,88,.6);display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.donor-inner{background:var(--blanco);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:480px;padding:1.4rem 1rem 2rem;max-height:92dvh;overflow-y:auto;position:relative}
+.donor-inner::before{content:'';display:block;width:40px;height:4px;background:var(--gborde);border-radius:2px;margin:-0.8rem auto .8rem}
+.donor-close{position:absolute;top:1rem;right:1rem;font-size:1.1rem;color:var(--gsub);padding:.25rem .5rem;border-radius:var(--r-sm)}
+.donor-title{font-size:1rem;font-weight:700;color:var(--azul);margin-bottom:1rem}
+.donor-opt{width:100%;display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;border-radius:var(--r-sm);border:1.5px solid var(--gborde);background:var(--blanco);margin-bottom:.5rem;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s;text-decoration:none;color:var(--gtxt)}
+.donor-opt:active{background:var(--gbg)}
+.dopt-icon{font-size:1.5rem;flex-shrink:0}
+.dopt-text{flex:1;text-align:left;display:flex;flex-direction:column;gap:2px}
+.dopt-label{font-size:.88rem;font-weight:600;color:var(--gtxt)}
+.dopt-sub{font-size:.72rem;color:var(--gsub)}
+.dopt-arrow{font-size:1.2rem;color:var(--gsub)}
+.donor-opt--green{border-color:#9fe1cb}
+.donor-opt--blue{border-color:#b8d0f8}
+.donor-opt--yellow{border-color:#f5d77a}
+.donor-opt--orange{border-color:#f5c4a0}
+.donor-opt--teal{border-color:#9fe1cb}
+.donor-opt--purple{border-color:#cecbf6}
+ 
+/* ── Toast ── */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(0);background:var(--azul);color:var(--blanco);font-size:.82rem;font-weight:500;padding:.65rem 1.2rem;border-radius:24px;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;white-space:nowrap;animation:tIn .3s ease,tOut .3s ease 2.5s forwards}
+@keyframes tIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes tOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(12px)}}
+ 
+/* ── Responsive ≥480px ── */
+@media(min-width:480px){
+  .modal-overlay,.donor-panel{align-items:center;padding:1rem}
+  .modal-card,.donor-inner{border-radius:var(--r-lg);max-height:88dvh}
+  .modal-card::before,.donor-inner::before{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  
+/* ── Botón atrás ── */
+#btnBack{display:none;align-items:center;gap:.3rem;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);border:none;border-radius:20px;padding:.3rem .7rem .3rem .5rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+#btnBack:active{opacity:.7}
+
+/* ── Logo clicable ── */
+.logo{cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* ── Welcome btn inspección ── */
+.welcome-btn--insp{background:#1a4a7a;color:#fff}
+
+/* ── Modal inspección ── */
+.cal-info{font-size:.78rem;margin-top:.3rem;min-height:1.2em}
+.fotos-preview{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.insp-hint{background:#f0f8ff;border:1px solid #c0d8f0;border-radius:var(--r-sm);padding:.6rem .8rem;font-size:.75rem;color:#1a4a7a;line-height:1.5;margin-bottom:.75rem}
+
+/* ── Botón transparencia flotante ── */
+.btn-transparencia{position:fixed;bottom:1.2rem;right:1rem;z-index:89;background:var(--azul);color:var(--amarillo);border:none;border-radius:20px;padding:.5rem 1rem;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(11,48,88,.3);display:flex;align-items:center;gap:.4rem;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-transparencia:active{opacity:.85;transform:scale(.96)}
+
+/* ── Modal donaciones / transparencia ── */
+.don-card{background:var(--blanco);border:1px solid var(--gborde);border-radius:var(--r);padding:1rem;margin-bottom:.75rem}
+.don-card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.don-icon{font-size:1.5rem}
+.don-monto{font-size:1rem;font-weight:700;color:var(--azul)}
+.don-fecha{font-size:.72rem;color:var(--gsub)}
+.don-desc{font-size:.83rem;color:var(--gtxt);line-height:1.5;margin-bottom:.4rem}
+.don-donde{font-size:.75rem;color:var(--gsub);margin-bottom:.3rem}
+.don-empty{text-align:center;padding:2rem;color:var(--gsub);font-size:.85rem}
+
+
+/* ── Header top con atrás ── */
+.header-top{display:flex;align-items:center;gap:.6rem;padding:.5rem 1rem;height:var(--hh);position:relative}
+.logo{flex:1;min-width:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.header-actions{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+
+/* ── Página de inicio ── */
+.inicio-hero{background:linear-gradient(160deg,var(--azul) 0%,#1a4a7a 100%);border-radius:var(--r);padding:2rem 1.2rem;text-align:center;margin-bottom:1rem}
+.inicio-flag{font-size:2.5rem;margin-bottom:.5rem}
+.inicio-titulo{font-size:1.4rem;font-weight:700;color:var(--blanco);line-height:1.2;margin-bottom:.4rem}
+.inicio-vzla{color:var(--amarillo);font-size:1.6rem;letter-spacing:.05em}
+.inicio-lema{font-size:.82rem;color:rgba(255,255,255,.7);margin-top:.4rem}
+.inicio-about{background:var(--blanco);border-radius:var(--r);padding:1.1rem;margin-bottom:.75rem;border:1px solid var(--gborde)}
+.inicio-section-title{font-size:.9rem;font-weight:700;color:var(--azul);margin-bottom:.6rem}
+.inicio-p{font-size:.82rem;color:var(--gtxt);line-height:1.65;margin-bottom:.65rem}
+.inicio-p:last-child{margin-bottom:0}
+.inicio-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.inicio-stat{background:var(--azul);border-radius:var(--r-sm);padding:.75rem .5rem;text-align:center}
+.istat-num{display:block;font-size:1.5rem;font-weight:700;color:var(--amarillo)}
+.istat-label{display:block;font-size:.62rem;color:rgba(255,255,255,.7);margin-top:.15rem;line-height:1.3}
+.inicio-don-section{margin-bottom:.75rem}
+.inicio-don-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem}
+.btn-sm{padding:.35rem .75rem;font-size:.75rem}
+.inicio-cta-row{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.inicio-cta-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem;border-radius:var(--r-sm);font-weight:700;font-size:.88rem;text-decoration:none;transition:opacity .2s}
+.inicio-cta-btn:active{opacity:.82}
+.inicio-cta-green{background:#00B964;color:#fff}
+.inicio-cta-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
+
+/* ── Donaciones llamativas ── */
+.don-card{background:var(--blanco);border-radius:var(--r);overflow:hidden;margin-bottom:.85rem;box-shadow:0 2px 12px rgba(11,48,88,.1);border:1px solid var(--gborde)}
+.don-card-top{background:linear-gradient(135deg,var(--azul),#1a4a7a);padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem}
+.don-icon-big{font-size:1.8rem}
+.don-monto{font-size:1.15rem;font-weight:700;color:var(--amarillo)}
+.don-fecha{font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.1rem}
+.don-card-body{padding:.85rem 1rem}
+.don-desc{font-size:.85rem;color:var(--gtxt);line-height:1.6;margin-bottom:.5rem}
+.don-donde{font-size:.75rem;color:var(--gsub);display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem}
+.don-media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem}
+.don-media-grid img,.don-media-grid video{width:100%;border-radius:var(--r-sm);aspect-ratio:1;object-fit:cover}
+
+/* ── Botón transparencia flotante mejorado ── */
+.btn-transparencia{position:fixed;bottom:1.4rem;right:1rem;z-index:89;background:linear-gradient(135deg,var(--amarillo),#d4b800);color:var(--azul);border:none;border-radius:24px;padding:.6rem 1.1rem;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(251,224,122,.5);display:flex;align-items:center;gap:.4rem;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-transparencia:active{opacity:.85;transform:scale(.96)}
+.btn-transp-pulse{animation:pulse-gold 2s infinite}
+@keyframes pulse-gold{0%,100%{box-shadow:0 4px 16px rgba(251,224,122,.5)}50%{box-shadow:0 4px 24px rgba(251,224,122,.8)}}
+
+
+/* ── Fix radio buttons (el reset global los rompe) ── */
+input[type="radio"],input[type="checkbox"]{
+  width:18px;height:18px;flex-shrink:0;
+  -webkit-appearance:auto;appearance:auto;
+  accent-color:var(--azul);
+  padding:0;border:none;background:none;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+ 
+<!-- BIENVENIDA -->
+<div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-label="Bienvenida">
+  <div class="welcome-inner">
+    <div class="welcome-flag">🇻🇪</div>
+    <p class="welcome-super" data-i18n="logo_entre">entre amigos por</p>
+    <h1 class="welcome-title">VENEZUELA</h1>
+    <p class="welcome-sub" data-i18n="welcome_sub">Conectamos a quienes necesitan con quienes pueden ayudar</p>
+    <div class="welcome-btns">
+      <button class="welcome-btn welcome-btn--necesito" onclick="chooseRole('necesito')">
+        <span class="wbtn-emoji">🙋</span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_necesito">Necesito ayuda</span>
+          <span class="wbtn-sub" data-i18n="welcome_necesito_sub">Publicar una necesidad o buscar recursos</span>
+        </div>
+      </button>
+      <div class="welcome-or" data-i18n="welcome_o">— o —</div>
+      <button class="welcome-btn welcome-btn--ayudo" onclick="chooseRole('ayudo')">
+        <span class="wbtn-emoji">💛</span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_ayudo">Quiero ayudar</span>
+          <span class="wbtn-sub" data-i18n="welcome_ayudo_sub">Donar, ser voluntario o trasladar insumos</span>
+        </div>
+      </button>
+      <div class="welcome-or" data-i18n="welcome_o">— o —</div>
+      <button class="welcome-btn welcome-btn--local" onclick="chooseRole('local')">
+        <span class="wbtn-emoji">🏪</span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_local">Soy local</span>
+          <span class="wbtn-sub" data-i18n="welcome_local_sub">Ofrecer productos a la venta, ubicación y precios</span>
+        </div>
+      </button>
+    </div>
+      <div class="welcome-or">— o —</div>
+      <button class="welcome-btn welcome-btn--insp" onclick="dismissWelcome();showModal('modalInspeccion')">
+        <span class="wbtn-emoji">🏗️</span>
+        <div class="wbtn-text">
+          <span class="wbtn-label">Necesito inspección de vivienda</span>
+          <span class="wbtn-sub">Solicitar revisión estructural de tu edificio</span>
+        </div>
+      </button>
+    <button class="welcome-skip" onclick="dismissWelcome()" data-i18n="welcome_skip">Ver todo el directorio →</button>
+  </div>
+</div>
+ 
+<!-- BANNER -->
+<div class="sticky-banner" role="banner">
+  <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="banner-btn btn-gofundme" data-i18n="banner_gofundme">💛 Donar en GoFundMe</a>
+  <button class="banner-btn btn-pagomovil" onclick="showModal('modalPagoMovil')" data-i18n="banner_pagomovil">📲 Pago Móvil</button>
+  <a href="https://wa.me/525533200457" target="_blank" rel="noopener" class="banner-btn btn-psico" data-i18n="banner_psico">🧠 Apoyo Psicológico</a>
+</div>
+ 
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <button id="btnBack" onclick="goBack()" aria-label="Volver">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Atrás
+    </button>
+    <div class="logo" onclick="goToHome()" role="button" tabindex="0" aria-label="Inicio" title="Volver al inicio">
+      <span class="logo-entre" data-i18n="logo_entre">entre amigos por</span>
+      <span class="logo-vzla">VENEZUELA</span>
+    </div>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" onchange="setLang(this.value)" aria-label="Idioma">
+        <option value="es">🇻🇪 ES</option>
+        <option value="en">🇺🇸 EN</option>
+        <option value="pt">🇧🇷 PT</option>
+        <option value="fr">🇫🇷 FR</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="it">🇮🇹 IT</option>
+        <option value="ar">🇸🇾 Sirio</option>
+      </select>
+      <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="ig-btn" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="ig_seguir">Síguenos</span>
+      </a>
+    </div>
+  </div>
+  <nav class="main-nav" role="navigation" aria-label="Secciones">
+    <button class="nav-tab" onclick="showWelcome()">🏠 Inicio</button>
+    <button class="nav-tab active" onclick="showTab('tabNecesidades')" data-i18n="nav_necesidades">🔴 Necesidades</button>
+    <button class="nav-tab" onclick="showTab('tabVenta')" data-i18n="nav_venta">🏷️ Venta</button>
+    <button class="nav-tab" onclick="showTab('tabAcopio')" data-i18n="nav_acopio">📦 Acopio</button>
+    <button class="nav-tab" onclick="showTab('tabInventario')" data-i18n="nav_inventario">🏪 Locales</button>
+    <button class="nav-tab" onclick="showTab('tabVoluntarios')" data-i18n="nav_voluntarios">🤝 Voluntarios</button>
+    <button class="nav-tab" onclick="showTab('tabAlimentacion')" data-i18n="nav_alimentacion">🍽️ Alimentación</button>
+    <button class="nav-tab" onclick="showTab('tabTransporte')" data-i18n="nav_transporte">🚗 Transporte</button>
+  </nav>
+</header>
+ 
+<!-- FILTRO -->
+<section class="geo-filter" aria-label="Filtro geográfico">
+  <div class="filter-row">
+    <div class="input-group filter-ciudad">
+      <label for="filtroCiudad" data-i18n="label_ciudad">Ciudad / Estado</label>
+      <input type="text" id="filtroCiudad" placeholder="Ej: Caracas, Miranda…" autocomplete="off" oninput="applyFilters()">
+    </div>
+    <div class="filter-btn-geo">
+      <button class="btn-geo" onclick="useGeoLocation()" data-i18n="btn_ubicacion">📍 Mi ubicación</button>
+    </div>
+    <div class="input-group filter-categoria">
+      <label for="filtroCategoria" data-i18n="label_categoria">Categoría</label>
+      <select id="filtroCategoria" onchange="applyFilters()">
+        <option value="" data-i18n="cat_todas">Todas</option>
+        <option value="sangre">🩸 Sangre</option>
+        <option value="insumos_medicos">🏥 Insumos Médicos</option>
+        <option value="rescate">🦺 Rescate</option>
+        <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+        <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+      </select>
+    </div>
+  </div>
+</section>
+ 
+<!-- MAIN -->
+<main class="main-content">
+ 
+
+  <!-- INICIO -->
+  <section id="tabInicio" class="tab-panel hidden">
+    <div class="inicio-hero">
+      <div class="inicio-flag">🇻🇪</div>
+      <h2 class="inicio-titulo">Entre Amigos por<br><span class="inicio-vzla">VENEZUELA</span></h2>
+      <p class="inicio-lema">Unidos por quienes más lo necesitan</p>
+    </div>
+
+    <div class="inicio-about">
+      <h3 class="inicio-section-title">¿Quiénes somos?</h3>
+      <p class="inicio-p">Somos un grupo de jóvenes que, ante la emergencia causada por el terremoto en Venezuela, decidió actuar y unir esfuerzos para ayudar a las comunidades afectadas.</p><p class="inicio-p">Esta iniciativa surge con el objetivo de unir esfuerzos y trabajar de manera colaborativa junto a amigos, familiares y todas aquellas personas que desean ayudar, pero que, al encontrarse fuera del país o lejos de las zonas afectadas, no saben cómo hacerlo.</p><p class="inicio-p">Trabajamos en contacto directo con personas que se encuentran en primera línea atendiendo la emergencia y apoyando a las comunidades afectadas, lo que nos permite identificar las necesidades reales y hacer llegar la ayuda de forma rápida y directa.</p><p class="inicio-p">A través de esta plataforma compartiremos cada compra, entrega y acción realizada, garantizando total transparencia en el uso de cada donación recibida.</p>
+    </div>
+
+    <div class="inicio-stats-row">
+      <div class="inicio-stat">
+        <span class="istat-num" id="statDonaciones">0</span>
+        <span class="istat-label">Donaciones publicadas</span>
+      </div>
+      <div class="inicio-stat">
+        <span class="istat-num" id="statNecesidades">0</span>
+        <span class="istat-label">Necesidades cubiertas</span>
+      </div>
+      <div class="inicio-stat">
+        <span class="istat-num" id="statInspecciones">0</span>
+        <span class="istat-label">Inspecciones solicitadas</span>
+      </div>
+    </div>
+
+    <div class="inicio-don-section">
+      <div class="inicio-don-header">
+        <h3 class="inicio-section-title" style="margin:0">💛 Transparencia total</h3>
+        <button class="btn-primary btn-sm" onclick="showModal('modalPublicarDonacion')">+ Publicar</button>
+      </div>
+      <p style="font-size:.8rem;color:var(--gsub);margin:.4rem 0 .85rem;line-height:1.5">Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.</p>
+      <div id="listaDonacionesInicio"></div>
+    </div>
+
+    <div class="inicio-cta-row">
+      <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-green">
+        💚 Donar en GoFundMe
+      </a>
+      <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @entreamigosporvzla
+      </a>
+    </div>
+  </section>
+
+  <!-- NECESIDADES -->
+  <section id="tabNecesidades" class="tab-panel active">
+    <div class="section-head">
+      <h2 data-i18n="title_necesidades">Necesidades activas</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevaNecesidad')" data-i18n="btn_publicar">+ Publicar necesidad</button>
+    </div>
+    <div id="autoMatchBanner" class="match-banner hidden" role="status" aria-live="polite"></div>
+    <div id="listaNecesidades" class="cards-list" role="list"></div>
+    <p id="emptyNecesidades" class="empty-state"></p>
+  </section>
+  
+  <!-- VENTA (LOCALES QUE VENDEN) -->
+  <section id="tabVenta" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_venta">Locales de Venta</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevaVenta')" data-i18n="btn_registrar_venta">+ Registrar venta</button>
+    </div>
+    <p class="section-hint">Encuentra locales que ofrecen insumos a la venta con sus respectivos precios e información de contacto.</p>
+    <div id="listaVenta" class="cards-list" role="list"></div>
+    <p id="emptyVenta" class="empty-state"></p>
+  </section>
+
+  <!-- CENTROS DE ACOPIO E INVENTARIO -->
+  <section id="tabAcopio" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_acopio">Centros de Acopio e Inventario</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoAcopio')" data-i18n="btn_registrar_acopio">+ Registrar acopio</button>
+    </div>
+    <p class="section-hint">Insumos recolectados que ya cuentan con centros de acopio o personas individuales.</p>
+    <div id="listaAcopio" class="cards-list" role="list"></div>
+    <p id="emptyAcopio" class="empty-state"></p>
+  </section>
+ 
+  <!-- LOCALES (DONANTES) -->
+  <section id="tabInventario" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_inventario">Locales y donantes</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoInventario')" data-i18n="btn_ofrecer">+ Registrarme</button>
+    </div>
+    <div id="listaInventario" class="cards-list" role="list"></div>
+    <p id="emptyInventario" class="empty-state"></p>
+  </section>
+ 
+  <!-- VOLUNTARIOS CENTROS -->
+  <section id="tabVoluntarios" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_voluntarios">Centros que buscan voluntarios</h2>
+      <button class="btn-primary" onclick="showModal('modalPedirVoluntarios')" data-i18n="btn_pedir_voluntarios">+ Pedir voluntarios</button>
+    </div>
+    <p class="section-hint">¿Eres un centro, refugio u organización? Publica cuántos voluntarios necesitas y para qué. La gente se anota directamente.</p>
+    <div id="listaVoluntarios" class="cards-list" role="list"></div>
+    <p id="emptyVoluntarios" class="empty-state"></p>
+  </section>
+ 
+  <!-- ALIMENTACION -->
+  <section id="tabAlimentacion" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_alimentacion">Coordinación de alimentación</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoEvento')" data-i18n="btn_nuevo_evento">+ Nuevo evento</button>
+    </div>
+    <div id="listaAlimentacion" class="cards-list" role="list"></div>
+    <p id="emptyAlimentacion" class="empty-state"></p>
+  </section>
+ 
+  <!-- TRANSPORTE -->
+  <section id="tabTransporte" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_transporte">Red de conductores</h2>
+    </div>
+    <p class="section-hint" data-i18n="hint_transporte">Los insumos "comprados" necesitan traslado. Ofrécete desde cada tarjeta.</p>
+    <div id="listaTransporte" class="cards-list" role="list"></div>
+    <p id="emptyTransporte" class="empty-state"></p>
+  </section>
+ 
+</main>
+ 
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p class="site-footer-sub" data-i18n="ig_sub">Síguenos para actualizaciones en tiempo real</p>
+  <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="site-footer-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @entreamigosporvzla
+  </a>
+</footer>
+ 
+<!-- ═══ MODALES ═══ -->
+ 
+<!-- Modal: Nueva Necesidad -->
+<div id="modalNuevaNecesidad" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nueva_nec">Publicar necesidad</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevaNecesidad')">✕</button>
+    </div>
+    <form id="formNecesidad" onsubmit="submitNecesidad(event)" novalidate>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="nec_categoria" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="sangre">🩸 Sangre</option>
+          <option value="insumos_medicos">🏥 Insumos Médicos</option>
+          <option value="rescate">🦺 Rescate y Maquinaria</option>
+          <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+          <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+        </select>
+      </div>
+      <div class="form-group" id="grupoTipoSangre" style="display:none">
+        <label>Tipo de sangre *</label>
+        <select id="nec_tipo_sangre">
+          <option value="">Selecciona tipo</option>
+          <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+          <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción *</label>
+        <textarea id="nec_descripcion" rows="3" required placeholder="Describe qué se necesita y con qué urgencia…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad *</label>
+          <input type="number" id="nec_cantidad" min="1" required placeholder="1">
+        </div>
+        <div class="form-group">
+          <label>Unidad</label>
+          <input type="text" id="nec_unidad" placeholder="unidades, cajas…">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="nec_ciudad" required placeholder="Caracas, Miranda">
+      </div>
+      <div class="form-group">
+        <label>Hospital o centro (opcional)</label>
+        <input type="text" id="nec_hospital" placeholder="Hospital Pérez Carreño…">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('nec')">📍 Usar mi ubicación actual</button>
+        <span id="nec_geo_status" class="geo-status"></span>
+        <input type="hidden" id="nec_lat"><input type="hidden" id="nec_lng">
+      </div>
+      <div class="form-group">
+        <label>PIN de confirmación (4 dígitos) *</label>
+        <input type="password" id="nec_pin" maxlength="4" pattern="\d{4}" required placeholder="••••" inputmode="numeric" autocomplete="off">
+        <small>Lo usarás para confirmar cuando se compre o se reciba.</small>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaNecesidad')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Nuevo Local / Donante -->
+<div id="modalNuevoInventario" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_inv">Registrar local o donante</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoInventario')">✕</button>
+    </div>
+    <form id="formInventario" onsubmit="submitInventario(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del local o persona *</label>
+        <input type="text" id="inv_nombre_local" required placeholder="Farmacia Central, Juan Pérez…">
+      </div>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="inv_categoria" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="sangre">🩸 Sangre</option>
+          <option value="insumos_medicos">🏥 Insumos Médicos</option>
+          <option value="rescate">🦺 Rescate</option>
+          <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+          <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción de lo que ofreces *</label>
+        <textarea id="inv_descripcion" rows="2" required placeholder="Tenemos medicamentos, equipos, alimentos…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Productos disponibles (uno por línea)</label>
+        <textarea id="inv_productos" rows="3" placeholder="Gasas estériles&#10;Suero fisiológico&#10;Guantes nitrilo"></textarea>
+        <small>Aparecerán como etiquetas en tu tarjeta.</small>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad disponible</label>
+          <input type="number" id="inv_cantidad" min="0" placeholder="50">
+        </div>
+        <div class="form-group">
+          <label>Unidad</label>
+          <input type="text" id="inv_unidad" placeholder="cajas, unidades…">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Precio en Bs. (dejar vacío si es donación gratuita)</label>
+        <input type="number" id="inv_precio" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="inv_ciudad" required placeholder="Maracaibo, Zulia">
+      </div>
+      <div class="form-group">
+        <label>Dirección exacta</label>
+        <input type="text" id="inv_direccion" placeholder="Av. Bella Vista, local 4…">
+      </div>
+      <div class="form-group">
+        <label>Horario de atención</label>
+        <input type="text" id="inv_horario" placeholder="Lun–Vie 8am–6pm">
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="inv_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('inv')">📍 Geolocalizar mi ubicación</button>
+        <span id="inv_geo_status" class="geo-status"></span>
+        <input type="hidden" id="inv_lat"><input type="hidden" id="inv_lng">
+        <small>Así apareces en el mapa cuando alguien presione "Ver en mapa".</small>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoInventario')">Cancelar</button>
+        <button type="submit" class="btn-primary">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Nueva Venta -->
+<div id="modalNuevaVenta" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nueva_venta">Registrar Venta</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevaVenta')">✕</button>
+    </div>
+    <form id="formVenta" onsubmit="submitVenta(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del Local *</label>
+        <input type="text" id="vta_nombre" required placeholder="Ej: Farmacia Central">
+      </div>
+      <div class="form-group">
+        <label>Productos y Precios *</label>
+        <textarea id="vta_productos" rows="3" required placeholder="Ej: Gasas a $2, Alcohol a $3, Guantes a $1..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Ubicación exacta *</label>
+        <input type="text" id="vta_ubicacion" required placeholder="Av. Principal, local 4">
+      </div>
+      <div class="form-group">
+        <label>Teléfono *</label>
+        <input type="tel" id="vta_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('vta')">📍 Geolocalizar mi ubicación</button>
+        <span id="vta_geo_status" class="geo-status"></span>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaVenta')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Nuevo Acopio (Centros o Personas) -->
+<div id="modalNuevoAcopio" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_acopio">Registrar Inventario / Acopio</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoAcopio')">✕</button>
+    </div>
+    <form id="formAcopio" onsubmit="submitAcopio(event)" novalidate>
+      <div class="form-group">
+        <label>Soy... *</label>
+        <select id="acp_tipo" required onchange="document.getElementById('acp_centro_fields').style.display = this.value === 'centro' ? 'block' : 'none'; document.getElementById('acp_persona_fields').style.display = this.value === 'persona' ? 'block' : 'none';">
+          <option value="">Selecciona</option>
+          <option value="centro">Centro de Acopio</option>
+          <option value="persona">Persona Individual</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>¿Qué artículos tienes disponibles? *</label>
+        <textarea id="acp_articulos" rows="2" required placeholder="Ropa, medicinas, comida no perecedera..."></textarea>
+      </div>
+      
+      <!-- Campos para Centro -->
+      <div id="acp_centro_fields" style="display:none;">
+        <div class="form-group">
+          <label>¿De dónde son? (Organización) *</label>
+          <input type="text" id="acp_origen" placeholder="Ej: Fundación Cruz Roja">
+        </div>
+        <div class="form-group">
+          <label>¿Dónde están? (Dirección exacta) *</label>
+          <input type="text" id="acp_direccion" placeholder="Ej: Plaza Central, carpa 2">
+        </div>
+      </div>
+
+      <!-- Campos para Persona Individual -->
+      <div id="acp_persona_fields" style="display:none;">
+        <div class="form-group">
+          <label>Cédula / Identidad *</label>
+          <input type="text" id="acp_cedula" placeholder="V-12345678">
+        </div>
+        <div class="form-group">
+          <label>Teléfono *</label>
+          <input type="tel" id="acp_telefono" placeholder="0424-1234567">
+        </div>
+        <div class="form-group">
+          <label>Ciudad *</label>
+          <input type="text" id="acp_ciudad" placeholder="Ej: Caracas">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoAcopio')">Cancelar</button>
+        <button type="submit" class="btn-primary">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Pedir Voluntarios -->
+<div id="modalPedirVoluntarios" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pedir_vol">Pedir voluntarios para mi centro</h3>
+      <button class="modal-close" onclick="hideModal('modalPedirVoluntarios')">✕</button>
+    </div>
+    <form id="formSolicitudVoluntarios" onsubmit="submitSolicitudVoluntarios(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del centro u organización *</label>
+        <input type="text" id="sv_nombre_centro" required placeholder="Refugio Las Mercedes, Cruz Roja…">
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="sv_ciudad" required placeholder="Caracas, Miranda">
+      </div>
+      <div class="form-group">
+        <label>¿Cuántos voluntarios necesitan? *</label>
+        <input type="number" id="sv_cantidad" min="1" value="1" required>
+      </div>
+      <div class="form-group">
+        <label>¿Para qué tareas? *</label>
+        <textarea id="sv_tareas" rows="3" required placeholder="Repartir alimentos, clasificar donaciones, acompañar personas mayores…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Horario en que se necesitan</label>
+        <input type="text" id="sv_horario" placeholder="Sábados 9am–1pm, urgente esta semana…">
+      </div>
+      <div class="form-group">
+        <label>Persona de contacto</label>
+        <input type="text" id="sv_contacto" placeholder="Nombre del responsable">
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="sv_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalPedirVoluntarios')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar solicitud</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Ofrecerse como Voluntario -->
+<div id="modalOfrecerseVoluntario" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_ofrecerse_vol">Ofrecerme como voluntario</h3>
+      <button class="modal-close" onclick="hideModal('modalOfrecerseVoluntario')">✕</button>
+    </div>
+    <form id="formOfrecerseVoluntario" onsubmit="submitOfrecerseVoluntario(event)" novalidate>
+      <input type="hidden" id="ov_id_solicitud">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" id="ov_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte / ID *</label>
+        <input type="text" id="ov_cedula" required placeholder="V-12345678">
+        <small>Requerido por seguridad. No se comparte públicamente.</small>
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="ov_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <label>¿Qué puedes aportar? (opcional)</label>
+        <textarea id="ov_nota" rows="2" placeholder="Puedo llevar mi vehículo, tengo experiencia en primeros auxilios…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalOfrecerseVoluntario')">Cancelar</button>
+        <button type="submit" class="btn-primary">Ofrecerme</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Nuevo Evento Alimentación -->
+<div id="modalNuevoEvento" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_evento">Registrar evento de alimentación</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoEvento')">✕</button>
+    </div>
+    <form id="formEvento" onsubmit="submitEvento(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del lugar *</label>
+        <input type="text" id="ev_nombre" required placeholder="Parque Los Caobos…">
+      </div>
+      <div class="form-group">
+        <label>Tipo de lugar *</label>
+        <select id="ev_tipo" required>
+          <option value="">Selecciona</option>
+          <option value="parque">Parque</option>
+          <option value="refugio">Refugio</option>
+          <option value="centro_acopio">Centro de acopio</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Turno *</label>
+          <select id="ev_turno" required>
+            <option value="">Turno</option>
+            <option value="desayuno">🌅 Desayuno</option>
+            <option value="almuerzo">☀️ Almuerzo</option>
+            <option value="cena">🌙 Cena</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha *</label>
+          <input type="date" id="ev_fecha" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="ev_ciudad" required placeholder="Valencia, Carabobo">
+      </div>
+      <div class="form-group">
+        <label>Personas estimadas</label>
+        <input type="number" id="ev_personas" min="0" placeholder="50">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('ev')">📍 Geolocalizar lugar</button>
+        <span id="ev_geo_status" class="geo-status"></span>
+        <input type="hidden" id="ev_lat"><input type="hidden" id="ev_lng">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoEvento')">Cancelar</button>
+        <button type="submit" class="btn-primary">Crear evento</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Voluntario Comida -->
+<div id="modalVoluntarioComida" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_voluntario_comida">Anotarme para llevar comida</h3>
+      <button class="modal-close" onclick="hideModal('modalVoluntarioComida')">✕</button>
+    </div>
+    <form id="formVoluntarioComida" onsubmit="submitVoluntarioComida(event)" novalidate>
+      <input type="hidden" id="vol_id_alimentacion">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" id="vol_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte / ID *</label>
+        <input type="text" id="vol_cedula" required placeholder="V-12345678">
+        <small>Requerido por seguridad. No se comparte públicamente.</small>
+      </div>
+      <div class="form-group">
+        <label>¿Qué llevas? *</label>
+        <textarea id="vol_que_lleva" rows="2" required placeholder="Arroz, caraotas, agua…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Teléfono (opcional)</label>
+        <input type="tel" id="vol_telefono" placeholder="0424-1234567">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalVoluntarioComida')">Cancelar</button>
+        <button type="submit" class="btn-primary">Anotarme</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Conductor -->
+<div id="modalConductor" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_conductor">🚗 Yo lo traslado</h3>
+      <button class="modal-close" onclick="hideModal('modalConductor')">✕</button>
+    </div>
+    <form id="formConductor" onsubmit="submitConductor(event)" novalidate>
+      <input type="hidden" id="cond_id_insumo">
+      <div class="form-group">
+        <label>Nombre o alias *</label>
+        <input type="text" id="cond_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte *</label>
+        <input type="text" id="cond_cedula" required placeholder="V-12345678">
+        <small>Requerido para seguridad y trazabilidad.</small>
+      </div>
+      <div class="form-group">
+        <label>Teléfono (WhatsApp) *</label>
+        <input type="tel" id="cond_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ciudad origen *</label>
+          <input type="text" id="cond_origen" required placeholder="Caracas">
+        </div>
+        <div class="form-group">
+          <label>Ciudad destino *</label>
+          <input type="text" id="cond_destino" required placeholder="Valencia">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalConductor')">Cancelar</button>
+        <button type="submit" class="btn-primary">Confirmar traslado</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: PIN -->
+<div id="modalPin" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card modal-card--sm">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pin">Confirmar con PIN</h3>
+      <button class="modal-close" onclick="hideModal('modalPin')">✕</button>
+    </div>
+    <p id="pinMensaje" class="pin-msg"></p>
+    <div class="form-group">
+      <label>PIN de 4 dígitos *</label>
+      <input type="password" id="pinInput" maxlength="4" pattern="\d{4}" inputmode="numeric" autocomplete="off" placeholder="••••" class="pin-input">
+    </div>
+    <div id="pinError" class="pin-error hidden">PIN incorrecto. Inténtalo de nuevo.</div>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="hideModal('modalPin')">Cancelar</button>
+      <button class="btn-primary" onclick="confirmPin()" data-i18n="btn_confirmar">Confirmar</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Modal: Pago Móvil -->
+<div id="modalPagoMovil" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card modal-card--sm">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pago">Pago Móvil</h3>
+      <button class="modal-close" onclick="hideModal('modalPagoMovil')">✕</button>
+    </div>
+    <div class="pago-movil-info">
+      <div class="pago-row"><span class="pago-label">Banco</span><span class="pago-val">BANCARIBE</span></div>
+      <div class="pago-row"><span class="pago-label">Teléfono</span><span class="pago-val">0424-2170412</span></div>
+      <div class="pago-row"><span class="pago-label">Cédula</span><span class="pago-val">V-30.660.344</span></div>
+    </div>
+    <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="hideModal('modalPagoMovil')" data-i18n="btn_listo">Listo</button>
+  </div>
+</div>
+ 
+<!-- Panel Donante -->
+<div id="donorPanel" class="donor-panel hidden" role="dialog" aria-modal="true">
+  <div class="donor-inner">
+    <button class="donor-close" onclick="closeDonorPanel()">✕</button>
+    <h2 class="donor-title" data-i18n="donor_title">¿Cómo quieres ayudar?</h2>
+    <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="donor-opt donor-opt--green">
+      <span class="dopt-icon">💚</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_gofundme">Donar dinero</span><span class="dopt-sub" data-i18n="donor_gofundme_sub">GoFundMe · llega directo a quienes más lo necesitan</span></div>
+      <span class="dopt-arrow">›</span>
+    </a>
+    <button class="donor-opt donor-opt--blue" onclick="closeDonorPanel();showModal('modalPagoMovil')">
+      <span class="dopt-icon">📲</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_pagomovil">Pago Móvil</span><span class="dopt-sub" data-i18n="donor_pagomovil_sub">Transferencia bancaria desde Venezuela</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--yellow" onclick="closeDonorPanel();showTab('tabInventario')">
+      <span class="dopt-icon">📦</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_insumos">Ofrecer insumos</span><span class="dopt-sub" data-i18n="donor_insumos_sub">Tengo medicinas, comida u otros recursos</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--orange" onclick="closeDonorPanel();showTab('tabTransporte')">
+      <span class="dopt-icon">🚗</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_transporte">Trasladar insumos</span><span class="dopt-sub" data-i18n="donor_transporte_sub">Tengo vehículo y puedo hacer entregas</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--teal" onclick="closeDonorPanel();showTab('tabAlimentacion')">
+      <span class="dopt-icon">🍽️</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_comida">Llevar comida</span><span class="dopt-sub" data-i18n="donor_comida_sub">Anotarme en un turno de alimentación</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--purple" onclick="closeDonorPanel();showTab('tabVoluntarios')">
+      <span class="dopt-icon">🤝</span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_voluntario">Ser voluntario</span><span class="dopt-sub" data-i18n="donor_voluntario_sub">Apoyar en un centro que necesita manos</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+  </div>
+</div>
+ 
+<!-- Botón flotante transparencia -->
+<button class="btn-transparencia btn-transp-pulse" onclick="showModal('modalTransparencia')" aria-label="Ver donaciones">
+  💛 Mira tus donaciones
+</button>
+
+
+<!-- Modal: Inspección de viviendas y edificaciones -->
+<div id="modalInspeccion" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>🏗️ Inspección de edificación</h3>
+      <button class="modal-close" onclick="hideModal('modalInspeccion')">✕</button>
+    </div>
+    <div class="insp-hint">📋 Completa el formulario con la mayor precisión posible. Al enviar recibirás una confirmación por WhatsApp y la fecha quedará reservada automáticamente.</div>
+    <form id="formInspeccion" onsubmit="submitInspeccion(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del solicitante *</label>
+        <input type="text" id="insp_nombre" required placeholder="Tu nombre completo">
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico *</label>
+        <input type="email" id="insp_correo" required placeholder="correo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label>Número telefónico (WhatsApp) *</label>
+        <input type="tel" id="insp_telefono" required placeholder="0424-1234567">
+        <small>Recibirás la confirmación aquí.</small>
+      </div>
+      <div class="form-group">
+        <label>Nombre del edificio *</label>
+        <input type="text" id="insp_edificio" required placeholder="Edificio Las Mercedes, Residencias Bolívar…">
+      </div>
+      <div class="form-group">
+        <label>Ubicación exacta (ser lo más específico posible) *</label>
+        <textarea id="insp_ubicacion" rows="2" required placeholder="Av. Principal, entre calles X y Y, piso / apto…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Su edificio fue construido antes de 1967? *</label>
+        <div style="display:flex;gap:1rem;margin-top:.4rem">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_antes1967" value="si" required style="width:auto"> Sí
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_antes1967" value="no" style="width:auto"> No
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Si respondió "Sí" — ¿el edificio sufrió daños y reparaciones?</label>
+        <textarea id="insp_danos" rows="2" placeholder="Describa los daños o reparaciones realizadas (obviar si respondió No)…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Cuenta con disponibilidad de planos estructurales? *</label>
+        <div style="display:flex;gap:1rem;margin-top:.4rem">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_planos" value="si" required style="width:auto"> Sí
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_planos" value="no" style="width:auto"> No
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fotos del estado del edificio (vigas y columnas)</label>
+        <small style="margin-bottom:.5rem;display:block">Haz clic en "Examinar" para acceder a tu galería. Máximo 6 fotos.</small>
+        <input type="file" id="insp_fotos" accept="image/*" multiple style="padding:.4rem;font-size:.8rem">
+        <div id="insp_fotos_preview" class="fotos-preview"></div>
+      </div>
+      <div style="border-top:1px solid var(--gborde);padding-top:.85rem;margin-top:.5rem">
+        <div class="form-group">
+          <label>📅 Fecha de inspección *</label>
+          <input type="date" id="insp_fecha" required>
+          <div id="insp_cal_info" class="cal-info"></div>
+        </div>
+        <div class="form-group">
+          <label>🕐 Hora preferida *</label>
+          <select id="insp_hora" required>
+            <option value="">Selecciona una hora</option>
+            <option value="08:00">08:00 AM</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalInspeccion')">Cancelar</button>
+        <button type="submit" class="btn-primary">Enviar solicitud</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal: Transparencia / Donaciones publicadas -->
+<div id="modalTransparencia" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>💛 Transparencia y donaciones</h3>
+      <button class="modal-close" onclick="hideModal('modalTransparencia')">✕</button>
+    </div>
+    <p style="font-size:.8rem;color:var(--gsub);margin-bottom:.75rem;line-height:1.5">Aquí publicamos cada donación recibida: cuánto, dónde se usó y cómo. Total transparencia.</p>
+    <button class="btn-primary" style="width:100%;margin-bottom:.85rem" onclick="showModal('modalPublicarDonacion')">+ Publicar donación</button>
+    <div id="listaDonaciones"></div>
+  </div>
+</div>
+
+<!-- Modal: Publicar donación -->
+<div id="modalPublicarDonacion" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Publicar donación recibida</h3>
+      <button class="modal-close" onclick="hideModal('modalPublicarDonacion')">✕</button>
+    </div>
+    <form id="formDonacion" onsubmit="submitDonacion(event)" novalidate>
+      <div class="form-group">
+        <label>Monto recibido (Bs. o $) *</label>
+        <input type="text" id="don_monto" required placeholder="5,000 Bs. / 50 USD">
+      </div>
+      <div class="form-group">
+        <label>¿En qué se usó? *</label>
+        <textarea id="don_descripcion" rows="3" required placeholder="Se compraron 20 cajas de gasas y 10 litros de suero fisiológico para el Hospital Vargas…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Dónde se entregó? *</label>
+        <input type="text" id="don_donde" required placeholder="Hospital Vargas, Caracas">
+      </div>
+      <div class="form-group">
+        <label>Fecha *</label>
+        <input type="date" id="don_fecha" required>
+      </div>
+      <div class="form-group">
+        <label>Fotos o videos (opcional)</label>
+        <small style="display:block;margin-bottom:.4rem">Puedes subir hasta 4 archivos (fotos o videos cortos).</small>
+        <input type="file" id="don_media" accept="image/*,video/*" multiple style="padding:.4rem;font-size:.8rem">
+        <div id="don_media_preview" class="fotos-preview"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalPublicarDonacion')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
