@@ -1096,6 +1096,21 @@ input[type="radio"],input[type="checkbox"]{
   </div>
 </div>
  
+<!-- Modal: Pregunta Sí/No (reemplaza window.confirm, que no funciona en navegadores móviles) -->
+<div id="modalPreguntaSiNo" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card modal-card--sm">
+    <div class="modal-header">
+      <h3 id="pregunta_titulo">¿Necesita transporte?</h3>
+      <button class="modal-close" onclick="hideModal('modalPreguntaSiNo')">✕</button>
+    </div>
+    <p id="preguntaMensaje" class="pin-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="responderPreguntaSiNo(false)">No</button>
+      <button class="btn-primary" onclick="responderPreguntaSiNo(true)">Sí</button>
+    </div>
+  </div>
+</div>
+ 
 <!-- Modal: Pago Móvil -->
 <div id="modalPagoMovil" class="modal-overlay hidden" role="dialog" aria-modal="true">
   <div class="modal-card modal-card--sm">
