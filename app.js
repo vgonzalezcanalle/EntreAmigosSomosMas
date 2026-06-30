@@ -70,6 +70,7 @@ const I18N = {
     donor_transporte:'Trasladar insumos', donor_transporte_sub:'Tengo vehículo y puedo hacer entregas',
     donor_comida:'Llevar comida', donor_comida_sub:'Anotarme en un turno de alimentación',
     donor_voluntario:'Ser voluntario', donor_voluntario_sub:'Apoyar en un centro que necesita manos',
+    ph_ciudad:'Ej: Caracas', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital Pérez Carreño…', ph_descripcion_nec:'Describe qué se necesita y con qué urgencia…', ph_unidad:'unidades, cajas…', ph_nombre_local:'Farmacia Central, Juan Pérez…', ph_desc_inv:'Tenemos medicamentos, equipos, alimentos…', ph_productos:'Gasas estériles\nSuero fisiológico\nGuantes nitrilo', ph_direccion:'Av. Bella Vista, local 4…', ph_horario:'Lun–Vie 8am–6pm', ph_prod_precios:'Ej: Gasas a $2, Alcohol a $3…', ph_ubicacion:'Av. Principal, local 4', ph_articulos:'Ropa, medicinas, comida no perecedera…', ph_organizacion:'Ej: Fundación Cruz Roja', ph_cedula:'V-12345678', ph_nombre_centro:'Refugio Las Mercedes, Cruz Roja…', ph_tareas:'Repartir alimentos, clasificar donaciones…', ph_horario_vol:'Sábados 9am–1pm, urgente esta semana…', ph_contacto:'Nombre del responsable', ph_tu_nombre:'Tu nombre', ph_aportar:'Puedo llevar mi vehículo, tengo experiencia en primeros auxilios…', ph_nombre_lugar:'Parque Los Caobos…', ph_personas:'50', ph_que_llevas:'Arroz, caraotas, agua…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5.000 Bs. / 50 USD', ph_don_desc:'Se compraron 20 cajas de gasas para el Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'Categoría *', lbl_tipo_sangre:'Tipo de sangre *', lbl_descripcion:'Descripción *', lbl_cantidad:'Cantidad *', lbl_unidad:'Unidad', lbl_ciudad_estado:'Ciudad / Estado *', lbl_hospital:'Hospital o centro (opcional)', lbl_pin:'PIN de confirmación (4 dígitos) *', lbl_nombre_local:'Nombre del local o persona *', lbl_descripcion_ofreces:'Descripción de lo que ofreces *', lbl_productos:'Productos disponibles (uno por línea)', lbl_cantidad_disp:'Cantidad disponible', lbl_precio:'Precio en Bs. (vacío si es donación gratuita)', lbl_direccion:'Dirección exacta', lbl_horario:'Horario de atención', lbl_telefono_wa:'Teléfono / WhatsApp *', lbl_prod_precios:'Productos y Precios *', lbl_ubicacion_exacta:'Ubicación exacta *', lbl_telefono:'Teléfono *', lbl_soy:'Soy... *', lbl_articulos:'¿Qué artículos tienes disponibles? *', lbl_organizacion:'¿De dónde son? (Organización) *', lbl_donde_estan:'¿Dónde están? (Dirección exacta) *', lbl_cedula:'Cédula / Identidad *', lbl_ciudad:'Ciudad *', lbl_nombre_centro:'Nombre del centro u organización *', lbl_cuantos_vol:'¿Cuántos voluntarios necesitan? *', lbl_tareas:'¿Para qué tareas? *', lbl_horario_vol:'Horario en que se necesitan', lbl_contacto:'Persona de contacto', lbl_nombre_completo:'Nombre completo *', lbl_cedula_id:'Cédula / Pasaporte / ID *', lbl_que_aportas:'¿Qué puedes aportar? (opcional)', lbl_nombre_lugar:'Nombre del lugar *', lbl_tipo_lugar:'Tipo de lugar *', lbl_turno:'Turno *', lbl_fecha:'Fecha *', lbl_personas:'Personas estimadas', lbl_que_llevas:'¿Qué llevas? *', lbl_telefono_op:'Teléfono (opcional)', lbl_nombre_alias:'Nombre o alias *', lbl_cedula_pas:'Cédula / Pasaporte *', lbl_ciudad_origen:'Ciudad origen *', lbl_ciudad_destino:'Ciudad destino *', lbl_monto:'Monto recibido (Bs. o $) *', lbl_don_uso:'¿En qué se usó? *', lbl_don_donde:'¿Dónde se entregó? *', lbl_don_media:'Fotos o videos (opcional)', lbl_registrar:'Registrar', sel_categoria:'Selecciona una categoría', sel_tipo:'Selecciona tipo', sel_selecciona:'Selecciona', sel_turno:'Turno', opt_centro:'Centro de Acopio', opt_persona:'Persona Individual', opt_parque:'Parque', opt_refugio:'Refugio', opt_centro_acopio:'Centro de acopio', opt_otro:'Otro', opt_desayuno:'🌅 Desayuno', opt_almuerzo:'☀️ Almuerzo', opt_cena:'🌙 Cena', small_pin:'Lo usarás para confirmar cuando se compre o se reciba.', small_productos:'Aparecerán como etiquetas en tu tarjeta.', small_geo_mapa:'Así apareces en el mapa cuando alguien presione "Ver en mapa".', small_seguridad:'Requerido por seguridad. No se comparte públicamente.', small_trazabilidad:'Requerido para seguridad y trazabilidad.', small_don_media:'Puedes subir hasta 4 archivos (fotos o videos cortos).', btn_geolocal:'📍 Geolocalizar mi ubicación', btn_publicar_sol:'Publicar solicitud', btn_ofrecerme:'Ofrecerme', btn_crear_evento:'Crear evento', btn_anotarme:'Anotarme', btn_confirmar_traslado:'Confirmar traslado', pin_error_msg:'PIN incorrecto. Inténtalo de nuevo.', pago_banco:'Banco', pago_telefono:'Teléfono', pago_cedula:'Cédula', hint_venta:'Encuentra locales que ofrecen insumos a la venta con sus respectivos precios e información de contacto.', hint_acopio:'Insumos recolectados que ya cuentan con centros de acopio o personas individuales.', hint_voluntarios:'¿Eres un centro, refugio u organización? Publica cuántos voluntarios necesitas y para qué. La gente se anota directamente.',
   },
   en: {
     nav_venta: '🏷️ Sales', nav_acopio: '📦 Collections', title_venta: 'Sales Locations', title_acopio: 'Collection Centers',
@@ -114,6 +115,7 @@ const I18N = {
     donor_gofundme:'Donate money', donor_gofundme_sub:'GoFundMe · goes directly to those in need', donor_pagomovil:'Mobile Payment', donor_pagomovil_sub:'Bank transfer from Venezuela',
     donor_insumos:'Offer supplies', donor_insumos_sub:'I have medicine, food or other resources', donor_transporte:'Transport supplies', donor_transporte_sub:'I have a vehicle and can make deliveries',
     donor_comida:'Bring food', donor_comida_sub:'Sign up for a food distribution shift', donor_voluntario:'Volunteer', donor_voluntario_sub:'Support a center that needs hands',
+    ph_ciudad:'E.g. Caracas, Miranda…', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital name…', ph_descripcion_nec:'Describe what is needed and how urgently…', ph_unidad:'units, boxes…', ph_nombre_local:'Central Pharmacy, Juan Pérez…', ph_desc_inv:'We have medicine, equipment, food…', ph_productos:'Sterile gauze\nSaline solution\nNitrile gloves', ph_direccion:'Main Ave, store 4…', ph_horario:'Mon–Fri 8am–6pm', ph_prod_precios:'E.g. Gauze $2, Alcohol $3…', ph_ubicacion:'Main Ave, store 4', ph_articulos:'Clothing, medicine, non-perishable food…', ph_organizacion:'E.g. Red Cross Foundation', ph_cedula:'ID-12345678', ph_nombre_centro:'Las Mercedes Shelter, Red Cross…', ph_tareas:'Distribute food, sort donations…', ph_horario_vol:'Saturdays 9am–1pm, urgent this week…', ph_contacto:'Name of person in charge', ph_tu_nombre:'Your name', ph_aportar:'I can bring my vehicle, I have first aid experience…', ph_nombre_lugar:'Los Caobos Park…', ph_personas:'50', ph_que_llevas:'Rice, beans, water…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5,000 Bs. / 50 USD', ph_don_desc:'We bought 20 boxes of gauze for Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'Category *', lbl_tipo_sangre:'Blood type *', lbl_descripcion:'Description *', lbl_cantidad:'Quantity *', lbl_unidad:'Unit', lbl_ciudad_estado:'City / State *', lbl_hospital:'Hospital or center (optional)', lbl_pin:'Confirmation PIN (4 digits) *', lbl_nombre_local:'Store or person name *', lbl_descripcion_ofreces:'Description of what you offer *', lbl_productos:'Available products (one per line)', lbl_cantidad_disp:'Available quantity', lbl_precio:'Price in Bs. (leave blank if free donation)', lbl_direccion:'Exact address', lbl_horario:'Opening hours', lbl_telefono_wa:'Phone / WhatsApp *', lbl_prod_precios:'Products and Prices *', lbl_ubicacion_exacta:'Exact location *', lbl_telefono:'Phone *', lbl_soy:'I am... *', lbl_articulos:'What items do you have available? *', lbl_organizacion:'Where are you from? (Organization) *', lbl_donde_estan:'Where are you? (Exact address) *', lbl_cedula:'ID / Identity *', lbl_ciudad:'City *', lbl_nombre_centro:'Center or organization name *', lbl_cuantos_vol:'How many volunteers do you need? *', lbl_tareas:'For what tasks? *', lbl_horario_vol:'Schedule when needed', lbl_contacto:'Contact person', lbl_nombre_completo:'Full name *', lbl_cedula_id:'ID / Passport *', lbl_que_aportas:'What can you contribute? (optional)', lbl_nombre_lugar:'Place name *', lbl_tipo_lugar:'Place type *', lbl_turno:'Shift *', lbl_fecha:'Date *', lbl_personas:'Estimated people', lbl_que_llevas:'What are you bringing? *', lbl_telefono_op:'Phone (optional)', lbl_nombre_alias:'Name or alias *', lbl_cedula_pas:'ID / Passport *', lbl_ciudad_origen:'Origin city *', lbl_ciudad_destino:'Destination city *', lbl_monto:'Amount received (Bs. or $) *', lbl_don_uso:'What was it used for? *', lbl_don_donde:'Where was it delivered? *', lbl_don_media:'Photos or videos (optional)', lbl_registrar:'Register', sel_categoria:'Select a category', sel_tipo:'Select type', sel_selecciona:'Select', sel_turno:'Shift', opt_centro:'Collection Center', opt_persona:'Individual Person', opt_parque:'Park', opt_refugio:'Shelter', opt_centro_acopio:'Collection center', opt_otro:'Other', opt_desayuno:'🌅 Breakfast', opt_almuerzo:'☀️ Lunch', opt_cena:'🌙 Dinner', small_pin:'You will use this to confirm when purchased or received.', small_productos:'They will appear as tags on your card.', small_geo_mapa:'This is how you appear on the map when someone presses "View on map".', small_seguridad:'Required for security. Not shared publicly.', small_trazabilidad:'Required for security and traceability.', small_don_media:'You can upload up to 4 files (photos or short videos).', btn_geolocal:'📍 Geolocate my location', btn_publicar_sol:'Publish request', btn_ofrecerme:'Volunteer', btn_crear_evento:'Create event', btn_anotarme:'Sign up', btn_confirmar_traslado:'Confirm transport', pin_error_msg:'Incorrect PIN. Please try again.', pago_banco:'Bank', pago_telefono:'Phone', pago_cedula:'ID', hint_venta:'Find stores offering supplies for sale with prices and contact info.', hint_acopio:'Collected supplies that already have collection centers or individual holders.', hint_voluntarios:'Are you a center, shelter or organization? Post how many volunteers you need and for what. People sign up directly.',
   },
   pt: {
     nav_venta: '🏷️ Vendas', nav_acopio: '📦 Centros de Coleta', title_venta: 'Locais de Venda', title_acopio: 'Centros de Coleta',
@@ -145,7 +147,8 @@ const I18N = {
     donor_title:'Como você quer ajudar?', donor_gofundme:'Doar dinheiro', donor_gofundme_sub:'GoFundMe · vai direto para quem mais precisa',
     donor_pagomovil:'Pagamento Móvel', donor_pagomovil_sub:'Transferência bancária', donor_insumos:'Oferecer insumos', donor_insumos_sub:'Tenho remédios, comida ou outros recursos',
     donor_transporte:'Transportar insumos', donor_transporte_sub:'Tenho veículo e posso fazer entregas', donor_comida:'Levar comida', donor_comida_sub:'Me inscrever em um turno de alimentação',
-    donor_voluntario:'Ser voluntário', donor_voluntario_sub:'Apoiar um centro que precisa de ajuda'
+    donor_voluntario:'Ser voluntário', donor_voluntario_sub:'Apoiar um centro que precisa de ajuda',
+    lbl_categoria:'Categoria *', lbl_tipo_sangre:'Tipo sanguíneo *', lbl_descripcion:'Descrição *', lbl_cantidad:'Quantidade *', lbl_ciudad_estado:'Cidade / Estado *', lbl_telefono_wa:'Telefone / WhatsApp *', sel_categoria:'Selecione uma categoria', sel_tipo:'Selecione o tipo', sel_selecciona:'Selecione', sel_turno:'Turno', opt_centro:'Centro de Coleta', opt_persona:'Pessoa Individual', opt_desayuno:'🌅 Café da manhã', opt_almuerzo:'☀️ Almoço', opt_cena:'🌙 Jantar', small_pin:'Você usará isso para confirmar quando comprado ou recebido.', small_seguridad:'Obrigatório por segurança. Não é compartilhado publicamente.', btn_publicar_sol:'Publicar solicitação', btn_ofrecerme:'Me oferecer', btn_crear_evento:'Criar evento', btn_anotarme:'Me inscrever', btn_confirmar_traslado:'Confirmar transporte', pin_error_msg:'PIN incorreto. Tente novamente.', pago_banco:'Banco', pago_telefono:'Telefone', pago_cedula:'CPF/ID', lbl_nombre_completo:'Nome completo *', lbl_ciudad:'Cidade *', hint_venta:'Encontre locais com insumos à venda com preços e contato.', hint_acopio:'Insumos coletados com centros de coleta ou detentores individuais.', hint_voluntarios:'É um centro ou organização? Publique quantos voluntários precisam.'
   },
   fr: {
     nav_venta: '🏷️ Ventes', nav_acopio: '📦 Collectes', title_venta: 'Points de Vente', title_acopio: 'Centres de Collecte',
@@ -173,7 +176,8 @@ const I18N = {
     modal_inspeccion_title:'🏗️ Inspection de bâtiment', insp_hint:'📋 Remplissez le formulaire. Vous recevrez une confirmation par WhatsApp.', insp_label_telefono:'Numéro WhatsApp *', insp_small_telefono:'Nous vous contacterons ici pour coordonner la visite.', insp_label_edificio:'Nom du bâtiment *', insp_label_ubicacion:'Localisation exacte *', insp_label_fotos:'Photos du bâtiment (poutres et colonnes) *', insp_small_fotos:'Obligatoire. Jusqu\'à 6 photos. Focalisez sur les poutres et colonnes.', insp_label_antes1967:'Le bâtiment a-t-il été construit avant 1967 ? *', insp_label_danos:'Si vous avez répondu "Oui" — le bâtiment a-t-il subi des dommages ou réparations ?', insp_label_planos:'Avez-vous des plans structurels disponibles ? *', insp_btn_enviar:'Envoyer la demande',
     donor_title:'Comment voulez-vous aider?', donor_gofundme:'Donner de l\'argent', donor_gofundme_sub:'GoFundMe · va directement à ceux qui en ont besoin',
     donor_pagomovil:'Paiement Mobile', donor_pagomovil_sub:'Virement bancaire', donor_insumos:'Offrir des fournitures', donor_insumos_sub:'J\'ai des médicaments, de la nourriture...', donor_transporte:'Transporter des fournitures', donor_transporte_sub:'J\'ai un véhicule et je peux livrer',
-    donor_comida:'Apporter de la nourriture', donor_comida_sub:'M\'inscrire pour une distribution', donor_voluntario:'Être bénévole', donor_voluntario_sub:'Soutenir un centre qui a besoin d\'aide'
+    donor_comida:'Apporter de la nourriture', donor_comida_sub:'M\'inscrire pour une distribution', donor_voluntario:'Être bénévole', donor_voluntario_sub:'Soutenir un centre qui a besoin d\'aide',
+    ph_ciudad:'E.g. Caracas, Miranda…', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital name…', ph_descripcion_nec:'Describe what is needed and how urgently…', ph_unidad:'units, boxes…', ph_nombre_local:'Central Pharmacy, Juan Pérez…', ph_desc_inv:'We have medicine, equipment, food…', ph_productos:'Sterile gauze\nSaline solution\nNitrile gloves', ph_direccion:'Main Ave, store 4…', ph_horario:'Mon–Fri 8am–6pm', ph_prod_precios:'E.g. Gauze $2, Alcohol $3…', ph_ubicacion:'Main Ave, store 4', ph_articulos:'Clothing, medicine, non-perishable food…', ph_organizacion:'E.g. Red Cross Foundation', ph_cedula:'ID-12345678', ph_nombre_centro:'Las Mercedes Shelter, Red Cross…', ph_tareas:'Distribute food, sort donations…', ph_horario_vol:'Saturdays 9am–1pm, urgent this week…', ph_contacto:'Name of person in charge', ph_tu_nombre:'Your name', ph_aportar:'I can bring my vehicle, I have first aid experience…', ph_nombre_lugar:'Los Caobos Park…', ph_personas:'50', ph_que_llevas:'Rice, beans, water…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5,000 Bs. / 50 USD', ph_don_desc:'We bought 20 boxes of gauze for Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'Catégorie *', lbl_tipo_sangre:'Groupe sanguin *', lbl_descripcion:'Description *', lbl_cantidad:'Quantité *', lbl_unidad:'Unit', lbl_ciudad_estado:'Ville / État *', lbl_hospital:'Hospital or center (optional)', lbl_pin:'Confirmation PIN (4 digits) *', lbl_nombre_local:'Store or person name *', lbl_descripcion_ofreces:'Description of what you offer *', lbl_productos:'Available products (one per line)', lbl_cantidad_disp:'Available quantity', lbl_precio:'Price in Bs. (leave blank if free donation)', lbl_direccion:'Exact address', lbl_horario:'Opening hours', lbl_telefono_wa:'Téléphone / WhatsApp *', lbl_prod_precios:'Products and Prices *', lbl_ubicacion_exacta:'Exact location *', lbl_telefono:'Phone *', lbl_soy:'I am... *', lbl_articulos:'What items do you have available? *', lbl_organizacion:'Where are you from? (Organization) *', lbl_donde_estan:'Where are you? (Exact address) *', lbl_cedula:'ID / Identity *', lbl_ciudad:'City *', lbl_nombre_centro:'Center or organization name *', lbl_cuantos_vol:'How many volunteers do you need? *', lbl_tareas:'For what tasks? *', lbl_horario_vol:'Schedule when needed', lbl_contacto:'Contact person', lbl_nombre_completo:'Full name *', lbl_cedula_id:'ID / Passport *', lbl_que_aportas:'What can you contribute? (optional)', lbl_nombre_lugar:'Place name *', lbl_tipo_lugar:'Place type *', lbl_turno:'Shift *', lbl_fecha:'Date *', lbl_personas:'Estimated people', lbl_que_llevas:'What are you bringing? *', lbl_telefono_op:'Phone (optional)', lbl_nombre_alias:'Name or alias *', lbl_cedula_pas:'ID / Passport *', lbl_ciudad_origen:'Origin city *', lbl_ciudad_destino:'Destination city *', lbl_monto:'Amount received (Bs. or $) *', lbl_don_uso:'What was it used for? *', lbl_don_donde:'Where was it delivered? *', lbl_don_media:'Photos or videos (optional)', lbl_registrar:'Register', sel_categoria:'Sélectionnez une catégorie', sel_tipo:'Sélectionnez le type', sel_selecciona:'Sélectionnez', sel_turno:'Shift', opt_centro:'Collection Center', opt_persona:'Individual Person', opt_parque:'Park', opt_refugio:'Shelter', opt_centro_acopio:'Collection center', opt_otro:'Other', opt_desayuno:'🌅 Petit-déjeuner', opt_almuerzo:'☀️ Déjeuner', opt_cena:'🌙 Dîner', small_pin:'You will use this to confirm when purchased or received.', small_productos:'They will appear as tags on your card.', small_geo_mapa:'This is how you appear on the map when someone presses "View on map".', small_seguridad:'Required for security. Not shared publicly.', small_trazabilidad:'Required for security and traceability.', small_don_media:'You can upload up to 4 files (photos or short videos).', btn_geolocal:'📍 Geolocate my location', btn_publicar_sol:'Publier la demande', btn_ofrecerme:'Me porter volontaire', btn_crear_evento:'Créer l\'événement', btn_anotarme:'M\'inscrire', btn_confirmar_traslado:'Confirmer le transport', pin_error_msg:'PIN incorrect. Veuillez réessayer.', pago_banco:'Banque', pago_telefono:'Téléphone', pago_cedula:'ID', hint_venta:'Find stores offering supplies for sale with prices and contact info.', hint_acopio:'Collected supplies that already have collection centers or individual holders.', hint_voluntarios:'Are you a center, shelter or organization? Post how many volunteers you need and for what. People sign up directly.',
   },
   de: {
     nav_venta: '🏷️ Verkauf', nav_acopio: '📦 Sammelstellen', title_venta: 'Verkaufsstellen', title_acopio: 'Sammelzentren',
@@ -201,7 +205,8 @@ const I18N = {
     modal_inspeccion_title:'🏗️ Gebäudeinspektion', insp_hint:'📋 Füllen Sie das Formular aus. Sie erhalten eine Bestätigung per WhatsApp.', insp_label_telefono:'WhatsApp-Nummer *', insp_small_telefono:'Wir kontaktieren Sie hier, um den Besuch zu koordinieren.', insp_label_edificio:'Gebäudename *', insp_label_ubicacion:'Genaue Adresse *', insp_label_fotos:'Fotos des Gebäudes (Träger und Säulen) *', insp_small_fotos:'Pflichtfeld. Bis zu 6 Fotos. Fokus auf Träger und Säulen.', insp_label_antes1967:'Wurde das Gebäude vor 1967 gebaut? *', insp_label_danos:'Falls ja — Hat das Gebäude Schäden oder Reparaturen erlitten?', insp_label_planos:'Haben Sie Baupläne verfügbar? *', insp_btn_enviar:'Anfrage senden',
     donor_title:'Wie möchtest du helfen?', donor_gofundme:'Geld spenden', donor_gofundme_sub:'GoFundMe · geht direkt an die Bedürftigen',
     donor_pagomovil:'Mobile Zahlung', donor_pagomovil_sub:'Banküberweisung', donor_insumos:'Hilfsgüter anbieten', donor_insumos_sub:'Ich habe Medikamente, Essen...', donor_transporte:'Hilfsgüter transportieren', donor_transporte_sub:'Ich habe ein Fahrzeug und kann liefern',
-    donor_comida:'Essen bringen', donor_comida_sub:'Für Lebensmittelausgabe anmelden', donor_voluntario:'Freiwilliger werden', donor_voluntario_sub:'Ein Zentrum unterstützen, das Hilfe braucht'
+    donor_comida:'Essen bringen', donor_comida_sub:'Für Lebensmittelausgabe anmelden', donor_voluntario:'Freiwilliger werden', donor_voluntario_sub:'Ein Zentrum unterstützen, das Hilfe braucht',
+    ph_ciudad:'E.g. Caracas, Miranda…', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital name…', ph_descripcion_nec:'Describe what is needed and how urgently…', ph_unidad:'units, boxes…', ph_nombre_local:'Central Pharmacy, Juan Pérez…', ph_desc_inv:'We have medicine, equipment, food…', ph_productos:'Sterile gauze\nSaline solution\nNitrile gloves', ph_direccion:'Main Ave, store 4…', ph_horario:'Mon–Fri 8am–6pm', ph_prod_precios:'E.g. Gauze $2, Alcohol $3…', ph_ubicacion:'Main Ave, store 4', ph_articulos:'Clothing, medicine, non-perishable food…', ph_organizacion:'E.g. Red Cross Foundation', ph_cedula:'ID-12345678', ph_nombre_centro:'Las Mercedes Shelter, Red Cross…', ph_tareas:'Distribute food, sort donations…', ph_horario_vol:'Saturdays 9am–1pm, urgent this week…', ph_contacto:'Name of person in charge', ph_tu_nombre:'Your name', ph_aportar:'I can bring my vehicle, I have first aid experience…', ph_nombre_lugar:'Los Caobos Park…', ph_personas:'50', ph_que_llevas:'Rice, beans, water…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5,000 Bs. / 50 USD', ph_don_desc:'We bought 20 boxes of gauze for Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'Kategorie *', lbl_tipo_sangre:'Blood type *', lbl_descripcion:'Beschreibung *', lbl_cantidad:'Menge *', lbl_unidad:'Unit', lbl_ciudad_estado:'Stadt / Bundesland *', lbl_hospital:'Hospital or center (optional)', lbl_pin:'Confirmation PIN (4 digits) *', lbl_nombre_local:'Store or person name *', lbl_descripcion_ofreces:'Description of what you offer *', lbl_productos:'Available products (one per line)', lbl_cantidad_disp:'Available quantity', lbl_precio:'Price in Bs. (leave blank if free donation)', lbl_direccion:'Exact address', lbl_horario:'Opening hours', lbl_telefono_wa:'Telefon / WhatsApp *', lbl_prod_precios:'Products and Prices *', lbl_ubicacion_exacta:'Exact location *', lbl_telefono:'Phone *', lbl_soy:'I am... *', lbl_articulos:'What items do you have available? *', lbl_organizacion:'Where are you from? (Organization) *', lbl_donde_estan:'Where are you? (Exact address) *', lbl_cedula:'ID / Identity *', lbl_ciudad:'City *', lbl_nombre_centro:'Center or organization name *', lbl_cuantos_vol:'How many volunteers do you need? *', lbl_tareas:'For what tasks? *', lbl_horario_vol:'Schedule when needed', lbl_contacto:'Contact person', lbl_nombre_completo:'Full name *', lbl_cedula_id:'ID / Passport *', lbl_que_aportas:'What can you contribute? (optional)', lbl_nombre_lugar:'Place name *', lbl_tipo_lugar:'Place type *', lbl_turno:'Shift *', lbl_fecha:'Date *', lbl_personas:'Estimated people', lbl_que_llevas:'What are you bringing? *', lbl_telefono_op:'Phone (optional)', lbl_nombre_alias:'Name or alias *', lbl_cedula_pas:'ID / Passport *', lbl_ciudad_origen:'Origin city *', lbl_ciudad_destino:'Destination city *', lbl_monto:'Amount received (Bs. or $) *', lbl_don_uso:'What was it used for? *', lbl_don_donde:'Where was it delivered? *', lbl_don_media:'Photos or videos (optional)', lbl_registrar:'Register', sel_categoria:'Kategorie wählen', sel_tipo:'Typ wählen', sel_selecciona:'Auswählen', sel_turno:'Shift', opt_centro:'Collection Center', opt_persona:'Individual Person', opt_parque:'Park', opt_refugio:'Shelter', opt_centro_acopio:'Collection center', opt_otro:'Other', opt_desayuno:'🌅 Frühstück', opt_almuerzo:'☀️ Mittagessen', opt_cena:'🌙 Abendessen', small_pin:'You will use this to confirm when purchased or received.', small_productos:'They will appear as tags on your card.', small_geo_mapa:'This is how you appear on the map when someone presses "View on map".', small_seguridad:'Required for security. Not shared publicly.', small_trazabilidad:'Required for security and traceability.', small_don_media:'You can upload up to 4 files (photos or short videos).', btn_geolocal:'📍 Geolocate my location', btn_publicar_sol:'Anfrage veröffentlichen', btn_ofrecerme:'Freiwillig melden', btn_crear_evento:'Veranstaltung erstellen', btn_anotarme:'Anmelden', btn_confirmar_traslado:'Transport bestätigen', pin_error_msg:'Falsche PIN. Bitte erneut versuchen.', pago_banco:'Bank', pago_telefono:'Telefon', pago_cedula:'Ausweis', hint_venta:'Find stores offering supplies for sale with prices and contact info.', hint_acopio:'Collected supplies that already have collection centers or individual holders.', hint_voluntarios:'Are you a center, shelter or organization? Post how many volunteers you need and for what. People sign up directly.',
   },
   it: {
     nav_venta: '🏷️ Vendita', nav_acopio: '📦 Raccolta', title_venta: 'Punti Vendita', title_acopio: 'Centri di Raccolta',
@@ -229,7 +234,8 @@ const I18N = {
     modal_inspeccion_title:'🏗️ Ispezione dell\'edificio', insp_hint:'📋 Compila il modulo. Riceverai la conferma via WhatsApp.', insp_label_telefono:'Numero WhatsApp *', insp_small_telefono:'Ti contatteremo qui per coordinare la visita.', insp_label_edificio:'Nome dell\'edificio *', insp_label_ubicacion:'Posizione esatta *', insp_label_fotos:'Foto dell\'edificio (travi e colonne) *', insp_small_fotos:'Obbligatorio. Fino a 6 foto. Focati su travi e colonne.', insp_label_antes1967:'L\'edificio è stato costruito prima del 1967? *', insp_label_danos:'Se hai risposto "Sì" — l\'edificio ha subito danni o riparazioni?', insp_label_planos:'Hai piante strutturali disponibili? *', insp_btn_enviar:'Invia richiesta',
     donor_title:'Come vuoi aiutare?', donor_gofundme:'Dona denaro', donor_gofundme_sub:'GoFundMe · va direttamente a chi ne ha bisogno',
     donor_pagomovil:'Pagamento Mobile', donor_pagomovil_sub:'Bonifico bancario', donor_insumos:'Offri forniture', donor_insumos_sub:'Ho medicine, cibo...', donor_transporte:'Trasporta forniture', donor_transporte_sub:'Ho un veicolo e posso consegnare',
-    donor_comida:'Porta cibo', donor_comida_sub:'Iscriviti per la distribuzione', donor_voluntario:'Fai volontariato', donor_voluntario_sub:'Supporta un centro che ha bisogno di aiuto'
+    donor_comida:'Porta cibo', donor_comida_sub:'Iscriviti per la distribuzione', donor_voluntario:'Fai volontariato', donor_voluntario_sub:'Supporta un centro che ha bisogno di aiuto',
+    ph_ciudad:'E.g. Caracas, Miranda…', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital name…', ph_descripcion_nec:'Describe what is needed and how urgently…', ph_unidad:'units, boxes…', ph_nombre_local:'Central Pharmacy, Juan Pérez…', ph_desc_inv:'We have medicine, equipment, food…', ph_productos:'Sterile gauze\nSaline solution\nNitrile gloves', ph_direccion:'Main Ave, store 4…', ph_horario:'Mon–Fri 8am–6pm', ph_prod_precios:'E.g. Gauze $2, Alcohol $3…', ph_ubicacion:'Main Ave, store 4', ph_articulos:'Clothing, medicine, non-perishable food…', ph_organizacion:'E.g. Red Cross Foundation', ph_cedula:'ID-12345678', ph_nombre_centro:'Las Mercedes Shelter, Red Cross…', ph_tareas:'Distribute food, sort donations…', ph_horario_vol:'Saturdays 9am–1pm, urgent this week…', ph_contacto:'Name of person in charge', ph_tu_nombre:'Your name', ph_aportar:'I can bring my vehicle, I have first aid experience…', ph_nombre_lugar:'Los Caobos Park…', ph_personas:'50', ph_que_llevas:'Rice, beans, water…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5,000 Bs. / 50 USD', ph_don_desc:'We bought 20 boxes of gauze for Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'Categoria *', lbl_tipo_sangre:'Blood type *', lbl_descripcion:'Descrizione *', lbl_cantidad:'Quantità *', lbl_unidad:'Unit', lbl_ciudad_estado:'Città / Stato *', lbl_hospital:'Hospital or center (optional)', lbl_pin:'Confirmation PIN (4 digits) *', lbl_nombre_local:'Store or person name *', lbl_descripcion_ofreces:'Description of what you offer *', lbl_productos:'Available products (one per line)', lbl_cantidad_disp:'Available quantity', lbl_precio:'Price in Bs. (leave blank if free donation)', lbl_direccion:'Exact address', lbl_horario:'Opening hours', lbl_telefono_wa:'Telefono / WhatsApp *', lbl_prod_precios:'Products and Prices *', lbl_ubicacion_exacta:'Exact location *', lbl_telefono:'Phone *', lbl_soy:'I am... *', lbl_articulos:'What items do you have available? *', lbl_organizacion:'Where are you from? (Organization) *', lbl_donde_estan:'Where are you? (Exact address) *', lbl_cedula:'ID / Identity *', lbl_ciudad:'City *', lbl_nombre_centro:'Center or organization name *', lbl_cuantos_vol:'How many volunteers do you need? *', lbl_tareas:'For what tasks? *', lbl_horario_vol:'Schedule when needed', lbl_contacto:'Contact person', lbl_nombre_completo:'Full name *', lbl_cedula_id:'ID / Passport *', lbl_que_aportas:'What can you contribute? (optional)', lbl_nombre_lugar:'Place name *', lbl_tipo_lugar:'Place type *', lbl_turno:'Shift *', lbl_fecha:'Date *', lbl_personas:'Estimated people', lbl_que_llevas:'What are you bringing? *', lbl_telefono_op:'Phone (optional)', lbl_nombre_alias:'Name or alias *', lbl_cedula_pas:'ID / Passport *', lbl_ciudad_origen:'Origin city *', lbl_ciudad_destino:'Destination city *', lbl_monto:'Amount received (Bs. or $) *', lbl_don_uso:'What was it used for? *', lbl_don_donde:'Where was it delivered? *', lbl_don_media:'Photos or videos (optional)', lbl_registrar:'Register', sel_categoria:'Seleziona una categoria', sel_tipo:'Seleziona tipo', sel_selecciona:'Seleziona', sel_turno:'Shift', opt_centro:'Collection Center', opt_persona:'Individual Person', opt_parque:'Park', opt_refugio:'Shelter', opt_centro_acopio:'Collection center', opt_otro:'Other', opt_desayuno:'🌅 Colazione', opt_almuerzo:'☀️ Pranzo', opt_cena:'🌙 Cena', small_pin:'You will use this to confirm when purchased or received.', small_productos:'They will appear as tags on your card.', small_geo_mapa:'This is how you appear on the map when someone presses "View on map".', small_seguridad:'Required for security. Not shared publicly.', small_trazabilidad:'Required for security and traceability.', small_don_media:'You can upload up to 4 files (photos or short videos).', btn_geolocal:'📍 Geolocate my location', btn_publicar_sol:'Pubblica richiesta', btn_ofrecerme:'Offrirmi', btn_crear_evento:'Crea evento', btn_anotarme:'Iscrivermi', btn_confirmar_traslado:'Conferma trasporto', pin_error_msg:'PIN errato. Riprova.', pago_banco:'Banca', pago_telefono:'Telefono', pago_cedula:'ID', hint_venta:'Find stores offering supplies for sale with prices and contact info.', hint_acopio:'Collected supplies that already have collection centers or individual holders.', hint_voluntarios:'Are you a center, shelter or organization? Post how many volunteers you need and for what. People sign up directly.',
   },
   ar: {
     nav_venta: '🏷️ مبيعات', nav_acopio: '📦 مراكز التجميع', title_venta: 'أماكن البيع', title_acopio: 'مراكز التجميع',
@@ -257,7 +263,8 @@ const I18N = {
     modal_inspeccion_title:'🏗️ فحص المبنى', insp_hint:'📋 أكمل النموذج. ستتلقى تأكيداً عبر واتساب.', insp_label_telefono:'رقم واتساب *', insp_small_telefono:'سنتواصل معك هنا لتنسيق الزيارة.', insp_label_edificio:'اسم المبنى *', insp_label_ubicacion:'الموقع الدقيق *', insp_label_fotos:'صور المبنى (الكمرات والأعمدة) *', insp_small_fotos:'إلزامي. حتى 6 صور. ركز على الكمرات والأعمدة.', insp_label_antes1967:'هل بُني المبنى قبل عام 1967؟ *', insp_label_danos:'إذا أجبت بـ "نعم" — هل عانى المبنى من أضرار أو إصلاحات؟', insp_label_planos:'هل لديك مخططات هيكلية متاحة؟ *', insp_btn_enviar:'إرسال الطلب',
     donor_title:'كيف تريد المساعدة؟', donor_gofundme:'تبرع بالمال', donor_gofundme_sub:'GoFundMe · يذهب مباشرة لمن هم في أمس الحاجة',
     donor_pagomovil:'الدفع عبر الهاتف', donor_pagomovil_sub:'تحويل مصرفي', donor_insumos:'تقديم مستلزمات', donor_insumos_sub:'لدي دواء، طعام...', donor_transporte:'نقل المستلزمات', donor_transporte_sub:'لدي مركبة ويمكنني التوصيل',
-    donor_comida:'إحضار طعام', donor_comida_sub:'التسجيل في دورية توزيع الطعام', donor_voluntario:'كن متطوعاً', donor_voluntario_sub:'دعم مركز يحتاج إلى مساعدة'
+    donor_comida:'إحضار طعام', donor_comida_sub:'التسجيل في دورية توزيع الطعام', donor_voluntario:'كن متطوعاً', donor_voluntario_sub:'دعم مركز يحتاج إلى مساعدة',
+    ph_ciudad:'E.g. Caracas, Miranda…', ph_ciudad_vzla:'Caracas, Miranda', ph_ciudad_vzla2:'Maracaibo, Zulia', ph_ciudad_ev:'Valencia, Carabobo', ph_hospital:'Hospital name…', ph_descripcion_nec:'Describe what is needed and how urgently…', ph_unidad:'units, boxes…', ph_nombre_local:'Central Pharmacy, Juan Pérez…', ph_desc_inv:'We have medicine, equipment, food…', ph_productos:'Sterile gauze\nSaline solution\nNitrile gloves', ph_direccion:'Main Ave, store 4…', ph_horario:'Mon–Fri 8am–6pm', ph_prod_precios:'E.g. Gauze $2, Alcohol $3…', ph_ubicacion:'Main Ave, store 4', ph_articulos:'Clothing, medicine, non-perishable food…', ph_organizacion:'E.g. Red Cross Foundation', ph_cedula:'ID-12345678', ph_nombre_centro:'Las Mercedes Shelter, Red Cross…', ph_tareas:'Distribute food, sort donations…', ph_horario_vol:'Saturdays 9am–1pm, urgent this week…', ph_contacto:'Name of person in charge', ph_tu_nombre:'Your name', ph_aportar:'I can bring my vehicle, I have first aid experience…', ph_nombre_lugar:'Los Caobos Park…', ph_personas:'50', ph_que_llevas:'Rice, beans, water…', ph_origen:'Caracas', ph_destino:'Valencia', ph_monto:'5,000 Bs. / 50 USD', ph_don_desc:'We bought 20 boxes of gauze for Hospital Vargas…', ph_don_donde:'Hospital Vargas, Caracas', lbl_categoria:'الفئة *', lbl_tipo_sangre:'فصيلة الدم *', lbl_descripcion:'الوصف *', lbl_cantidad:'الكمية *', lbl_unidad:'Unit', lbl_ciudad_estado:'المدينة / الولاية *', lbl_hospital:'Hospital or center (optional)', lbl_pin:'Confirmation PIN (4 digits) *', lbl_nombre_local:'Store or person name *', lbl_descripcion_ofreces:'Description of what you offer *', lbl_productos:'Available products (one per line)', lbl_cantidad_disp:'Available quantity', lbl_precio:'Price in Bs. (leave blank if free donation)', lbl_direccion:'Exact address', lbl_horario:'Opening hours', lbl_telefono_wa:'الهاتف / واتساب *', lbl_prod_precios:'Products and Prices *', lbl_ubicacion_exacta:'Exact location *', lbl_telefono:'Phone *', lbl_soy:'I am... *', lbl_articulos:'What items do you have available? *', lbl_organizacion:'Where are you from? (Organization) *', lbl_donde_estan:'Where are you? (Exact address) *', lbl_cedula:'ID / Identity *', lbl_ciudad:'المدينة *', lbl_nombre_centro:'Center or organization name *', lbl_cuantos_vol:'How many volunteers do you need? *', lbl_tareas:'For what tasks? *', lbl_horario_vol:'Schedule when needed', lbl_contacto:'Contact person', lbl_nombre_completo:'الاسم الكامل *', lbl_cedula_id:'ID / Passport *', lbl_que_aportas:'What can you contribute? (optional)', lbl_nombre_lugar:'Place name *', lbl_tipo_lugar:'Place type *', lbl_turno:'Shift *', lbl_fecha:'Date *', lbl_personas:'Estimated people', lbl_que_llevas:'What are you bringing? *', lbl_telefono_op:'Phone (optional)', lbl_nombre_alias:'Name or alias *', lbl_cedula_pas:'ID / Passport *', lbl_ciudad_origen:'Origin city *', lbl_ciudad_destino:'Destination city *', lbl_monto:'Amount received (Bs. or $) *', lbl_don_uso:'What was it used for? *', lbl_don_donde:'Where was it delivered? *', lbl_don_media:'Photos or videos (optional)', lbl_registrar:'Register', sel_categoria:'اختر فئة', sel_tipo:'اختر النوع', sel_selecciona:'اختر', sel_turno:'Shift', opt_centro:'Collection Center', opt_persona:'Individual Person', opt_parque:'Park', opt_refugio:'Shelter', opt_centro_acopio:'Collection center', opt_otro:'Other', opt_desayuno:'🌅 إفطار', opt_almuerzo:'☀️ غداء', opt_cena:'🌙 عشاء', small_pin:'You will use this to confirm when purchased or received.', small_productos:'They will appear as tags on your card.', small_geo_mapa:'This is how you appear on the map when someone presses "View on map".', small_seguridad:'Required for security. Not shared publicly.', small_trazabilidad:'Required for security and traceability.', small_don_media:'You can upload up to 4 files (photos or short videos).', btn_geolocal:'📍 Geolocate my location', btn_publicar_sol:'نشر الطلب', btn_ofrecerme:'التطوع', btn_crear_evento:'إنشاء حدث', btn_anotarme:'التسجيل', btn_confirmar_traslado:'تأكيد النقل', pin_error_msg:'رمز PIN غير صحيح. حاول مرة أخرى.', pago_banco:'البنك', pago_telefono:'الهاتف', pago_cedula:'الهوية', hint_venta:'Find stores offering supplies for sale with prices and contact info.', hint_acopio:'Collected supplies that already have collection centers or individual holders.', hint_voluntarios:'Are you a center, shelter or organization? Post how many volunteers you need and for what. People sign up directly.',
   }
 };
 
@@ -266,19 +273,222 @@ const t = k => (I18N[LANG]?.[k] ?? I18N.es[k] ?? k);
 
 function setLang(lang) {
   LANG = lang;
-  // Soporte para árabe de Derecha a Izquierda (RTL)
   if (lang === 'ar') {
     document.body.style.direction = 'rtl';
   } else {
     document.body.style.direction = 'ltr';
   }
-  
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     el.textContent = t(key);
   });
   document.documentElement.lang = lang;
+  updateFormTranslations();
   renderAll();
+}
+
+function setText(id, key) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = t(key);
+}
+function setPlaceholder(id, key) {
+  const el = document.getElementById(id);
+  if (el) el.placeholder = t(key);
+}
+function setSelectOption(selectId, optionIndex, key) {
+  const sel = document.getElementById(selectId);
+  if (sel && sel.options[optionIndex]) sel.options[optionIndex].text = t(key);
+}
+
+function updateFormTranslations() {
+  // ── Filter bar ──
+  setPlaceholder('filtroCiudad', 'ph_ciudad');
+
+  // ── Section hints ──
+  setText('hint_venta_el',       'hint_venta');
+  setText('hint_acopio_el',      'hint_acopio');
+  setText('hint_voluntarios_el', 'hint_voluntarios');
+
+  // ── Modal: Nueva Necesidad ──
+  setText('lbl_nec_cat',     'lbl_categoria');
+  setText('lbl_nec_sangre',  'lbl_tipo_sangre');
+  setText('lbl_nec_desc',    'lbl_descripcion');
+  setText('lbl_nec_cant',    'lbl_cantidad');
+  setText('lbl_nec_unid',    'lbl_unidad');
+  setText('lbl_nec_ciudad',  'lbl_ciudad_estado');
+  setText('lbl_nec_hosp',    'lbl_hospital');
+  setText('lbl_nec_pin',     'lbl_pin');
+  setText('small_nec_pin',   'small_pin');
+  setText('btn_nec_geo',     'btn_usar_ubicacion');
+  setText('btn_nec_cancel',  'btn_cancelar');
+  setText('btn_nec_submit',  'btn_publicar_nec');
+  setSelectOption('nec_categoria', 0, 'sel_categoria');
+  setSelectOption('nec_tipo_sangre', 0, 'sel_tipo');
+  setPlaceholder('nec_descripcion', 'ph_descripcion_nec');
+  setPlaceholder('nec_unidad',      'ph_unidad');
+  setPlaceholder('nec_ciudad',      'ph_ciudad_vzla');
+  setPlaceholder('nec_hospital',    'ph_hospital');
+
+  // ── Modal: Nuevo Inventario ──
+  setText('lbl_inv_nombre',  'lbl_nombre_local');
+  setText('lbl_inv_cat',     'lbl_categoria');
+  setText('lbl_inv_desc',    'lbl_descripcion_ofreces');
+  setText('lbl_inv_prod',    'lbl_productos');
+  setText('small_inv_prod',  'small_productos');
+  setText('lbl_inv_cant',    'lbl_cantidad_disp');
+  setText('lbl_inv_unid',    'lbl_unidad');
+  setText('lbl_inv_precio',  'lbl_precio');
+  setText('lbl_inv_ciudad',  'lbl_ciudad_estado');
+  setText('lbl_inv_dir',     'lbl_direccion');
+  setText('lbl_inv_horario', 'lbl_horario');
+  setText('lbl_inv_tel',     'lbl_telefono_wa');
+  setText('small_inv_geo',   'small_geo_mapa');
+  setText('btn_inv_geo',     'btn_geolocal');
+  setText('btn_inv_cancel',  'btn_cancelar');
+  setText('btn_inv_submit',  'lbl_registrar');
+  setSelectOption('inv_categoria', 0, 'sel_categoria');
+  setPlaceholder('inv_nombre_local', 'ph_nombre_local');
+  setPlaceholder('inv_descripcion',  'ph_desc_inv');
+  setPlaceholder('inv_productos',    'ph_productos');
+  setPlaceholder('inv_ciudad',       'ph_ciudad_vzla2');
+  setPlaceholder('inv_direccion',    'ph_direccion');
+  setPlaceholder('inv_horario',      'ph_horario');
+
+  // ── Modal: Nueva Venta ──
+  setText('lbl_vta_nombre',  'lbl_nombre_local');
+  setText('lbl_vta_prod',    'lbl_prod_precios');
+  setText('lbl_vta_ubic',    'lbl_ubicacion_exacta');
+  setText('lbl_vta_tel',     'lbl_telefono');
+  setText('btn_vta_geo',     'btn_geolocal');
+  setText('btn_vta_cancel',  'btn_cancelar');
+  setText('btn_vta_submit',  'btn_publicar_nec');
+  setPlaceholder('vta_nombre',    'ph_nombre_local');
+  setPlaceholder('vta_productos', 'ph_prod_precios');
+  setPlaceholder('vta_ubicacion', 'ph_ubicacion');
+  setPlaceholder('vta_telefono',  'ph_telefono');
+
+  // ── Modal: Acopio ──
+  setText('lbl_acp_tipo',     'lbl_soy');
+  setText('lbl_acp_arts',     'lbl_articulos');
+  setText('lbl_acp_origen',   'lbl_organizacion');
+  setText('lbl_acp_dir',      'lbl_donde_estan');
+  setText('lbl_acp_cedula',   'lbl_cedula');
+  setText('lbl_acp_tel',      'lbl_telefono');
+  setText('lbl_acp_ciudad',   'lbl_ciudad');
+  setText('btn_acp_cancel',   'btn_cancelar');
+  setText('btn_acp_submit',   'lbl_registrar');
+  setSelectOption('acp_tipo', 0, 'sel_selecciona');
+  setSelectOption('acp_tipo', 1, 'opt_centro');
+  setSelectOption('acp_tipo', 2, 'opt_persona');
+  setPlaceholder('acp_articulos', 'ph_articulos');
+  setPlaceholder('acp_origen',    'ph_organizacion');
+  setPlaceholder('acp_direccion', 'ph_ubicacion');
+  setPlaceholder('acp_cedula',    'ph_cedula');
+  setPlaceholder('acp_ciudad',    'ph_ciudad');
+
+  // ── Modal: Pedir Voluntarios ──
+  setText('lbl_sv_nombre',   'lbl_nombre_centro');
+  setText('lbl_sv_ciudad',   'lbl_ciudad_estado');
+  setText('lbl_sv_cantidad', 'lbl_cuantos_vol');
+  setText('lbl_sv_tareas',   'lbl_tareas');
+  setText('lbl_sv_horario',  'lbl_horario_vol');
+  setText('lbl_sv_contacto', 'lbl_contacto');
+  setText('lbl_sv_tel',      'lbl_telefono_wa');
+  setText('btn_sv_cancel',   'btn_cancelar');
+  setText('btn_sv_submit',   'btn_publicar_sol');
+  setPlaceholder('sv_nombre_centro', 'ph_nombre_centro');
+  setPlaceholder('sv_ciudad',        'ph_ciudad_vzla');
+  setPlaceholder('sv_tareas',        'ph_tareas');
+  setPlaceholder('sv_horario',       'ph_horario_vol');
+  setPlaceholder('sv_contacto',      'ph_contacto');
+  setPlaceholder('sv_telefono',      'ph_telefono');
+
+  // ── Modal: Ofrecerse Voluntario ──
+  setText('lbl_ov_nombre',  'lbl_nombre_completo');
+  setText('lbl_ov_cedula',  'lbl_cedula_id');
+  setText('small_ov_cedula','small_seguridad');
+  setText('lbl_ov_tel',     'lbl_telefono_wa');
+  setText('lbl_ov_nota',    'lbl_que_aportas');
+  setText('btn_ov_cancel',  'btn_cancelar');
+  setText('btn_ov_submit',  'btn_ofrecerme');
+  setPlaceholder('ov_nombre',   'ph_tu_nombre');
+  setPlaceholder('ov_cedula',   'ph_cedula');
+  setPlaceholder('ov_telefono', 'ph_telefono');
+  setPlaceholder('ov_nota',     'ph_aportar');
+
+  // ── Modal: Evento Alimentación ──
+  setText('lbl_ev_nombre',   'lbl_nombre_lugar');
+  setText('lbl_ev_tipo',     'lbl_tipo_lugar');
+  setText('lbl_ev_turno',    'lbl_turno');
+  setText('lbl_ev_fecha',    'lbl_fecha');
+  setText('lbl_ev_ciudad',   'lbl_ciudad_estado');
+  setText('lbl_ev_personas', 'lbl_personas');
+  setText('btn_ev_geo',      'btn_geolocal');
+  setText('btn_ev_cancel',   'btn_cancelar');
+  setText('btn_ev_submit',   'btn_crear_evento');
+  setSelectOption('ev_tipo',  0, 'sel_selecciona');
+  setSelectOption('ev_tipo',  1, 'opt_parque');
+  setSelectOption('ev_tipo',  2, 'opt_refugio');
+  setSelectOption('ev_tipo',  3, 'opt_centro_acopio');
+  setSelectOption('ev_tipo',  4, 'opt_otro');
+  setSelectOption('ev_turno', 0, 'sel_turno');
+  setSelectOption('ev_turno', 1, 'opt_desayuno');
+  setSelectOption('ev_turno', 2, 'opt_almuerzo');
+  setSelectOption('ev_turno', 3, 'opt_cena');
+  setPlaceholder('ev_nombre',   'ph_nombre_lugar');
+  setPlaceholder('ev_ciudad',   'ph_ciudad_ev');
+  setPlaceholder('ev_personas', 'ph_personas');
+
+  // ── Modal: Voluntario Comida ──
+  setText('lbl_vol_nombre',  'lbl_nombre_completo');
+  setText('lbl_vol_cedula',  'lbl_cedula_id');
+  setText('small_vol_cedula','small_seguridad');
+  setText('lbl_vol_lleva',   'lbl_que_llevas');
+  setText('lbl_vol_tel',     'lbl_telefono_op');
+  setText('btn_vol_cancel',  'btn_cancelar');
+  setText('btn_vol_submit',  'btn_anotarme');
+  setPlaceholder('vol_nombre',    'ph_tu_nombre');
+  setPlaceholder('vol_cedula',    'ph_cedula');
+  setPlaceholder('vol_que_lleva', 'ph_que_llevas');
+  setPlaceholder('vol_telefono',  'ph_telefono');
+
+  // ── Modal: Conductor ──
+  setText('lbl_cond_nombre',  'lbl_nombre_alias');
+  setText('lbl_cond_cedula',  'lbl_cedula_pas');
+  setText('small_cond_cedula','small_trazabilidad');
+  setText('lbl_cond_tel',     'lbl_telefono_wa');
+  setText('lbl_cond_origen',  'lbl_ciudad_origen');
+  setText('lbl_cond_destino', 'lbl_ciudad_destino');
+  setText('btn_cond_cancel',  'btn_cancelar');
+  setText('btn_cond_submit',  'btn_confirmar_traslado');
+  setPlaceholder('cond_nombre',   'ph_tu_nombre');
+  setPlaceholder('cond_cedula',   'ph_cedula');
+  setPlaceholder('cond_telefono', 'ph_telefono');
+  setPlaceholder('cond_origen',   'ph_origen');
+  setPlaceholder('cond_destino',  'ph_destino');
+
+  // ── Modal: PIN ──
+  setText('lbl_pin_input', 'lbl_pin');
+  setText('pinError',      'pin_error_msg');
+  setText('btn_pin_cancel','btn_cancelar');
+
+  // ── Modal: Pago Móvil ──
+  setText('pago_lbl_banco', 'pago_banco');
+  setText('pago_lbl_tel',   'pago_telefono');
+  setText('pago_lbl_ced',   'pago_cedula');
+
+  // ── Modal: Publicar Donación ──
+  setText('lbl_don_monto',  'lbl_monto');
+  setText('lbl_don_desc',   'lbl_don_uso');
+  setText('lbl_don_donde',  'lbl_don_donde');
+  setText('lbl_don_fecha',  'lbl_fecha');
+  setText('lbl_don_media',  'lbl_don_media');
+  setText('small_don_media','small_don_media');
+  setText('btn_don_cancel', 'btn_cancelar');
+  setText('btn_don_submit', 'btn_publicar_nec');
+  setPlaceholder('don_monto',       'ph_monto');
+  setPlaceholder('don_descripcion', 'ph_don_desc');
+  setPlaceholder('don_donde',       'ph_don_donde');
 }
 
 /* ─── Utils ─── */
