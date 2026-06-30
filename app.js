@@ -37,6 +37,7 @@ const I18N = {
     btn_publicar_nec:'Publicar', btn_cancelar:'Cancelar', btn_confirmar:'Confirmar',
     btn_usar_ubicacion:'📍 Usar mi ubicación actual', btn_listo:'Listo',
     ig_sub:'Síguenos para actualizaciones en tiempo real',
+    stat_donaciones:'Donaciones publicadas', stat_necesidades:'Necesidades cubiertas', stat_inspecciones:'Inspecciones solicitadas', inicio_transparencia_title:'💛 Transparencia total', inicio_transparencia_sub:'Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.', btn_publicar_donacion:'+ Publicar', inicio_cta_gofundme:'💚 Donar en GoFundMe', empty_donaciones:'Aún no hay donaciones publicadas.<br>¡Sé el primero en compartir cómo ayudaste! 💛',
     estado_necesitado:'🔴 Necesitado', estado_comprado:'🟡 Comprado',
     estado_en_transito:'🟠 En tránsito', estado_recibido:'🟢 Recibido',
     btn_marcar_comprado:'✅ Marcar comprado', btn_yo_traslado:'🚗 Yo lo traslado',
@@ -91,7 +92,8 @@ const I18N = {
     modal_nueva_nec:'Post a need', modal_nuevo_inv:'Register store or donor', modal_nuevo_evento:'Register food event', modal_voluntario_comida:'Sign up to bring food',
     modal_pedir_vol:'Request volunteers for my center', modal_ofrecerse_vol:'Volunteer', modal_conductor:'🚗 I will deliver it', modal_pin:'Confirm with PIN', modal_pago:'Mobile Payment',
     btn_publicar_nec:'Publish', btn_cancelar:'Cancel', btn_confirmar:'Confirm', btn_usar_ubicacion:'📍 Use my current location', btn_listo:'Done',
-    ig_sub:'Follow us for real-time updates', estado_necesitado:'🔴 Needed', estado_comprado:'🟡 Purchased', estado_en_transito:'🟠 In transit', estado_recibido:'🟢 Received',
+    ig_sub:'Follow us for real-time updates',
+    stat_donaciones:'Donations published', stat_necesidades:'Needs covered', stat_inspecciones:'Inspections requested', inicio_transparencia_title:'💛 Full transparency', inicio_transparencia_sub:'Every donation received is published here with photos, amounts and destination. Nothing goes unaccounted for.', btn_publicar_donacion:'+ Publish', inicio_cta_gofundme:'💚 Donate on GoFundMe', empty_donaciones:'No donations published yet.<br>Be the first to share how you helped! 💛', estado_necesitado:'🔴 Needed', estado_comprado:'🟡 Purchased', estado_en_transito:'🟠 In transit', estado_recibido:'🟢 Received',
     btn_marcar_comprado:'✅ Mark purchased', btn_yo_traslado:'🚗 I will deliver', btn_marcar_recibido:'🟢 Confirm received', btn_maps:'📍 View map', btn_whatsapp:'💬 WhatsApp',
     match_label:'💡 Available nearby!', toast_guardado:'✅ Published successfully', toast_error:'❌ Fill all required fields',
     toast_pin_ok:'✅ Status updated', toast_pin_error:'❌ Incorrect PIN', toast_geo_ok:'📍 Location obtained', toast_geo_error:'❌ Could not get location',
@@ -130,7 +132,8 @@ const I18N = {
     modal_nueva_nec:'Publicar necessidade', modal_nuevo_inv:'Registrar local ou doador', modal_nuevo_evento:'Registrar evento de alimentação', modal_voluntario_comida:'Me inscrever para levar comida',
     modal_pedir_vol:'Pedir voluntários para meu centro', modal_ofrecerse_vol:'Me oferecer como voluntário', modal_conductor:'🚗 Eu levo', modal_pin:'Confirmar com PIN', modal_pago:'Pagamento Móvel',
     btn_publicar_nec:'Publicar', btn_cancelar:'Cancelar', btn_confirmar:'Confirmar', btn_usar_ubicacion:'📍 Usar minha localização atual', btn_listo:'Pronto',
-    ig_sub:'Nos siga para atualizações', estado_necesitado:'🔴 Necessário', estado_comprado:'🟡 Comprado', estado_en_transito:'🟠 Em trânsito', estado_recibido:'🟢 Recebido',
+    ig_sub:'Nos siga para atualizações',
+    stat_donaciones:'Doações publicadas', stat_necesidades:'Necessidades atendidas', stat_inspecciones:'Inspeções solicitadas', inicio_transparencia_title:'💛 Transparência total', inicio_transparencia_sub:'Cada doação recebida é publicada aqui com fotos, valores e destino. Nada fica sem prestação de contas.', btn_publicar_donacion:'+ Publicar', inicio_cta_gofundme:'💚 Doar no GoFundMe', empty_donaciones:'Nenhuma doação publicada ainda.<br>Seja o primeiro a compartilhar como ajudou! 💛', estado_necesitado:'🔴 Necessário', estado_comprado:'🟡 Comprado', estado_en_transito:'🟠 Em trânsito', estado_recibido:'🟢 Recebido',
     btn_marcar_comprado:'✅ Marcar comprado', btn_yo_traslado:'🚗 Eu levo', btn_marcar_recibido:'🟢 Confirmar recebido', btn_maps:'📍 Ver no mapa', btn_whatsapp:'💬 WhatsApp',
     match_label:'💡 Disponível perto!', toast_guardado:'✅ Publicado com sucesso', toast_error:'❌ Preencha todos os campos obrigatórios', toast_pin_ok:'✅ Status atualizado', toast_pin_error:'❌ PIN incorreto',
     toast_geo_ok:'📍 Localização obtida', toast_geo_error:'❌ Erro ao obter localização', toast_conductor:'🚗 Transporte registrado!', welcome_sub:'Conectamos quem precisa com quem pode ajudar',
@@ -159,6 +162,7 @@ const I18N = {
     modal_nueva_nec:'Publier un besoin', modal_nuevo_inv:'Enregistrer local ou donateur', modal_nuevo_evento:'Enregistrer un événement', modal_voluntario_comida:'S\'inscrire pour apporter de la nourriture',
     modal_pedir_vol:'Demander des bénévoles', modal_ofrecerse_vol:'Devenir bénévole', modal_conductor:'🚗 Je le transporte', modal_pin:'Confirmer avec le code PIN', modal_pago:'Paiement Mobile',
     btn_publicar_nec:'Publier', btn_cancelar:'Annuler', btn_confirmar:'Confirmer', btn_usar_ubicacion:'📍 Utiliser ma position', btn_listo:'Prêt', ig_sub:'Suivez-nous pour des mises à jour en temps réel',
+    stat_donaciones:'Dons publiés', stat_necesidades:'Besoins couverts', stat_inspecciones:'Inspections demandées', inicio_transparencia_title:'💛 Transparence totale', inicio_transparencia_sub:'Chaque don reçu est publié ici avec photos, montants et destination. Rien ne reste sans compte rendu.', btn_publicar_donacion:'+ Publier', inicio_cta_gofundme:'💚 Faire un don GoFundMe', empty_donaciones:'Aucun don publié pour le moment.<br>Soyez le premier à partager comment vous avez aidé ! 💛',
     estado_necesitado:'🔴 Nécessaire', estado_comprado:'🟡 Acheté', estado_en_transito:'🟠 En transit', estado_recibido:'🟢 Reçu', btn_marcar_comprado:'✅ Marquer comme acheté', btn_yo_traslado:'🚗 Je le transporte',
     btn_marcar_recibido:'🟢 Confirmer la réception', btn_maps:'📍 Voir sur la carte', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponible à proximité!', toast_guardado:'✅ Publié avec succès', toast_error:'❌ Remplissez tous les champs',
     toast_pin_ok:'✅ Statut mis à jour', toast_pin_error:'❌ Code PIN incorrect', toast_geo_ok:'📍 Position obtenue', toast_geo_error:'❌ Impossible d\'obtenir la position', toast_conductor:'🚗 Transport enregistré!',
@@ -186,6 +190,7 @@ const I18N = {
     modal_nueva_nec:'Bedürfnis posten', modal_nuevo_inv:'Geschäft / Spender registrieren', modal_nuevo_evento:'Food-Event registrieren', modal_voluntario_comida:'Essen bringen anmelden',
     modal_pedir_vol:'Freiwillige anfragen', modal_ofrecerse_vol:'Als Freiwilliger melden', modal_conductor:'🚗 Ich transportiere es', modal_pin:'Mit PIN bestätigen', modal_pago:'Mobile Zahlung',
     btn_publicar_nec:'Veröffentlichen', btn_cancelar:'Abbrechen', btn_confirmar:'Bestätigen', btn_usar_ubicacion:'📍 Aktuellen Standort verwenden', btn_listo:'Fertig', ig_sub:'Folge uns für Echtzeit-Updates',
+    stat_donaciones:'Spenden veröffentlicht', stat_necesidades:'Bedürfnisse gedeckt', stat_inspecciones:'Inspektionen angefragt', inicio_transparencia_title:'💛 Volle Transparenz', inicio_transparencia_sub:'Jede erhaltene Spende wird hier mit Fotos, Beträgen und Verwendungszweck veröffentlicht.', btn_publicar_donacion:'+ Veröffentlichen', inicio_cta_gofundme:'💚 Spenden GoFundMe', empty_donaciones:'Noch keine Spenden veröffentlicht.<br>Sei der Erste, der zeigt, wie du geholfen hast! 💛',
     estado_necesitado:'🔴 Benötigt', estado_comprado:'🟡 Gekauft', estado_en_transito:'🟠 Unterwegs', estado_recibido:'🟢 Erhalten', btn_marcar_comprado:'✅ Als gekauft markieren', btn_yo_traslado:'🚗 Ich transportiere es',
     btn_marcar_recibido:'🟢 Erhalt bestätigen', btn_maps:'📍 Auf Karte anzeigen', btn_whatsapp:'💬 WhatsApp', match_label:'💡 In der Nähe verfügbar!', toast_guardado:'✅ Erfolgreich veröffentlicht', toast_error:'❌ Bitte alle Felder ausfüllen',
     toast_pin_ok:'✅ Status aktualisiert', toast_pin_error:'❌ Falsche PIN', toast_geo_ok:'📍 Standort abgerufen', toast_geo_error:'❌ Standort konnte nicht abgerufen werden', toast_conductor:'🚗 Transport registriert!',
@@ -213,6 +218,7 @@ const I18N = {
     modal_nueva_nec:'Pubblica necessità', modal_nuevo_inv:'Registra negozio o donatore', modal_nuevo_evento:'Registra evento alimentare', modal_voluntario_comida:'Iscriviti per portare cibo',
     modal_pedir_vol:'Richiedi volontari', modal_ofrecerse_vol:'Offriti come volontario', modal_conductor:'🚗 Lo trasporto io', modal_pin:'Conferma con PIN', modal_pago:'Pagamento Mobile',
     btn_publicar_nec:'Pubblica', btn_cancelar:'Annulla', btn_confirmar:'Conferma', btn_usar_ubicacion:'📍 Usa posizione attuale', btn_listo:'Fatto', ig_sub:'Seguici per aggiornamenti in tempo reale',
+    stat_donaciones:'Donazioni pubblicate', stat_necesidades:'Bisogni coperti', stat_inspecciones:'Ispezioni richieste', inicio_transparencia_title:'💛 Trasparenza totale', inicio_transparencia_sub:'Ogni donazione ricevuta viene pubblicata qui con foto, importi e destinazione. Nulla resta senza rendiconto.', btn_publicar_donacion:'+ Pubblica', inicio_cta_gofundme:'💚 Dona su GoFundMe', empty_donaciones:'Nessuna donazione pubblicata ancora.<br>Sii il primo a condividere come hai aiutato! 💛',
     estado_necesitado:'🔴 Necessario', estado_comprado:'🟡 Comprato', estado_en_transito:'🟠 In transito', estado_recibido:'🟢 Ricevuto', btn_marcar_comprado:'✅ Segna come comprato', btn_yo_traslado:'🚗 Lo trasporto io',
     btn_marcar_recibido:'🟢 Conferma ricezione', btn_maps:'📍 Vedi sulla mappa', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponibile nelle vicinanze!', toast_guardado:'✅ Pubblicato con successo', toast_error:'❌ Compila tutti i campi',
     toast_pin_ok:'✅ Stato aggiornato', toast_pin_error:'❌ PIN errato', toast_geo_ok:'📍 Posizione ottenuta', toast_geo_error:'❌ Impossibile ottenere la posizione', toast_conductor:'🚗 Trasporto registrato!',
@@ -240,6 +246,7 @@ const I18N = {
     modal_nueva_nec:'نشر حاجة', modal_nuevo_inv:'تسجيل متجر أو متبرع', modal_nuevo_evento:'تسجيل حدث غذائي', modal_voluntario_comida:'سجل لإحضار الطعام',
     modal_pedir_vol:'طلب متطوعين لمركزي', modal_ofrecerse_vol:'تطوع', modal_conductor:'🚗 سأقوم بنقله', modal_pin:'تأكيد باستخدام PIN', modal_pago:'الدفع عبر الهاتف',
     btn_publicar_nec:'نشر', btn_cancelar:'إلغاء', btn_confirmar:'تأكيد', btn_usar_ubicacion:'📍 استخدام موقعي الحالي', btn_listo:'تم', ig_sub:'تابعنا للحصول على التحديثات الفورية',
+    stat_donaciones:'التبرعات المنشورة', stat_necesidades:'الاحتياجات المغطاة', stat_inspecciones:'الفحوصات المطلوبة', inicio_transparencia_title:'💛 شفافية كاملة', inicio_transparencia_sub:'كل تبرع يُنشر هنا مع الصور والمبالغ والوجهة. لا شيء يبقى دون محاسبة.', btn_publicar_donacion:'+ نشر', inicio_cta_gofundme:'💚 تبرع في GoFundMe', empty_donaciones:'لا توجد تبرعات منشورة بعد.<br>كن أول من يشارك كيف ساعد! 💛',
     estado_necesitado:'🔴 مطلوب', estado_comprado:'🟡 تم الشراء', estado_en_transito:'🟠 في الطريق', estado_recibido:'🟢 تم الاستلام', btn_marcar_comprado:'✅ تعليم كمشترى', btn_yo_traslado:'🚗 سأقوم بنقله',
     btn_marcar_recibido:'🟢 تأكيد الاستلام', btn_maps:'📍 عرض الخريطة', btn_whatsapp:'💬 واتساب', match_label:'💡 متاح بالجوار!', toast_guardado:'✅ تم النشر بنجاح', toast_error:'❌ يرجى ملء جميع الحقول',
     toast_pin_ok:'✅ تم تحديث الحالة', toast_pin_error:'❌ PIN غير صحيح', toast_geo_ok:'📍 تم الحصول على الموقع', toast_geo_error:'❌ تعذر الحصول على الموقع', toast_conductor:'🚗 تم تسجيل النقل!',
@@ -1196,7 +1203,7 @@ function buildDonCard(item) {
 
 function renderDonaciones() {
   const items = DB.get('donaciones_pub');
-  const empty = '<p style="text-align:center;color:var(--gsub);padding:2rem;font-size:.85rem;line-height:1.6">Aún no hay donaciones publicadas.<br>¡Sé el primero en compartir cómo ayudaste! 💛</p>';
+  const empty = `<p style="text-align:center;color:var(--gsub);padding:2rem;font-size:.85rem;line-height:1.6">${t('empty_donaciones')}</p>`;
 
   // Modal transparencia
   const lista = document.getElementById('listaDonaciones');
