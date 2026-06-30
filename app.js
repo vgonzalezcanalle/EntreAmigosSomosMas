@@ -877,30 +877,39 @@ async function marcarComprado(insumoId) {
   requestConfirmacion(`Confirma que compraste "${ins.descripcion}".`, async (nombre, telefono) => {
     DB.update('insumos', insumoId, { estado_ayuda: 'comprado' });
     notificarPublicador(ins, 'comprado', nombre, telefono);
-    // Preguntar si necesita transporte
+    // Preguntar si necesita transporte (modal propio, no window.confirm — no funciona en navegadores móviles)
     setTimeout(() => preguntarSiNecesitaTransporte(insumoId), 400);
     return true;
   });
 }
+let _pendingTransportInsumoId = null;
 function preguntarSiNecesitaTransporte(insumoId) {
   const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
-  const necesita = window.confirm(`¿"${ins.descripcion}" necesita transporte para ser entregado?`);
-  if (necesita) {
-    DB.add('transporte', {
-      id: uuid(),
-      id_insumo: insumoId,
-      descripcion: ins.descripcion,
-      ciudad: ins.ciudad,
-      telefono_contacto: ins.telefono_contacto || '',
-      lat: ins.lat || null,
-      lng: ins.lng || null,
-      estado_traslado: 'pendiente',
-      creado_en: now()
-    });
-    DB.update('insumos', insumoId, { estado_ayuda: 'en_transito', necesita_transporte: true });
-    showToast('🚗 Publicado en Transporte — esperando que alguien lo lleve');
-    renderAll();
-  }
+  _pendingTransportInsumoId = insumoId;
+  const msg = document.getElementById('preguntaMensaje');
+  if (msg) msg.textContent = `¿"${ins.descripcion}" necesita transporte para ser entregado?`;
+  showModal('modalPreguntaSiNo');
+}
+function responderPreguntaSiNo(necesita) {
+  hideModal('modalPreguntaSiNo');
+  const insumoId = _pendingTransportInsumoId;
+  _pendingTransportInsumoId = null;
+  if (!necesita || !insumoId) return;
+  const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
+  DB.add('transporte', {
+    id: uuid(),
+    id_insumo: insumoId,
+    descripcion: ins.descripcion,
+    ciudad: ins.ciudad,
+    telefono_contacto: ins.telefono_contacto || '',
+    lat: ins.lat || null,
+    lng: ins.lng || null,
+    estado_traslado: 'pendiente',
+    creado_en: now()
+  });
+  DB.update('insumos', insumoId, { estado_ayuda: 'en_transito', necesita_transporte: true });
+  showToast('🚗 Publicado en Transporte — esperando que alguien lo lleve');
+  renderAll();
 }
 async function marcarRecibido(insumoId) {
   const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
