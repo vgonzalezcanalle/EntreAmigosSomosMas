@@ -9,8 +9,9 @@
 /* ─── MÓDULO H: i18n (Diccionarios de Idiomas) ─── */
 const I18N = {
   es: {
-    banner_gofundme:'💛 Donar en GoFundMe', banner_pagomovil:'📲 Pago Móvil', banner_psico:'🧠 Apoyo Psicológico',
+    banner_gofundme:'💛 Donar en GoFundMe', banner_pagomovil:'📲 Pago Móvil', banner_psico:'🧠 Apoyo Psicológico', banner_ig:'📸 Instagram',
     logo_entre:'entre amigos por', ig_seguir:'Síguenos',
+    nav_inicio:'ℹ️ Nosotros',
     nav_necesidades:'🔴 Necesidades', nav_venta: '🏷️ Venta', nav_acopio: '📦 Acopio', nav_inventario:'🏪 Locales y Donantes',
     nav_voluntarios:'🤝 Voluntarios', nav_alimentacion:'🍽️ Alimentación', nav_transporte:'🚗 Transporte',
     label_ciudad:'Ciudad / Estado', label_categoria:'Categoría', btn_ubicacion:'📍 Mi ubicación',
@@ -49,7 +50,17 @@ const I18N = {
     welcome_necesito:'Necesito ayuda', welcome_necesito_sub:'Publicar una necesidad o buscar recursos',
     welcome_ayudo:'Quiero ayudar', welcome_ayudo_sub:'Donar, ser voluntario o trasladar insumos',
     welcome_local:'Soy local', welcome_local_sub:'Ofrecer productos a la venta, ubicación y precios',
+    welcome_insp:'Necesito inspección de vivienda', welcome_insp_sub:'Solicitar revisión estructural de tu edificio',
     welcome_o:'— o —', welcome_skip:'Ver todo el directorio →',
+    modal_inspeccion_title:'🏗️ Inspección de edificación',
+    insp_hint:'📋 Completa el formulario. Recibirás confirmación por WhatsApp.',
+    insp_label_telefono:'Número de WhatsApp *', insp_small_telefono:'Te contactaremos aquí para coordinar la visita.',
+    insp_label_edificio:'Nombre del edificio *', insp_label_ubicacion:'Ubicación exacta *',
+    insp_label_fotos:'Fotos del edificio (vigas y columnas) *', insp_small_fotos:'Obligatorio. Hasta 6 fotos. Enfoca las vigas y columnas.',
+    insp_label_antes1967:'¿Su edificio fue construido antes de 1967? *',
+    insp_label_danos:'Si respondió "Sí" — ¿el edificio sufrió daños y reparaciones?',
+    insp_label_planos:'¿Cuenta con planos estructurales? *',
+    insp_btn_enviar:'Enviar solicitud',
     donor_title:'¿Cómo quieres ayudar?',
     donor_gofundme:'Donar dinero', donor_gofundme_sub:'GoFundMe · llega directo a quienes más lo necesitan',
     donor_pagomovil:'Pago Móvil', donor_pagomovil_sub:'Transferencia bancaria desde Venezuela',
@@ -62,8 +73,10 @@ const I18N = {
     nav_venta: '🏷️ Sales', nav_acopio: '📦 Collections', title_venta: 'Sales Locations', title_acopio: 'Collection Centers',
     btn_registrar_venta: '+ Register sale', btn_registrar_acopio: '+ Register center', empty_venta: 'No sales locations registered yet.', empty_acopio: 'No collection centers registered yet.',
     modal_nueva_venta: 'Register Sale', modal_nuevo_acopio: 'Register Collection', welcome_local: 'I am a local store', welcome_local_sub: 'Offer products for sale, location and prices',
-    banner_gofundme:'💛 Donate on GoFundMe', banner_pagomovil:'📲 Mobile Payment', banner_psico:'🧠 Psychological Support',
-    logo_entre:'between friends for', ig_seguir:'Follow us', nav_necesidades:'🔴 Needs', nav_inventario:'🏪 Stores & Donors',
+    banner_gofundme:'💛 Donate on GoFundMe', banner_pagomovil:'📲 Mobile Payment', banner_psico:'🧠 Psychological Support', banner_ig:'📸 Instagram',
+    logo_entre:'between friends for', ig_seguir:'Follow us',
+    nav_inicio:'ℹ️ About',
+    nav_necesidades:'🔴 Needs', nav_inventario:'🏪 Stores & Donors',
     nav_voluntarios:'🤝 Volunteers', nav_alimentacion:'🍽️ Food Aid', nav_transporte:'🚗 Transport',
     label_ciudad:'City / State', label_categoria:'Category', btn_ubicacion:'📍 My location',
     cat_todas:'All', cat_sangre:'🩸 Blood', cat_insumos:'🏥 Medical Supplies',
@@ -83,7 +96,17 @@ const I18N = {
     toast_pin_ok:'✅ Status updated', toast_pin_error:'❌ Incorrect PIN', toast_geo_ok:'📍 Location obtained', toast_geo_error:'❌ Could not get location',
     toast_conductor:'🚗 Transport registered!', welcome_sub:'Connecting those who need with those who can help',
     welcome_necesito:'I need help', welcome_necesito_sub:'Post a need or find resources', welcome_ayudo:'I want to help', welcome_ayudo_sub:'Donate, volunteer or transport supplies',
+    welcome_insp:'I need a building inspection', welcome_insp_sub:'Request a structural review of your building',
     welcome_o:'— or —', welcome_skip:'Browse the full directory →', donor_title:'How do you want to help?',
+    modal_inspeccion_title:'🏗️ Building inspection',
+    insp_hint:'📋 Fill out the form. You will receive confirmation via WhatsApp.',
+    insp_label_telefono:'WhatsApp number *', insp_small_telefono:'We will contact you here to coordinate the visit.',
+    insp_label_edificio:'Building name *', insp_label_ubicacion:'Exact location *',
+    insp_label_fotos:'Building photos (beams and columns) *', insp_small_fotos:'Required. Up to 6 photos. Focus on beams and columns.',
+    insp_label_antes1967:'Was the building built before 1967? *',
+    insp_label_danos:'If you answered "Yes" — did the building suffer damage or repairs?',
+    insp_label_planos:'Do you have structural blueprints available? *',
+    insp_btn_enviar:'Submit request',
     donor_gofundme:'Donate money', donor_gofundme_sub:'GoFundMe · goes directly to those in need', donor_pagomovil:'Mobile Payment', donor_pagomovil_sub:'Bank transfer from Venezuela',
     donor_insumos:'Offer supplies', donor_insumos_sub:'I have medicine, food or other resources', donor_transporte:'Transport supplies', donor_transporte_sub:'I have a vehicle and can make deliveries',
     donor_comida:'Bring food', donor_comida_sub:'Sign up for a food distribution shift', donor_voluntario:'Volunteer', donor_voluntario_sub:'Support a center that needs hands',
@@ -92,8 +115,10 @@ const I18N = {
     nav_venta: '🏷️ Vendas', nav_acopio: '📦 Centros de Coleta', title_venta: 'Locais de Venda', title_acopio: 'Centros de Coleta',
     btn_registrar_venta: '+ Registrar venda', btn_registrar_acopio: '+ Registrar coleta', empty_venta: 'Nenhum local de venda registrado.', empty_acopio: 'Nenhum centro de coleta registrado.',
     modal_nueva_venta: 'Registrar Venda', modal_nuevo_acopio: 'Registrar Coleta', welcome_local: 'Sou lojista', welcome_local_sub: 'Oferecer produtos para venda, localização e preços',
-    banner_gofundme:'💛 Doar no GoFundMe', banner_pagomovil:'📲 Pagamento Móvel', banner_psico:'🧠 Apoio Psicológico',
-    logo_entre:'entre amigos pela', ig_seguir:'Nos siga', nav_necesidades:'🔴 Necessidades', nav_inventario:'🏪 Locais e Doadores',
+    banner_gofundme:'💛 Doar no GoFundMe', banner_pagomovil:'📲 Pagamento Móvel', banner_psico:'🧠 Apoio Psicológico', banner_ig:'📸 Instagram',
+    logo_entre:'entre amigos pela', ig_seguir:'Nos siga',
+    nav_inicio:'ℹ️ Sobre nós',
+    nav_necesidades:'🔴 Necessidades', nav_inventario:'🏪 Locais e Doadores',
     nav_voluntarios:'🤝 Voluntários', nav_alimentacion:'🍽️ Alimentação', nav_transporte:'🚗 Transporte', label_ciudad:'Cidade / Estado', label_categoria:'Categoria', btn_ubicacion:'📍 Minha localização',
     cat_todas:'Todas', cat_sangre:'🩸 Sangue', cat_insumos:'🏥 Insumos Médicos', cat_rescate:'🦺 Resgate', cat_refugio:'⛺ Abrigo e Roupas', cat_alimentos:'🥫 Alimentos e Água',
     title_necesidades:'Necessidades ativas', title_inventario:'Locais e doadores', title_voluntarios:'Centros que buscam voluntários', title_alimentacion:'Coordenação de alimentação', title_transporte:'Rede de motoristas',
@@ -108,7 +133,10 @@ const I18N = {
     match_label:'💡 Disponível perto!', toast_guardado:'✅ Publicado com sucesso', toast_error:'❌ Preencha todos os campos obrigatórios', toast_pin_ok:'✅ Status atualizado', toast_pin_error:'❌ PIN incorreto',
     toast_geo_ok:'📍 Localização obtida', toast_geo_error:'❌ Erro ao obter localização', toast_conductor:'🚗 Transporte registrado!', welcome_sub:'Conectamos quem precisa com quem pode ajudar',
     welcome_necesito:'Preciso de ajuda', welcome_necesito_sub:'Publicar uma necessidade ou buscar recursos', welcome_ayudo:'Quero ajudar', welcome_ayudo_sub:'Doar, ser voluntário ou transportar insumos',
-    welcome_o:'— ou —', welcome_skip:'Ver todo o diretório →', donor_title:'Como você quer ajudar?', donor_gofundme:'Doar dinheiro', donor_gofundme_sub:'GoFundMe · vai direto para quem mais precisa',
+    welcome_insp:'Preciso de inspeção de edificação', welcome_insp_sub:'Solicitar revisão estrutural do seu edifício',
+    welcome_o:'— ou —', welcome_skip:'Ver todo o diretório →', 
+    modal_inspeccion_title:'🏗️ Inspeção de edificação', insp_hint:'📋 Preencha o formulário. Você receberá confirmação via WhatsApp.', insp_label_telefono:'Número do WhatsApp *', insp_small_telefono:'Entraremos em contato aqui para coordenar a visita.', insp_label_edificio:'Nome do edifício *', insp_label_ubicacion:'Localização exata *', insp_label_fotos:'Fotos do edifício (vigas e colunas) *', insp_small_fotos:'Obrigatório. Até 6 fotos. Foque nas vigas e colunas.', insp_label_antes1967:'O edifício foi construído antes de 1967? *', insp_label_danos:'Se respondeu "Sim" — o edifício sofreu danos ou reparações?', insp_label_planos:'Você tem plantas estruturais disponíveis? *', insp_btn_enviar:'Enviar solicitação',
+    donor_title:'Como você quer ajudar?', donor_gofundme:'Doar dinheiro', donor_gofundme_sub:'GoFundMe · vai direto para quem mais precisa',
     donor_pagomovil:'Pagamento Móvel', donor_pagomovil_sub:'Transferência bancária', donor_insumos:'Oferecer insumos', donor_insumos_sub:'Tenho remédios, comida ou outros recursos',
     donor_transporte:'Transportar insumos', donor_transporte_sub:'Tenho veículo e posso fazer entregas', donor_comida:'Levar comida', donor_comida_sub:'Me inscrever em um turno de alimentação',
     donor_voluntario:'Ser voluntário', donor_voluntario_sub:'Apoiar um centro que precisa de ajuda'
@@ -117,7 +145,8 @@ const I18N = {
     nav_venta: '🏷️ Ventes', nav_acopio: '📦 Collectes', title_venta: 'Points de Vente', title_acopio: 'Centres de Collecte',
     btn_registrar_venta: '+ Enregistrer vente', btn_registrar_acopio: '+ Enregistrer centre', empty_venta: 'Aucun point de vente enregistré.', empty_acopio: 'Aucun centre de collecte enregistré.',
     modal_nueva_venta: 'Enregistrer Vente', modal_nuevo_acopio: 'Enregistrer Collecte', welcome_local: 'Je suis commerçant', welcome_local_sub: 'Proposer des produits à la vente, localisation et prix',
-    banner_gofundme:'💛 Faire un don GoFundMe', banner_pagomovil:'📲 Paiement Mobile', banner_psico:'🧠 Soutien Psychologique', logo_entre:'entre amis pour le', ig_seguir:'Suivez-nous',
+    banner_gofundme:'💛 Faire un don GoFundMe', banner_pagomovil:'📲 Paiement Mobile', banner_psico:'🧠 Soutien Psychologique', banner_ig:'📸 Instagram', logo_entre:'entre amis pour le', ig_seguir:'Suivez-nous',
+    nav_inicio:'ℹ️ À propos',
     nav_necesidades:'🔴 Besoins', nav_inventario:'🏪 Locaux & Donateurs', nav_voluntarios:'🤝 Bénévoles', nav_alimentacion:'🍽️ Alimentation', nav_transporte:'🚗 Transport',
     label_ciudad:'Ville / État', label_categoria:'Catégorie', btn_ubicacion:'📍 Ma position', cat_todas:'Toutes', cat_sangre:'🩸 Sang', cat_insumos:'🏥 Fournitures médicales',
     cat_rescate:'🦺 Sauvetage', cat_refugio:'⛺ Abri & Vêtements', cat_alimentos:'🥫 Nourriture & Eau', title_necesidades:'Besoins actifs', title_inventario:'Locaux et donateurs',
@@ -131,7 +160,10 @@ const I18N = {
     btn_marcar_recibido:'🟢 Confirmer la réception', btn_maps:'📍 Voir sur la carte', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponible à proximité!', toast_guardado:'✅ Publié avec succès', toast_error:'❌ Remplissez tous les champs',
     toast_pin_ok:'✅ Statut mis à jour', toast_pin_error:'❌ Code PIN incorrect', toast_geo_ok:'📍 Position obtenue', toast_geo_error:'❌ Impossible d\'obtenir la position', toast_conductor:'🚗 Transport enregistré!',
     welcome_sub:'Nous connectons ceux qui ont besoin et ceux qui peuvent aider', welcome_necesito:'J\'ai besoin d\'aide', welcome_necesito_sub:'Publier un besoin ou trouver des ressources', welcome_ayudo:'Je veux aider', welcome_ayudo_sub:'Faire un don, être bénévole ou transporter',
-    welcome_o:'— ou —', welcome_skip:'Voir tout le répertoire →', donor_title:'Comment voulez-vous aider?', donor_gofundme:'Donner de l\'argent', donor_gofundme_sub:'GoFundMe · va directement à ceux qui en ont besoin',
+    welcome_insp:'J\'ai besoin d\'une inspection de bâtiment', welcome_insp_sub:'Demander une inspection structurelle de votre immeuble',
+    welcome_o:'— ou —', welcome_skip:'Voir tout le répertoire →', 
+    modal_inspeccion_title:'🏗️ Inspection de bâtiment', insp_hint:'📋 Remplissez le formulaire. Vous recevrez une confirmation par WhatsApp.', insp_label_telefono:'Numéro WhatsApp *', insp_small_telefono:'Nous vous contacterons ici pour coordonner la visite.', insp_label_edificio:'Nom du bâtiment *', insp_label_ubicacion:'Localisation exacte *', insp_label_fotos:'Photos du bâtiment (poutres et colonnes) *', insp_small_fotos:'Obligatoire. Jusqu\'à 6 photos. Focalisez sur les poutres et colonnes.', insp_label_antes1967:'Le bâtiment a-t-il été construit avant 1967 ? *', insp_label_danos:'Si vous avez répondu "Oui" — le bâtiment a-t-il subi des dommages ou réparations ?', insp_label_planos:'Avez-vous des plans structurels disponibles ? *', insp_btn_enviar:'Envoyer la demande',
+    donor_title:'Comment voulez-vous aider?', donor_gofundme:'Donner de l\'argent', donor_gofundme_sub:'GoFundMe · va directement à ceux qui en ont besoin',
     donor_pagomovil:'Paiement Mobile', donor_pagomovil_sub:'Virement bancaire', donor_insumos:'Offrir des fournitures', donor_insumos_sub:'J\'ai des médicaments, de la nourriture...', donor_transporte:'Transporter des fournitures', donor_transporte_sub:'J\'ai un véhicule et je peux livrer',
     donor_comida:'Apporter de la nourriture', donor_comida_sub:'M\'inscrire pour une distribution', donor_voluntario:'Être bénévole', donor_voluntario_sub:'Soutenir un centre qui a besoin d\'aide'
   },
@@ -139,7 +171,8 @@ const I18N = {
     nav_venta: '🏷️ Verkauf', nav_acopio: '📦 Sammelstellen', title_venta: 'Verkaufsstellen', title_acopio: 'Sammelzentren',
     btn_registrar_venta: '+ Verkauf registrieren', btn_registrar_acopio: '+ Zentrum registrieren', empty_venta: 'Noch keine Verkaufsstellen registriert.', empty_acopio: 'Noch keine Sammelstellen registriert.',
     modal_nueva_venta: 'Verkauf registrieren', modal_nuevo_acopio: 'Sammelstelle registrieren', welcome_local: 'Ich bin Händler', welcome_local_sub: 'Produkte zum Verkauf, Standort und Preise anbieten',
-    banner_gofundme:'💛 Spenden GoFundMe', banner_pagomovil:'📲 Mobile Zahlung', banner_psico:'🧠 Psychologische Unterstützung', logo_entre:'unter freunden für', ig_seguir:'Folge uns',
+    banner_gofundme:'💛 Spenden GoFundMe', banner_pagomovil:'📲 Mobile Zahlung', banner_psico:'🧠 Psychologische Unterstützung', banner_ig:'📸 Instagram', logo_entre:'unter freunden für', ig_seguir:'Folge uns',
+    nav_inicio:'ℹ️ Über uns',
     nav_necesidades:'🔴 Bedürfnisse', nav_inventario:'🏪 Geschäfte & Spender', nav_voluntarios:'🤝 Freiwillige', nav_alimentacion:'🍽️ Ernährung', nav_transporte:'🚗 Transport',
     label_ciudad:'Stadt / Bundesland', label_categoria:'Kategorie', btn_ubicacion:'📍 Mein Standort', cat_todas:'Alle', cat_sangre:'🩸 Blut', cat_insumos:'🏥 Medizinische Versorgung',
     cat_rescate:'🦺 Rettung', cat_refugio:'⛺ Unterkunft & Kleidung', cat_alimentos:'🥫 Essen & Wasser', title_necesidades:'Aktuelle Bedürfnisse', title_inventario:'Geschäfte und Spender',
@@ -153,7 +186,10 @@ const I18N = {
     btn_marcar_recibido:'🟢 Erhalt bestätigen', btn_maps:'📍 Auf Karte anzeigen', btn_whatsapp:'💬 WhatsApp', match_label:'💡 In der Nähe verfügbar!', toast_guardado:'✅ Erfolgreich veröffentlicht', toast_error:'❌ Bitte alle Felder ausfüllen',
     toast_pin_ok:'✅ Status aktualisiert', toast_pin_error:'❌ Falsche PIN', toast_geo_ok:'📍 Standort abgerufen', toast_geo_error:'❌ Standort konnte nicht abgerufen werden', toast_conductor:'🚗 Transport registriert!',
     welcome_sub:'Wir verbinden die Bedürftigen mit denen, die helfen können', welcome_necesito:'Ich brauche Hilfe', welcome_necesito_sub:'Ein Bedürfnis posten oder Ressourcen finden', welcome_ayudo:'Ich möchte helfen', welcome_ayudo_sub:'Spenden, freiwillig arbeiten oder Hilfsgüter transportieren',
-    welcome_o:'— oder —', welcome_skip:'Gesamtes Verzeichnis ansehen →', donor_title:'Wie möchtest du helfen?', donor_gofundme:'Geld spenden', donor_gofundme_sub:'GoFundMe · geht direkt an die Bedürftigen',
+    welcome_insp:'Ich benötige eine Gebäudeinspektion', welcome_insp_sub:'Strukturelle Überprüfung Ihres Gebäudes beantragen',
+    welcome_o:'— oder —', welcome_skip:'Gesamtes Verzeichnis ansehen →', 
+    modal_inspeccion_title:'🏗️ Gebäudeinspektion', insp_hint:'📋 Füllen Sie das Formular aus. Sie erhalten eine Bestätigung per WhatsApp.', insp_label_telefono:'WhatsApp-Nummer *', insp_small_telefono:'Wir kontaktieren Sie hier, um den Besuch zu koordinieren.', insp_label_edificio:'Gebäudename *', insp_label_ubicacion:'Genaue Adresse *', insp_label_fotos:'Fotos des Gebäudes (Träger und Säulen) *', insp_small_fotos:'Pflichtfeld. Bis zu 6 Fotos. Fokus auf Träger und Säulen.', insp_label_antes1967:'Wurde das Gebäude vor 1967 gebaut? *', insp_label_danos:'Falls ja — Hat das Gebäude Schäden oder Reparaturen erlitten?', insp_label_planos:'Haben Sie Baupläne verfügbar? *', insp_btn_enviar:'Anfrage senden',
+    donor_title:'Wie möchtest du helfen?', donor_gofundme:'Geld spenden', donor_gofundme_sub:'GoFundMe · geht direkt an die Bedürftigen',
     donor_pagomovil:'Mobile Zahlung', donor_pagomovil_sub:'Banküberweisung', donor_insumos:'Hilfsgüter anbieten', donor_insumos_sub:'Ich habe Medikamente, Essen...', donor_transporte:'Hilfsgüter transportieren', donor_transporte_sub:'Ich habe ein Fahrzeug und kann liefern',
     donor_comida:'Essen bringen', donor_comida_sub:'Für Lebensmittelausgabe anmelden', donor_voluntario:'Freiwilliger werden', donor_voluntario_sub:'Ein Zentrum unterstützen, das Hilfe braucht'
   },
@@ -161,7 +197,8 @@ const I18N = {
     nav_venta: '🏷️ Vendita', nav_acopio: '📦 Raccolta', title_venta: 'Punti Vendita', title_acopio: 'Centri di Raccolta',
     btn_registrar_venta: '+ Registra vendita', btn_registrar_acopio: '+ Registra centro', empty_venta: 'Nessun punto vendita registrato.', empty_acopio: 'Nessun centro di raccolta registrato.',
     modal_nueva_venta: 'Registra Vendita', modal_nuevo_acopio: 'Registra Raccolta', welcome_local: 'Sono un commerciante', welcome_local_sub: 'Offrire prodotti in vendita, posizione e prezzi',
-    banner_gofundme:'💛 Dona su GoFundMe', banner_pagomovil:'📲 Pagamento Mobile', banner_psico:'🧠 Supporto Psicologico', logo_entre:'tra amici per il', ig_seguir:'Seguici',
+    banner_gofundme:'💛 Dona su GoFundMe', banner_pagomovil:'📲 Pagamento Mobile', banner_psico:'🧠 Supporto Psicologico', banner_ig:'📸 Instagram', logo_entre:'tra amici per il', ig_seguir:'Seguici',
+    nav_inicio:'ℹ️ Chi siamo',
     nav_necesidades:'🔴 Necessità', nav_inventario:'🏪 Negozi e Donatori', nav_voluntarios:'🤝 Voluntari', nav_alimentacion:'🍽️ Alimentazione', nav_transporte:'🚗 Trasporto',
     label_ciudad:'Città / Stato', label_categoria:'Categoria', btn_ubicacion:'📍 La mia posizione', cat_todas:'Tutte', cat_sangre:'🩸 Sangue', cat_insumos:'🏥 Forniture Mediche',
     cat_rescate:'🦺 Salvataggio', cat_refugio:'⛺ Rifugio e Vestiti', cat_alimentos:'🥫 Cibo e Acqua', title_necesidades:'Necessità attive', title_inventario:'Negozi e donatori',
@@ -175,7 +212,10 @@ const I18N = {
     btn_marcar_recibido:'🟢 Conferma ricezione', btn_maps:'📍 Vedi sulla mappa', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponibile nelle vicinanze!', toast_guardado:'✅ Pubblicato con successo', toast_error:'❌ Compila tutti i campi',
     toast_pin_ok:'✅ Stato aggiornato', toast_pin_error:'❌ PIN errato', toast_geo_ok:'📍 Posizione ottenuta', toast_geo_error:'❌ Impossibile ottenere la posizione', toast_conductor:'🚗 Trasporto registrato!',
     welcome_sub:'Mettiamo in contatto chi ha bisogno con chi può aiutare', welcome_necesito:'Ho bisogno di aiuto', welcome_necesito_sub:'Pubblica una necessità o cerca risorse', welcome_ayudo:'Voglio aiutare', welcome_ayudo_sub:'Dona, fai volontariato o trasporta forniture',
-    welcome_o:'— o —', welcome_skip:'Visualizza tutta la directory →', donor_title:'Come vuoi aiutare?', donor_gofundme:'Dona denaro', donor_gofundme_sub:'GoFundMe · va direttamente a chi ne ha bisogno',
+    welcome_insp:'Ho bisogno di un\'ispezione dell\'edificio', welcome_insp_sub:'Richiedere una revisione strutturale del tuo edificio',
+    welcome_o:'— o —', welcome_skip:'Visualizza tutta la directory →', 
+    modal_inspeccion_title:'🏗️ Ispezione dell\'edificio', insp_hint:'📋 Compila il modulo. Riceverai la conferma via WhatsApp.', insp_label_telefono:'Numero WhatsApp *', insp_small_telefono:'Ti contatteremo qui per coordinare la visita.', insp_label_edificio:'Nome dell\'edificio *', insp_label_ubicacion:'Posizione esatta *', insp_label_fotos:'Foto dell\'edificio (travi e colonne) *', insp_small_fotos:'Obbligatorio. Fino a 6 foto. Focati su travi e colonne.', insp_label_antes1967:'L\'edificio è stato costruito prima del 1967? *', insp_label_danos:'Se hai risposto "Sì" — l\'edificio ha subito danni o riparazioni?', insp_label_planos:'Hai piante strutturali disponibili? *', insp_btn_enviar:'Invia richiesta',
+    donor_title:'Come vuoi aiutare?', donor_gofundme:'Dona denaro', donor_gofundme_sub:'GoFundMe · va direttamente a chi ne ha bisogno',
     donor_pagomovil:'Pagamento Mobile', donor_pagomovil_sub:'Bonifico bancario', donor_insumos:'Offri forniture', donor_insumos_sub:'Ho medicine, cibo...', donor_transporte:'Trasporta forniture', donor_transporte_sub:'Ho un veicolo e posso consegnare',
     donor_comida:'Porta cibo', donor_comida_sub:'Iscriviti per la distribuzione', donor_voluntario:'Fai volontariato', donor_voluntario_sub:'Supporta un centro che ha bisogno di aiuto'
   },
@@ -183,7 +223,8 @@ const I18N = {
     nav_venta: '🏷️ مبيعات', nav_acopio: '📦 مراكز التجميع', title_venta: 'أماكن البيع', title_acopio: 'مراكز التجميع',
     btn_registrar_venta: '+ تسجيل مبيعات', btn_registrar_acopio: '+ تسجيل مركز', empty_venta: 'لا توجد أماكن بيع مسجلة بعد.', empty_acopio: 'لا توجد مراكز تجميع مسجلة بعد.',
     modal_nueva_venta: 'تسجيل مبيعات', modal_nuevo_acopio: 'تسجيل مركز تجميع', welcome_local: 'أنا متجر محلي', welcome_local_sub: 'عرض المنتجات للبيع، الموقع والأسعار',
-    banner_gofundme:'💛 تبرع في GoFundMe', banner_pagomovil:'📲 الدفع عبر الهاتف', banner_psico:'🧠 الدعم النفسي', logo_entre:'بين الأصدقاء لأجل', ig_seguir:'تابعنا',
+    banner_gofundme:'💛 تبرع في GoFundMe', banner_pagomovil:'📲 الدفع عبر الهاتف', banner_psico:'🧠 الدعم النفسي', banner_ig:'📸 إنستغرام', logo_entre:'بين الأصدقاء لأجل', ig_seguir:'تابعنا',
+    nav_inicio:'ℹ️ من نحن',
     nav_necesidades:'🔴 الاحتياجات', nav_inventario:'🏪 المتاجر والمتبرعون', nav_voluntarios:'🤝 المتطوعون', nav_alimentacion:'🍽️ المساعدات الغذائية', nav_transporte:'🚗 النقل',
     label_ciudad:'المدينة / الولاية', label_categoria:'الفئة', btn_ubicacion:'📍 موقعي', cat_todas:'الكل', cat_sangre:'🩸 الدم', cat_insumos:'🏥 المستلزمات الطبية',
     cat_rescate:'🦺 الإنقاذ', cat_refugio:'⛺ المأوى والملابس', cat_alimentos:'🥫 الطعام والماء', title_necesidades:'الاحتياجات النشطة', title_inventario:'المتاجر والمتبرعون',
@@ -197,7 +238,10 @@ const I18N = {
     btn_marcar_recibido:'🟢 تأكيد الاستلام', btn_maps:'📍 عرض الخريطة', btn_whatsapp:'💬 واتساب', match_label:'💡 متاح بالجوار!', toast_guardado:'✅ تم النشر بنجاح', toast_error:'❌ يرجى ملء جميع الحقول',
     toast_pin_ok:'✅ تم تحديث الحالة', toast_pin_error:'❌ PIN غير صحيح', toast_geo_ok:'📍 تم الحصول على الموقع', toast_geo_error:'❌ تعذر الحصول على الموقع', toast_conductor:'🚗 تم تسجيل النقل!',
     welcome_sub:'نربط بين من يحتاج ومن يمكنه المساعدة', welcome_necesito:'أحتاج إلى المساعدة', welcome_necesito_sub:'نشر حاجة أو البحث عن موارد', welcome_ayudo:'أريد المساعدة', welcome_ayudo_sub:'تبرع، تطوع أو انقل المستلزمات',
-    welcome_o:'— أو —', welcome_skip:'تصفح الدليل بالكامل →', donor_title:'كيف تريد المساعدة؟', donor_gofundme:'تبرع بالمال', donor_gofundme_sub:'GoFundMe · يذهب مباشرة لمن هم في أمس الحاجة',
+    welcome_insp:'أحتاج إلى فحص المبنى', welcome_insp_sub:'طلب مراجعة هيكلية لمبناك',
+    welcome_o:'— أو —', welcome_skip:'تصفح الدليل بالكامل →', 
+    modal_inspeccion_title:'🏗️ فحص المبنى', insp_hint:'📋 أكمل النموذج. ستتلقى تأكيداً عبر واتساب.', insp_label_telefono:'رقم واتساب *', insp_small_telefono:'سنتواصل معك هنا لتنسيق الزيارة.', insp_label_edificio:'اسم المبنى *', insp_label_ubicacion:'الموقع الدقيق *', insp_label_fotos:'صور المبنى (الكمرات والأعمدة) *', insp_small_fotos:'إلزامي. حتى 6 صور. ركز على الكمرات والأعمدة.', insp_label_antes1967:'هل بُني المبنى قبل عام 1967؟ *', insp_label_danos:'إذا أجبت بـ "نعم" — هل عانى المبنى من أضرار أو إصلاحات؟', insp_label_planos:'هل لديك مخططات هيكلية متاحة؟ *', insp_btn_enviar:'إرسال الطلب',
+    donor_title:'كيف تريد المساعدة؟', donor_gofundme:'تبرع بالمال', donor_gofundme_sub:'GoFundMe · يذهب مباشرة لمن هم في أمس الحاجة',
     donor_pagomovil:'الدفع عبر الهاتف', donor_pagomovil_sub:'تحويل مصرفي', donor_insumos:'تقديم مستلزمات', donor_insumos_sub:'لدي دواء، طعام...', donor_transporte:'نقل المستلزمات', donor_transporte_sub:'لدي مركبة ويمكنني التوصيل',
     donor_comida:'إحضار طعام', donor_comida_sub:'التسجيل في دورية توزيع الطعام', donor_voluntario:'كن متطوعاً', donor_voluntario_sub:'دعم مركز يحتاج إلى مساعدة'
   }
@@ -329,7 +373,7 @@ function showTab(tabId) {
   const panel = document.getElementById(tabId);
   if (panel) { panel.classList.add('active'); panel.classList.remove('hidden'); }
   
-  // Mapa con las 7 pestañas exactas
+  // Mapa con las 8 pestañas exactas
   const map = { 
     tabInicio: 0,
     tabNecesidades: 1, 
@@ -975,122 +1019,70 @@ function isSlotTaken(fecha, hora) {
 function submitInspeccion(e) {
   e.preventDefault();
 
-  const nombre    = document.getElementById('insp_nombre').value.trim();
-  const correo    = document.getElementById('insp_correo').value.trim();
   const telefono  = document.getElementById('insp_telefono').value.trim();
   const edificio  = document.getElementById('insp_edificio').value.trim();
   const ubicacion = document.getElementById('insp_ubicacion').value.trim();
   const antes1967 = document.querySelector('input[name="insp_antes1967"]:checked')?.value;
   const danos     = document.getElementById('insp_danos')?.value.trim() || '';
   const planos    = document.querySelector('input[name="insp_planos"]:checked')?.value;
-  const fecha     = document.getElementById('insp_fecha').value;
-  const hora      = document.getElementById('insp_hora').value;
+  const archivos  = document.getElementById('insp_fotos').files;
 
-  if (!nombre || !correo || !telefono || !edificio || !ubicacion || !antes1967 || !planos || !fecha || !hora) {
+  if (!telefono || !edificio || !ubicacion || !antes1967 || !planos) {
     showToast('❌ Completa todos los campos obligatorios'); return;
   }
-
-  if (isSlotTaken(fecha, hora)) {
-    showToast('❌ Esa fecha y hora ya está reservada. Elige otra.');
-    actualizarCalendario();
-    return;
+  if (archivos.length === 0) {
+    showToast('❌ Las fotos son obligatorias'); return;
   }
 
-  // ── Construir mensajes AQUÍ, en el gesto directo del usuario ──
-  // (Antes de cualquier Promise, para que el navegador no bloquee los popups)
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ubicacion)}`;
   const INSPECTOR_TEL = '17863018995';
   const telLimpio = telefono.replace(/\D/g, '');
+  const numFotos = archivos.length;
 
-  // Mensaje 1 → Inspector: toda la info del formulario
-  const numFotos = document.getElementById('insp_fotos').files.length;
   const msgInspector = encodeURIComponent(
     `🏗️ *Nueva solicitud de inspección*\n` +
     `*Entre Amigos por Venezuela*\n\n` +
-    `👤 *Solicitante:* ${nombre}\n` +
-    `📞 *Teléfono:* ${telefono}\n` +
-    `📧 *Correo:* ${correo}\n\n` +
+    `📞 *WhatsApp:* ${telefono}\n\n` +
     `🏢 *Edificio:* ${edificio}\n` +
-    `📍 *Dirección:* ${ubicacion}\n` +
-    `📅 *Fecha de visita:* ${fecha}\n` +
-    `🕐 *Hora:* ${hora}\n\n` +
+    `📍 *Dirección:* ${ubicacion}\n\n` +
     `🏗️ *Construido antes de 1967:* ${antes1967 === 'si' ? 'Sí' : 'No'}\n` +
     (danos ? `🔧 *Daños / reparaciones:* ${danos}\n` : '') +
     `📐 *Planos disponibles:* ${planos === 'si' ? 'Sí' : 'No'}\n\n` +
-    (numFotos > 0 ? `📸 *Fotos del edificio:* ${numFotos} foto${numFotos !== 1 ? 's' : ''} subida${numFotos !== 1 ? 's' : ''} (vigas y columnas) — disponibles en la plataforma web.\n\n` : '') +
+    `📸 *Fotos:* ${numFotos} foto${numFotos !== 1 ? 's' : ''} adjunta${numFotos !== 1 ? 's' : ''} (vigas y columnas)\n\n` +
     `📌 *Ver en Google Maps:*\n${mapsUrl}`
   );
 
-  // Mensaje 2 → Solicitante: confirmación con fecha, hora y lugar
   const msgSolicitante = encodeURIComponent(
-    `✅ *Tu evaluación está confirmada*\n` +
+    `✅ *Solicitud de inspección recibida*\n` +
     `*Entre Amigos por Venezuela* 🇻🇪\n\n` +
-    `Hola ${nombre}, recibimos tu solicitud correctamente.\n\n` +
-    `📋 *Resumen de tu evaluación:*\n` +
+    `Recibimos tu solicitud correctamente.\n\n` +
     `🏢 *Edificio:* ${edificio}\n` +
-    `📍 *Dirección:* ${ubicacion}\n` +
-    `📅 *Día:* ${fecha}\n` +
-    `🕐 *Hora:* ${hora}\n` +
-    `📧 *Correo registrado:* ${correo}\n\n` +
+    `📍 *Dirección:* ${ubicacion}\n\n` +
     `📌 *Ubicación en Google Maps:*\n${mapsUrl}\n\n` +
-    `Nuestro equipo estará contigo puntualmente. ¡Gracias por confiar en nosotros! 💛`
+    `Nuestro equipo se pondrá en contacto contigo para coordinar la visita. ¡Gracias por confiar en nosotros! 💛`
   );
 
-  // Abrir ambos WhatsApp ANTES de la Promise (gesto directo → no se bloquea)
   window.open(`https://wa.me/${INSPECTOR_TEL}?text=${msgInspector}`, '_blank');
   window.open(`https://wa.me/${telLimpio}?text=${msgSolicitante}`, '_blank');
 
-  // Guardar en BD y comprimir fotos (ya no depende de que los popups funcionen)
-  const archivos = document.getElementById('insp_fotos').files;
   const fotosPromises = Array.from(archivos).slice(0, 6).map(f => compressImage(f, 200));
 
   Promise.all(fotosPromises).then(fotos => {
     const id = uuid();
     DB.add('inspecciones', {
-      id, nombre, correo, telefono, edificio, ubicacion,
-      antes1967, danos, planos, fecha, hora, fotos,
+      id, telefono, edificio, ubicacion,
+      antes1967, danos, planos, fotos,
       estado: 'pendiente', creado_en: now()
     });
-    addReservedDate(fecha, hora, id);
     hideModal('modalInspeccion');
     document.getElementById('formInspeccion').reset();
     document.getElementById('insp_fotos_preview').innerHTML = '';
-    actualizarCalendario();
     showToast('✅ Solicitud enviada — revisa tu WhatsApp');
   }).catch(() => {
     showToast('❌ Error con las fotos, pero la solicitud fue registrada.');
   });
 }
 
-function actualizarCalendario() {
-  const fechaInput = document.getElementById('insp_fecha');
-  const horaSelect = document.getElementById('insp_hora');
-  const calInfo    = document.getElementById('insp_cal_info');
-  if (!fechaInput || !horaSelect || !calInfo) return;
-
-  const fecha = fechaInput.value;
-  if (!fecha) { calInfo.textContent = ''; return; }
-
-  const reservadas = getReservedDates().filter(d => d.fecha === fecha);
-  const horasDisp  = HORAS_INSPECCION.filter(h => !reservadas.some(r => r.hora === h));
-
-  // Marcar opciones tomadas
-  Array.from(horaSelect.options).forEach(opt => {
-    if (opt.value === '') return;
-    const tomada = reservadas.some(r => r.hora === opt.value);
-    opt.disabled = tomada;
-    opt.text = tomada ? `${opt.value} — No disponible` : opt.value;
-    opt.style.color = tomada ? '#aaa' : '';
-  });
-
-  if (horasDisp.length === 0) {
-    calInfo.innerHTML = `<span style="color:var(--rojo)">❌ No hay horarios disponibles para esta fecha. Elige otra.</span>`;
-  } else {
-    calInfo.innerHTML = `<span style="color:var(--verde)">✅ ${horasDisp.length} horario${horasDisp.length !== 1 ? 's' : ''} disponible${horasDisp.length !== 1 ? 's' : ''}</span>`;
-  }
-}
-
-const HORAS_INSPECCION = ['08:00','09:00','10:00','11:00','14:00','15:00','16:00'];
 
 function previsualizarFotos() {
   const input   = document.getElementById('insp_fotos');
@@ -1226,13 +1218,6 @@ function updateInicioStats() {
 
 /* ─── Init extendido ─── */
 document.addEventListener('DOMContentLoaded', () => {
-  // Fecha mínima inspección = mañana
-  const fechaInsp = document.getElementById('insp_fecha');
-  if (fechaInsp) {
-    const tom = new Date(); tom.setDate(tom.getDate() + 1);
-    fechaInsp.min = tom.toISOString().slice(0, 10);
-    fechaInsp.addEventListener('change', actualizarCalendario);
-  }
   // Preview fotos inspección
   const fotosInsp = document.getElementById('insp_fotos');
   if (fotosInsp) fotosInsp.addEventListener('change', previsualizarFotos);
@@ -1241,7 +1226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (donMedia) donMedia.addEventListener('change', previsualizarMedia);
   // Historial navegación — botón atrás del sistema
   window.addEventListener('popstate', () => goBack());
-  // Botón atrás
+  // Start on tabInicio
   NavHistory.push('tabInicio');
   showTabInternal('tabInicio');
 });
