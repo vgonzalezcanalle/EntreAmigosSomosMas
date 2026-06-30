@@ -630,10 +630,15 @@ async function fetchCollection(colName) {
   return docs;
 }
 
-async function writeDocument(colName, docId, data) {
-  const url = `${firestoreBaseUrl()}/${colName}/${docId}?key=${window.__firestoreConfig.apiKey}`;
+async function writeDocument(colName, docId, data, isPartialUpdate) {
+  let url = `${firestoreBaseUrl()}/${colName}/${docId}?key=${window.__firestoreConfig.apiKey}`;
   const fields = {};
   Object.entries(data).forEach(([k, v]) => { fields[k] = toFirestoreValue(v); });
+  if (isPartialUpdate) {
+    // CRÍTICO: sin updateMask, Firestore REST PATCH reemplaza el documento entero
+    // (borra todos los campos no incluidos). Con updateMask, solo actualiza esos campos.
+    Object.keys(data).forEach(k => { url += `&updateMask.fieldPaths=${encodeURIComponent(k)}`; });
+  }
   const res = await fetch(url, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -693,7 +698,7 @@ const DB = {
     return finalItem;
   },
   update(col, id, patch) {
-    writeDocument(col, id, { ...patch, actualizado_en: now() })
+    writeDocument(col, id, { ...patch, actualizado_en: now() }, true)
       .then(() => syncAllCollections({ isFirstLoad: false }))
       .catch(err => console.error('Error al actualizar', col, id, err));
   },
@@ -1120,7 +1125,7 @@ function renderNecesidades() {
   const lista = document.getElementById('listaNecesidades');
   const empty = document.getElementById('emptyNecesidades');
   if (!lista) return;
-  const items = filterItems(DB.get('insumos'));
+  const items = filterItems(DB.get('insumos')).filter(x => x.descripcion);
   lista.innerHTML = '';
   if (!items.length) { emptyState(empty, filtros.ciudad || filtros.categoria ? 'Sin resultados en esa zona o categoría.\nPrueba con otra ciudad o quita el filtro.' : t('empty_necesidades')); return; }
   empty?.classList.add('hidden');
@@ -1379,15 +1384,10 @@ function renderTransporte() {
 }
 
 function renderAll() {
-  updateInicioStats();
-  renderDonaciones();
-  renderNecesidades();
-  renderVenta();
-  renderAcopio();
-  renderInventario();
-  renderVoluntarios();
-  renderAlimentacion();
-  renderTransporte();
+  const sections = [updateInicioStats, renderDonaciones, renderNecesidades, renderVenta, renderAcopio, renderInventario, renderVoluntarios, renderAlimentacion, renderTransporte];
+  sections.forEach(fn => {
+    try { fn(); } catch (err) { console.error(`Error en ${fn.name}:`, err); }
+  });
 }
 
 /* ─── Init ─── */
