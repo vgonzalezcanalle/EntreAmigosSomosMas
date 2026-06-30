@@ -1070,46 +1070,7 @@ input[type="radio"],input[type="checkbox"]{
     </form>
   </div>
 </div>
- 
-<!-- Modal: Conductor -->
-<div id="modalConductor" class="modal-overlay hidden" role="dialog" aria-modal="true">
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 data-i18n="modal_conductor">🚗 Yo lo traslado</h3>
-      <button class="modal-close" onclick="hideModal('modalConductor')">✕</button>
-    </div>
-    <form id="formConductor" onsubmit="submitConductor(event)" novalidate>
-      <input type="hidden" id="cond_id_insumo">
-      <div class="form-group">
-        <label id="lbl_cond_nombre">Nombre o alias *</label>
-        <input type="text" id="cond_nombre" required placeholder="Tu nombre">
-      </div>
-      <div class="form-group">
-        <label id="lbl_cond_cedula">Cédula / Pasaporte *</label>
-        <input type="text" id="cond_cedula" required placeholder="V-12345678">
-        <small id="small_cond_cedula">Requerido para seguridad y trazabilidad.</small>
-      </div>
-      <div class="form-group">
-        <label id="lbl_cond_tel">Teléfono (WhatsApp) *</label>
-        <input type="tel" id="cond_telefono" required placeholder="0424-1234567">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label id="lbl_cond_origen">Ciudad origen *</label>
-          <input type="text" id="cond_origen" required placeholder="Caracas">
-        </div>
-        <div class="form-group">
-          <label id="lbl_cond_destino">Ciudad destino *</label>
-          <input type="text" id="cond_destino" required placeholder="Valencia">
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button type="button" id="btn_cond_cancel" class="btn-outline" onclick="hideModal('modalConductor')">Cancelar</button>
-        <button type="submit" id="btn_cond_submit" class="btn-primary">Confirmar traslado</button>
-      </div>
-    </form>
-  </div>
-</div>
+
  
 <!-- Modal: Confirmar Acción (reemplaza PIN) -->
 <div id="modalConfirmarAccion" class="modal-overlay hidden" role="dialog" aria-modal="true">
