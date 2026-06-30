@@ -406,11 +406,6 @@ input[type="radio"],input[type="checkbox"]{
 </head>
 <body>
  
-<!-- Aviso de problema de conexión con la base de datos -->
-<div id="syncErrorBanner" class="hidden" style="position:fixed;top:0;left:0;right:0;z-index:600;background:#fde8e8;color:#b91c1c;font-size:.78rem;font-weight:600;text-align:center;padding:.5rem 1rem;line-height:1.4">
-  ⚠️ No se pudo conectar con el servidor. Revisa tu conexión a internet y recarga la página.
-</div>
- 
 <!-- BIENVENIDA -->
 <div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-label="Bienvenida">
   <div class="welcome-inner">
@@ -1313,26 +1308,16 @@ input[type="radio"],input[type="checkbox"]{
   </div>
 </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, setDoc, updateDoc, doc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXr6vL0lbh6A8xoWCgOLCmTtkZOpYSxas",
-    authDomain: "entreamigos-venezuela.firebaseapp.com",
+<script>
+  // Configuración de Firestore — usamos la REST API directamente (fetch normal)
+  // en vez del SDK de JavaScript, porque el SDK insiste en abrir conexiones tipo
+  // streaming (WebChannel) que están bloqueadas en redes con restricciones, como
+  // las de Venezuela. Peticiones fetch() normales son HTTP estándar y no tienen
+  // este problema.
+  window.__firestoreConfig = {
     projectId: "entreamigos-venezuela",
-    storageBucket: "entreamigos-venezuela.firebasestorage.app",
-    messagingSenderId: "872105031844",
-    appId: "1:872105031844:web:3c4056abd5dd39eb4fce31"
+    apiKey: "AIzaSyBXr6vL0lbh6A8xoWCgOLCmTtkZOpYSxas"
   };
-
-  const fbApp = initializeApp(firebaseConfig);
-  const fbDb  = getFirestore(fbApp);
-
-  // Exponer Firebase globalmente para que app.js (script normal) lo use
-  window.__firebase = { fbDb, collection, addDoc, setDoc, updateDoc, doc, getDocs, serverTimestamp };
-  window.__firebaseReady = true;
-  window.dispatchEvent(new Event('firebase-ready'));
 </script>
 <script src="app.js"></script>
 </body>
