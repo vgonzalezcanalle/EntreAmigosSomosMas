@@ -501,7 +501,7 @@ input[type="radio"],input[type="checkbox"]{
   <div class="filter-row">
     <div class="input-group filter-ciudad">
       <label for="filtroCiudad" data-i18n="label_ciudad">Ciudad / Estado</label>
-      <input type="text" id="filtroCiudad" placeholder="Ej: Caracas, Miranda…" autocomplete="off" oninput="applyFilters()">
+      <input type="text" id="filtroCiudad" placeholder="Ej: Caracas, Miranda…" id="filtroCiudad_input" autocomplete="off" oninput="applyFilters()">
     </div>
     <div class="filter-btn-geo">
       <button class="btn-geo" onclick="useGeoLocation()" data-i18n="btn_ubicacion">📍 Mi ubicación</button>
@@ -592,7 +592,7 @@ input[type="radio"],input[type="checkbox"]{
       <h2 data-i18n="title_venta">Locales de Venta</h2>
       <button class="btn-primary" onclick="showModal('modalNuevaVenta')" data-i18n="btn_registrar_venta">+ Registrar venta</button>
     </div>
-    <p class="section-hint">Encuentra locales que ofrecen insumos a la venta con sus respectivos precios e información de contacto.</p>
+    <p class="section-hint" id="hint_venta_el">Encuentra locales que ofrecen insumos a la venta con sus respectivos precios e información de contacto.</p>
     <div id="listaVenta" class="cards-list" role="list"></div>
     <p id="emptyVenta" class="empty-state"></p>
   </section>
@@ -603,7 +603,7 @@ input[type="radio"],input[type="checkbox"]{
       <h2 data-i18n="title_acopio">Centros de Acopio e Inventario</h2>
       <button class="btn-primary" onclick="showModal('modalNuevoAcopio')" data-i18n="btn_registrar_acopio">+ Registrar acopio</button>
     </div>
-    <p class="section-hint">Insumos recolectados que ya cuentan con centros de acopio o personas individuales.</p>
+    <p class="section-hint" id="hint_acopio_el">Insumos recolectados que ya cuentan con centros de acopio o personas individuales.</p>
     <div id="listaAcopio" class="cards-list" role="list"></div>
     <p id="emptyAcopio" class="empty-state"></p>
   </section>
@@ -624,7 +624,7 @@ input[type="radio"],input[type="checkbox"]{
       <h2 data-i18n="title_voluntarios">Centros que buscan voluntarios</h2>
       <button class="btn-primary" onclick="showModal('modalPedirVoluntarios')" data-i18n="btn_pedir_voluntarios">+ Pedir voluntarios</button>
     </div>
-    <p class="section-hint">¿Eres un centro, refugio u organización? Publica cuántos voluntarios necesitas y para qué. La gente se anota directamente.</p>
+    <p class="section-hint" id="hint_voluntarios_el">¿Eres un centro, refugio u organización? Publica cuántos voluntarios necesitas y para qué. La gente se anota directamente.</p>
     <div id="listaVoluntarios" class="cards-list" role="list"></div>
     <p id="emptyVoluntarios" class="empty-state"></p>
   </section>
@@ -671,7 +671,7 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formNecesidad" onsubmit="submitNecesidad(event)" novalidate>
       <div class="form-group">
-        <label>Categoría *</label>
+        <label id="lbl_nec_cat">Categoría *</label>
         <select id="nec_categoria" required>
           <option value="">Selecciona una categoría</option>
           <option value="sangre">🩸 Sangre</option>
@@ -682,7 +682,7 @@ input[type="radio"],input[type="checkbox"]{
         </select>
       </div>
       <div class="form-group" id="grupoTipoSangre" style="display:none">
-        <label>Tipo de sangre *</label>
+        <label id="lbl_nec_sangre">Tipo de sangre *</label>
         <select id="nec_tipo_sangre">
           <option value="">Selecciona tipo</option>
           <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
@@ -690,40 +690,40 @@ input[type="radio"],input[type="checkbox"]{
         </select>
       </div>
       <div class="form-group">
-        <label>Descripción *</label>
+        <label id="lbl_nec_desc">Descripción *</label>
         <textarea id="nec_descripcion" rows="3" required placeholder="Describe qué se necesita y con qué urgencia…"></textarea>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Cantidad *</label>
+          <label id="lbl_nec_cant">Cantidad *</label>
           <input type="number" id="nec_cantidad" min="1" required placeholder="1">
         </div>
         <div class="form-group">
-          <label>Unidad</label>
+          <label id="lbl_nec_unid">Unidad</label>
           <input type="text" id="nec_unidad" placeholder="unidades, cajas…">
         </div>
       </div>
       <div class="form-group">
-        <label>Ciudad / Estado *</label>
+        <label id="lbl_nec_ciudad">Ciudad / Estado *</label>
         <input type="text" id="nec_ciudad" required placeholder="Caracas, Miranda">
       </div>
       <div class="form-group">
-        <label>Hospital o centro (opcional)</label>
+        <label id="lbl_nec_hosp">Hospital o centro (opcional)</label>
         <input type="text" id="nec_hospital" placeholder="Hospital Pérez Carreño…">
       </div>
       <div class="form-group">
-        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('nec')">📍 Usar mi ubicación actual</button>
+        <button type="button" id="btn_nec_geo" class="btn-outline-geo" onclick="getGeoForForm('nec')">📍 Usar mi ubicación actual</button>
         <span id="nec_geo_status" class="geo-status"></span>
         <input type="hidden" id="nec_lat"><input type="hidden" id="nec_lng">
       </div>
       <div class="form-group">
-        <label>PIN de confirmación (4 dígitos) *</label>
+        <label id="lbl_nec_pin">PIN de confirmación (4 dígitos) *</label>
         <input type="password" id="nec_pin" maxlength="4" pattern="\d{4}" required placeholder="••••" inputmode="numeric" autocomplete="off">
-        <small>Lo usarás para confirmar cuando se compre o se reciba.</small>
+        <small id="small_nec_pin">Lo usarás para confirmar cuando se compre o se reciba.</small>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaNecesidad')">Cancelar</button>
-        <button type="submit" class="btn-primary">Publicar</button>
+        <button type="button" id="btn_nec_cancel" class="btn-outline" onclick="hideModal('modalNuevaNecesidad')">Cancelar</button>
+        <button type="submit" id="btn_nec_submit" class="btn-primary">Publicar</button>
       </div>
     </form>
   </div>
@@ -738,11 +738,11 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formInventario" onsubmit="submitInventario(event)" novalidate>
       <div class="form-group">
-        <label>Nombre del local o persona *</label>
+        <label id="lbl_inv_nombre">Nombre del local o persona *</label>
         <input type="text" id="inv_nombre_local" required placeholder="Farmacia Central, Juan Pérez…">
       </div>
       <div class="form-group">
-        <label>Categoría *</label>
+        <label id="lbl_inv_cat">Categoría *</label>
         <select id="inv_categoria" required>
           <option value="">Selecciona una categoría</option>
           <option value="sangre">🩸 Sangre</option>
@@ -753,53 +753,53 @@ input[type="radio"],input[type="checkbox"]{
         </select>
       </div>
       <div class="form-group">
-        <label>Descripción de lo que ofreces *</label>
+        <label id="lbl_inv_desc">Descripción de lo que ofreces *</label>
         <textarea id="inv_descripcion" rows="2" required placeholder="Tenemos medicamentos, equipos, alimentos…"></textarea>
       </div>
       <div class="form-group">
-        <label>Productos disponibles (uno por línea)</label>
+        <label id="lbl_inv_prod">Productos disponibles (uno por línea)</label>
         <textarea id="inv_productos" rows="3" placeholder="Gasas estériles&#10;Suero fisiológico&#10;Guantes nitrilo"></textarea>
-        <small>Aparecerán como etiquetas en tu tarjeta.</small>
+        <small id="small_inv_prod">Aparecerán como etiquetas en tu tarjeta.</small>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Cantidad disponible</label>
+          <label id="lbl_inv_cant">Cantidad disponible</label>
           <input type="number" id="inv_cantidad" min="0" placeholder="50">
         </div>
         <div class="form-group">
-          <label>Unidad</label>
+          <label id="lbl_inv_unid">Unidad</label>
           <input type="text" id="inv_unidad" placeholder="cajas, unidades…">
         </div>
       </div>
       <div class="form-group">
-        <label>Precio en Bs. (dejar vacío si es donación gratuita)</label>
+        <label id="lbl_inv_precio">Precio en Bs. (dejar vacío si es donación gratuita)</label>
         <input type="number" id="inv_precio" min="0" step="0.01" placeholder="0.00">
       </div>
       <div class="form-group">
-        <label>Ciudad / Estado *</label>
+        <label id="lbl_inv_ciudad">Ciudad / Estado *</label>
         <input type="text" id="inv_ciudad" required placeholder="Maracaibo, Zulia">
       </div>
       <div class="form-group">
-        <label>Dirección exacta</label>
+        <label id="lbl_inv_dir">Dirección exacta</label>
         <input type="text" id="inv_direccion" placeholder="Av. Bella Vista, local 4…">
       </div>
       <div class="form-group">
-        <label>Horario de atención</label>
+        <label id="lbl_inv_horario">Horario de atención</label>
         <input type="text" id="inv_horario" placeholder="Lun–Vie 8am–6pm">
       </div>
       <div class="form-group">
-        <label>Teléfono / WhatsApp *</label>
+        <label id="lbl_inv_tel">Teléfono / WhatsApp *</label>
         <input type="tel" id="inv_telefono" required placeholder="0424-1234567">
       </div>
       <div class="form-group">
-        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('inv')">📍 Geolocalizar mi ubicación</button>
+        <button type="button" id="btn_inv_geo" class="btn-outline-geo" onclick="getGeoForForm('inv')">📍 Geolocalizar mi ubicación</button>
         <span id="inv_geo_status" class="geo-status"></span>
         <input type="hidden" id="inv_lat"><input type="hidden" id="inv_lng">
-        <small>Así apareces en el mapa cuando alguien presione "Ver en mapa".</small>
+        <small id="small_inv_geo">Así apareces en el mapa cuando alguien presione "Ver en mapa".</small>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoInventario')">Cancelar</button>
-        <button type="submit" class="btn-primary">Registrar</button>
+        <button type="button" id="btn_inv_cancel" class="btn-outline" onclick="hideModal('modalNuevoInventario')">Cancelar</button>
+        <button type="submit" id="btn_inv_submit" class="btn-primary">Registrar</button>
       </div>
     </form>
   </div>
@@ -814,28 +814,28 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formVenta" onsubmit="submitVenta(event)" novalidate>
       <div class="form-group">
-        <label>Nombre del Local *</label>
+        <label id="lbl_vta_nombre">Nombre del Local *</label>
         <input type="text" id="vta_nombre" required placeholder="Ej: Farmacia Central">
       </div>
       <div class="form-group">
-        <label>Productos y Precios *</label>
+        <label id="lbl_vta_prod">Productos y Precios *</label>
         <textarea id="vta_productos" rows="3" required placeholder="Ej: Gasas a $2, Alcohol a $3, Guantes a $1..."></textarea>
       </div>
       <div class="form-group">
-        <label>Ubicación exacta *</label>
+        <label id="lbl_vta_ubic">Ubicación exacta *</label>
         <input type="text" id="vta_ubicacion" required placeholder="Av. Principal, local 4">
       </div>
       <div class="form-group">
-        <label>Teléfono *</label>
+        <label id="lbl_vta_tel">Teléfono *</label>
         <input type="tel" id="vta_telefono" required placeholder="0424-1234567">
       </div>
       <div class="form-group">
-        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('vta')">📍 Geolocalizar mi ubicación</button>
+        <button type="button" id="btn_vta_geo" class="btn-outline-geo" onclick="getGeoForForm('vta')">📍 Geolocalizar mi ubicación</button>
         <span id="vta_geo_status" class="geo-status"></span>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaVenta')">Cancelar</button>
-        <button type="submit" class="btn-primary">Publicar</button>
+        <button type="button" id="btn_vta_cancel" class="btn-outline" onclick="hideModal('modalNuevaVenta')">Cancelar</button>
+        <button type="submit" id="btn_vta_submit" class="btn-primary">Publicar</button>
       </div>
     </form>
   </div>
@@ -850,7 +850,7 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formAcopio" onsubmit="submitAcopio(event)" novalidate>
       <div class="form-group">
-        <label>Soy... *</label>
+        <label id="lbl_acp_tipo">Soy... *</label>
         <select id="acp_tipo" required onchange="document.getElementById('acp_centro_fields').style.display = this.value === 'centro' ? 'block' : 'none'; document.getElementById('acp_persona_fields').style.display = this.value === 'persona' ? 'block' : 'none';">
           <option value="">Selecciona</option>
           <option value="centro">Centro de Acopio</option>
@@ -858,18 +858,18 @@ input[type="radio"],input[type="checkbox"]{
         </select>
       </div>
       <div class="form-group">
-        <label>¿Qué artículos tienes disponibles? *</label>
+        <label id="lbl_acp_arts">¿Qué artículos tienes disponibles? *</label>
         <textarea id="acp_articulos" rows="2" required placeholder="Ropa, medicinas, comida no perecedera..."></textarea>
       </div>
       
       <!-- Campos para Centro -->
       <div id="acp_centro_fields" style="display:none;">
         <div class="form-group">
-          <label>¿De dónde son? (Organización) *</label>
+          <label id="lbl_acp_origen">¿De dónde son? (Organización) *</label>
           <input type="text" id="acp_origen" placeholder="Ej: Fundación Cruz Roja">
         </div>
         <div class="form-group">
-          <label>¿Dónde están? (Dirección exacta) *</label>
+          <label id="lbl_acp_dir">¿Dónde están? (Dirección exacta) *</label>
           <input type="text" id="acp_direccion" placeholder="Ej: Plaza Central, carpa 2">
         </div>
       </div>
@@ -877,22 +877,22 @@ input[type="radio"],input[type="checkbox"]{
       <!-- Campos para Persona Individual -->
       <div id="acp_persona_fields" style="display:none;">
         <div class="form-group">
-          <label>Cédula / Identidad *</label>
+          <label id="lbl_acp_cedula">Cédula / Identidad *</label>
           <input type="text" id="acp_cedula" placeholder="V-12345678">
         </div>
         <div class="form-group">
-          <label>Teléfono *</label>
+          <label id="lbl_acp_tel">Teléfono *</label>
           <input type="tel" id="acp_telefono" placeholder="0424-1234567">
         </div>
         <div class="form-group">
-          <label>Ciudad *</label>
+          <label id="lbl_acp_ciudad">Ciudad *</label>
           <input type="text" id="acp_ciudad" placeholder="Ej: Caracas">
         </div>
       </div>
 
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoAcopio')">Cancelar</button>
-        <button type="submit" class="btn-primary">Registrar</button>
+        <button type="button" id="btn_acp_cancel" class="btn-outline" onclick="hideModal('modalNuevoAcopio')">Cancelar</button>
+        <button type="submit" id="btn_acp_submit" class="btn-primary">Registrar</button>
       </div>
     </form>
   </div>
@@ -907,36 +907,36 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formSolicitudVoluntarios" onsubmit="submitSolicitudVoluntarios(event)" novalidate>
       <div class="form-group">
-        <label>Nombre del centro u organización *</label>
+        <label id="lbl_sv_nombre">Nombre del centro u organización *</label>
         <input type="text" id="sv_nombre_centro" required placeholder="Refugio Las Mercedes, Cruz Roja…">
       </div>
       <div class="form-group">
-        <label>Ciudad / Estado *</label>
+        <label id="lbl_sv_ciudad">Ciudad / Estado *</label>
         <input type="text" id="sv_ciudad" required placeholder="Caracas, Miranda">
       </div>
       <div class="form-group">
-        <label>¿Cuántos voluntarios necesitan? *</label>
+        <label id="lbl_sv_cantidad">¿Cuántos voluntarios necesitan? *</label>
         <input type="number" id="sv_cantidad" min="1" value="1" required>
       </div>
       <div class="form-group">
-        <label>¿Para qué tareas? *</label>
+        <label id="lbl_sv_tareas">¿Para qué tareas? *</label>
         <textarea id="sv_tareas" rows="3" required placeholder="Repartir alimentos, clasificar donaciones, acompañar personas mayores…"></textarea>
       </div>
       <div class="form-group">
-        <label>Horario en que se necesitan</label>
+        <label id="lbl_sv_horario">Horario en que se necesitan</label>
         <input type="text" id="sv_horario" placeholder="Sábados 9am–1pm, urgente esta semana…">
       </div>
       <div class="form-group">
-        <label>Persona de contacto</label>
+        <label id="lbl_sv_contacto">Persona de contacto</label>
         <input type="text" id="sv_contacto" placeholder="Nombre del responsable">
       </div>
       <div class="form-group">
-        <label>Teléfono / WhatsApp *</label>
+        <label id="lbl_sv_tel">Teléfono / WhatsApp *</label>
         <input type="tel" id="sv_telefono" required placeholder="0424-1234567">
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalPedirVoluntarios')">Cancelar</button>
-        <button type="submit" class="btn-primary">Publicar solicitud</button>
+        <button type="button" id="btn_sv_cancel" class="btn-outline" onclick="hideModal('modalPedirVoluntarios')">Cancelar</button>
+        <button type="submit" id="btn_sv_submit" class="btn-primary">Publicar solicitud</button>
       </div>
     </form>
   </div>
@@ -952,25 +952,25 @@ input[type="radio"],input[type="checkbox"]{
     <form id="formOfrecerseVoluntario" onsubmit="submitOfrecerseVoluntario(event)" novalidate>
       <input type="hidden" id="ov_id_solicitud">
       <div class="form-group">
-        <label>Nombre completo *</label>
+        <label id="lbl_ov_nombre">Nombre completo *</label>
         <input type="text" id="ov_nombre" required placeholder="Tu nombre">
       </div>
       <div class="form-group">
-        <label>Cédula / Pasaporte / ID *</label>
+        <label id="lbl_ov_cedula">Cédula / Pasaporte / ID *</label>
         <input type="text" id="ov_cedula" required placeholder="V-12345678">
-        <small>Requerido por seguridad. No se comparte públicamente.</small>
+        <small id="small_ov_cedula">Requerido por seguridad. No se comparte públicamente.</small>
       </div>
       <div class="form-group">
-        <label>Teléfono / WhatsApp *</label>
+        <label id="lbl_ov_tel">Teléfono / WhatsApp *</label>
         <input type="tel" id="ov_telefono" required placeholder="0424-1234567">
       </div>
       <div class="form-group">
-        <label>¿Qué puedes aportar? (opcional)</label>
+        <label id="lbl_ov_nota">¿Qué puedes aportar? (opcional)</label>
         <textarea id="ov_nota" rows="2" placeholder="Puedo llevar mi vehículo, tengo experiencia en primeros auxilios…"></textarea>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalOfrecerseVoluntario')">Cancelar</button>
-        <button type="submit" class="btn-primary">Ofrecerme</button>
+        <button type="button" id="btn_ov_cancel" class="btn-outline" onclick="hideModal('modalOfrecerseVoluntario')">Cancelar</button>
+        <button type="submit" id="btn_ov_submit" class="btn-primary">Ofrecerme</button>
       </div>
     </form>
   </div>
@@ -985,11 +985,11 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formEvento" onsubmit="submitEvento(event)" novalidate>
       <div class="form-group">
-        <label>Nombre del lugar *</label>
+        <label id="lbl_ev_nombre">Nombre del lugar *</label>
         <input type="text" id="ev_nombre" required placeholder="Parque Los Caobos…">
       </div>
       <div class="form-group">
-        <label>Tipo de lugar *</label>
+        <label id="lbl_ev_tipo">Tipo de lugar *</label>
         <select id="ev_tipo" required>
           <option value="">Selecciona</option>
           <option value="parque">Parque</option>
@@ -1000,7 +1000,7 @@ input[type="radio"],input[type="checkbox"]{
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Turno *</label>
+          <label id="lbl_ev_turno">Turno *</label>
           <select id="ev_turno" required>
             <option value="">Turno</option>
             <option value="desayuno">🌅 Desayuno</option>
@@ -1009,26 +1009,26 @@ input[type="radio"],input[type="checkbox"]{
           </select>
         </div>
         <div class="form-group">
-          <label>Fecha *</label>
+          <label id="lbl_ev_fecha">Fecha *</label>
           <input type="date" id="ev_fecha" required>
         </div>
       </div>
       <div class="form-group">
-        <label>Ciudad / Estado *</label>
+        <label id="lbl_ev_ciudad">Ciudad / Estado *</label>
         <input type="text" id="ev_ciudad" required placeholder="Valencia, Carabobo">
       </div>
       <div class="form-group">
-        <label>Personas estimadas</label>
+        <label id="lbl_ev_personas">Personas estimadas</label>
         <input type="number" id="ev_personas" min="0" placeholder="50">
       </div>
       <div class="form-group">
-        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('ev')">📍 Geolocalizar lugar</button>
+        <button type="button" id="btn_ev_geo" class="btn-outline-geo" onclick="getGeoForForm('ev')">📍 Geolocalizar lugar</button>
         <span id="ev_geo_status" class="geo-status"></span>
         <input type="hidden" id="ev_lat"><input type="hidden" id="ev_lng">
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoEvento')">Cancelar</button>
-        <button type="submit" class="btn-primary">Crear evento</button>
+        <button type="button" id="btn_ev_cancel" class="btn-outline" onclick="hideModal('modalNuevoEvento')">Cancelar</button>
+        <button type="submit" id="btn_ev_submit" class="btn-primary">Crear evento</button>
       </div>
     </form>
   </div>
@@ -1044,25 +1044,25 @@ input[type="radio"],input[type="checkbox"]{
     <form id="formVoluntarioComida" onsubmit="submitVoluntarioComida(event)" novalidate>
       <input type="hidden" id="vol_id_alimentacion">
       <div class="form-group">
-        <label>Nombre completo *</label>
+        <label id="lbl_vol_nombre">Nombre completo *</label>
         <input type="text" id="vol_nombre" required placeholder="Tu nombre">
       </div>
       <div class="form-group">
-        <label>Cédula / Pasaporte / ID *</label>
+        <label id="lbl_vol_cedula">Cédula / Pasaporte / ID *</label>
         <input type="text" id="vol_cedula" required placeholder="V-12345678">
-        <small>Requerido por seguridad. No se comparte públicamente.</small>
+        <small id="small_vol_cedula">Requerido por seguridad. No se comparte públicamente.</small>
       </div>
       <div class="form-group">
-        <label>¿Qué llevas? *</label>
+        <label id="lbl_vol_lleva">¿Qué llevas? *</label>
         <textarea id="vol_que_lleva" rows="2" required placeholder="Arroz, caraotas, agua…"></textarea>
       </div>
       <div class="form-group">
-        <label>Teléfono (opcional)</label>
+        <label id="lbl_vol_tel">Teléfono (opcional)</label>
         <input type="tel" id="vol_telefono" placeholder="0424-1234567">
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalVoluntarioComida')">Cancelar</button>
-        <button type="submit" class="btn-primary">Anotarme</button>
+        <button type="button" id="btn_vol_cancel" class="btn-outline" onclick="hideModal('modalVoluntarioComida')">Cancelar</button>
+        <button type="submit" id="btn_vol_submit" class="btn-primary">Anotarme</button>
       </div>
     </form>
   </div>
@@ -1078,31 +1078,31 @@ input[type="radio"],input[type="checkbox"]{
     <form id="formConductor" onsubmit="submitConductor(event)" novalidate>
       <input type="hidden" id="cond_id_insumo">
       <div class="form-group">
-        <label>Nombre o alias *</label>
+        <label id="lbl_cond_nombre">Nombre o alias *</label>
         <input type="text" id="cond_nombre" required placeholder="Tu nombre">
       </div>
       <div class="form-group">
-        <label>Cédula / Pasaporte *</label>
+        <label id="lbl_cond_cedula">Cédula / Pasaporte *</label>
         <input type="text" id="cond_cedula" required placeholder="V-12345678">
-        <small>Requerido para seguridad y trazabilidad.</small>
+        <small id="small_cond_cedula">Requerido para seguridad y trazabilidad.</small>
       </div>
       <div class="form-group">
-        <label>Teléfono (WhatsApp) *</label>
+        <label id="lbl_cond_tel">Teléfono (WhatsApp) *</label>
         <input type="tel" id="cond_telefono" required placeholder="0424-1234567">
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Ciudad origen *</label>
+          <label id="lbl_cond_origen">Ciudad origen *</label>
           <input type="text" id="cond_origen" required placeholder="Caracas">
         </div>
         <div class="form-group">
-          <label>Ciudad destino *</label>
+          <label id="lbl_cond_destino">Ciudad destino *</label>
           <input type="text" id="cond_destino" required placeholder="Valencia">
         </div>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalConductor')">Cancelar</button>
-        <button type="submit" class="btn-primary">Confirmar traslado</button>
+        <button type="button" id="btn_cond_cancel" class="btn-outline" onclick="hideModal('modalConductor')">Cancelar</button>
+        <button type="submit" id="btn_cond_submit" class="btn-primary">Confirmar traslado</button>
       </div>
     </form>
   </div>
@@ -1117,12 +1117,12 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <p id="pinMensaje" class="pin-msg"></p>
     <div class="form-group">
-      <label>PIN de 4 dígitos *</label>
+      <label id="lbl_pin_input">PIN de 4 dígitos *</label>
       <input type="password" id="pinInput" maxlength="4" pattern="\d{4}" inputmode="numeric" autocomplete="off" placeholder="••••" class="pin-input">
     </div>
     <div id="pinError" class="pin-error hidden">PIN incorrecto. Inténtalo de nuevo.</div>
     <div class="modal-actions">
-      <button class="btn-outline" onclick="hideModal('modalPin')">Cancelar</button>
+      <button id="btn_pin_cancel" class="btn-outline" onclick="hideModal('modalPin')">Cancelar</button>
       <button class="btn-primary" onclick="confirmPin()" data-i18n="btn_confirmar">Confirmar</button>
     </div>
   </div>
@@ -1136,9 +1136,9 @@ input[type="radio"],input[type="checkbox"]{
       <button class="modal-close" onclick="hideModal('modalPagoMovil')">✕</button>
     </div>
     <div class="pago-movil-info">
-      <div class="pago-row"><span class="pago-label">Banco</span><span class="pago-val">BANCARIBE</span></div>
-      <div class="pago-row"><span class="pago-label">Teléfono</span><span class="pago-val">0424-2170412</span></div>
-      <div class="pago-row"><span class="pago-label">Cédula</span><span class="pago-val">V-30.660.344</span></div>
+      <div class="pago-row"><span class="pago-label" id="pago_lbl_banco">Banco</span><span class="pago-val">BANCARIBE</span></div>
+      <div class="pago-row"><span class="pago-label" id="pago_lbl_tel">Teléfono</span><span class="pago-val">0424-2170412</span></div>
+      <div class="pago-row"><span class="pago-label" id="pago_lbl_ced">Cédula</span><span class="pago-val">V-30.660.344</span></div>
     </div>
     <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="hideModal('modalPagoMovil')" data-i18n="btn_listo">Listo</button>
   </div>
@@ -1273,30 +1273,30 @@ input[type="radio"],input[type="checkbox"]{
     </div>
     <form id="formDonacion" onsubmit="submitDonacion(event)" novalidate>
       <div class="form-group">
-        <label>Monto recibido (Bs. o $) *</label>
+        <label id="lbl_don_monto">Monto recibido (Bs. o $) *</label>
         <input type="text" id="don_monto" required placeholder="5,000 Bs. / 50 USD">
       </div>
       <div class="form-group">
-        <label>¿En qué se usó? *</label>
+        <label id="lbl_don_desc">¿En qué se usó? *</label>
         <textarea id="don_descripcion" rows="3" required placeholder="Se compraron 20 cajas de gasas y 10 litros de suero fisiológico para el Hospital Vargas…"></textarea>
       </div>
       <div class="form-group">
-        <label>¿Dónde se entregó? *</label>
+        <label id="lbl_don_donde">¿Dónde se entregó? *</label>
         <input type="text" id="don_donde" required placeholder="Hospital Vargas, Caracas">
       </div>
       <div class="form-group">
-        <label>Fecha *</label>
+        <label id="lbl_don_fecha">Fecha *</label>
         <input type="date" id="don_fecha" required>
       </div>
       <div class="form-group">
-        <label>Fotos o videos (opcional)</label>
-        <small style="display:block;margin-bottom:.4rem">Puedes subir hasta 4 archivos (fotos o videos cortos).</small>
+        <label id="lbl_don_media">Fotos o videos (opcional)</label>
+        <small id="small_don_media" style="display:block;margin-bottom:.4rem">Puedes subir hasta 4 archivos (fotos o videos cortos).</small>
         <input type="file" id="don_media" accept="image/*,video/*" multiple style="padding:.4rem;font-size:.8rem">
         <div id="don_media_preview" class="fotos-preview"></div>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn-outline" onclick="hideModal('modalPublicarDonacion')">Cancelar</button>
-        <button type="submit" class="btn-primary">Publicar</button>
+        <button type="button" id="btn_don_cancel" class="btn-outline" onclick="hideModal('modalPublicarDonacion')">Cancelar</button>
+        <button type="submit" id="btn_don_submit" class="btn-primary">Publicar</button>
       </div>
     </form>
   </div>
