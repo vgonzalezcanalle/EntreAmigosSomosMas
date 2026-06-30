@@ -406,6 +406,11 @@ input[type="radio"],input[type="checkbox"]{
 </head>
 <body>
  
+<!-- Aviso de problema de conexión con la base de datos -->
+<div id="syncErrorBanner" class="hidden" style="position:fixed;top:0;left:0;right:0;z-index:600;background:#fde8e8;color:#b91c1c;font-size:.78rem;font-weight:600;text-align:center;padding:.5rem 1rem;line-height:1.4">
+  ⚠️ No se pudo conectar con el servidor. Revisa tu conexión a internet y recarga la página.
+</div>
+ 
 <!-- BIENVENIDA -->
 <div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-label="Bienvenida">
   <div class="welcome-inner">
@@ -1310,7 +1315,7 @@ input[type="radio"],input[type="checkbox"]{
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, setDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, setDoc, updateDoc, doc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBXr6vL0lbh6A8xoWCgOLCmTtkZOpYSxas",
@@ -1325,7 +1330,7 @@ input[type="radio"],input[type="checkbox"]{
   const fbDb  = getFirestore(fbApp);
 
   // Exponer Firebase globalmente para que app.js (script normal) lo use
-  window.__firebase = { fbDb, collection, addDoc, setDoc, updateDoc, doc, onSnapshot, serverTimestamp };
+  window.__firebase = { fbDb, collection, addDoc, setDoc, updateDoc, doc, getDocs, serverTimestamp };
   window.__firebaseReady = true;
   window.dispatchEvent(new Event('firebase-ready'));
 </script>
