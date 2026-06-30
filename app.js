@@ -39,7 +39,7 @@ const I18N = {
     ig_sub:'Síguenos para actualizaciones en tiempo real',
     stat_donaciones:'Donaciones publicadas', stat_necesidades:'Necesidades cubiertas', stat_inspecciones:'Inspecciones solicitadas', inicio_transparencia_title:'💛 Transparencia total', inicio_transparencia_sub:'Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.', btn_publicar_donacion:'+ Publicar', inicio_cta_gofundme:'💚 Donar en GoFundMe', empty_donaciones:'Aún no hay donaciones publicadas.<br>¡Sé el primero en compartir cómo ayudaste! 💛',
     estado_necesitado:'🔴 Necesitado', estado_comprado:'🟡 Comprado',
-    estado_en_transito:'🟠 En tránsito', estado_recibido:'🟢 Recibido',
+    estado_en_transito:'🟠 En tránsito', estado_recibido:'🟢 Recibido', estado_necesita_transporte:'Esperando transporte',
     btn_marcar_comprado:'✅ Marcar comprado', btn_yo_traslado:'🚗 Yo lo traslado',
     btn_marcar_recibido:'🟢 Confirmar recibido', btn_maps:'📍 Ver en mapa', btn_whatsapp:'💬 WhatsApp',
     match_label:'💡 ¡Disponible cerca!',
@@ -465,21 +465,6 @@ function updateFormTranslations() {
   setPlaceholder('vol_que_lleva', 'ph_que_llevas');
   setPlaceholder('vol_telefono',  'ph_telefono');
 
-  // ── Modal: Conductor ──
-  setText('lbl_cond_nombre',  'lbl_nombre_alias');
-  setText('lbl_cond_cedula',  'lbl_cedula_pas');
-  setText('small_cond_cedula','small_trazabilidad');
-  setText('lbl_cond_tel',     'lbl_telefono_wa');
-  setText('lbl_cond_origen',  'lbl_ciudad_origen');
-  setText('lbl_cond_destino', 'lbl_ciudad_destino');
-  setText('btn_cond_cancel',  'btn_cancelar');
-  setText('btn_cond_submit',  'btn_confirmar_traslado');
-  setPlaceholder('cond_nombre',   'ph_tu_nombre');
-  setPlaceholder('cond_cedula',   'ph_cedula');
-  setPlaceholder('cond_telefono', 'ph_telefono');
-  setPlaceholder('cond_origen',   'ph_origen');
-  setPlaceholder('cond_destino',  'ph_destino');
-
   // ── Modal: PIN ──
   // ── Modal: Confirmar Acción ──
   setText('modal_confirmar_title', 'modal_confirmar_titulo');
@@ -590,7 +575,7 @@ function onDbReady(cb) {
 
 function firestoreBaseUrl() {
   const { projectId } = window.__firestoreConfig;
-  return `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
+  return `https://firestore.googleapis.com/v1/projects/${projectId}/databases/%28default%29/documents`;
 }
 
 /* Convierte un valor JS a formato de "Value" de Firestore REST */
@@ -892,8 +877,30 @@ async function marcarComprado(insumoId) {
   requestConfirmacion(`Confirma que compraste "${ins.descripcion}".`, async (nombre, telefono) => {
     DB.update('insumos', insumoId, { estado_ayuda: 'comprado' });
     notificarPublicador(ins, 'comprado', nombre, telefono);
+    // Preguntar si necesita transporte
+    setTimeout(() => preguntarSiNecesitaTransporte(insumoId), 400);
     return true;
   });
+}
+function preguntarSiNecesitaTransporte(insumoId) {
+  const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
+  const necesita = window.confirm(`¿"${ins.descripcion}" necesita transporte para ser entregado?`);
+  if (necesita) {
+    DB.add('transporte', {
+      id: uuid(),
+      id_insumo: insumoId,
+      descripcion: ins.descripcion,
+      ciudad: ins.ciudad,
+      telefono_contacto: ins.telefono_contacto || '',
+      lat: ins.lat || null,
+      lng: ins.lng || null,
+      estado_traslado: 'pendiente',
+      creado_en: now()
+    });
+    DB.update('insumos', insumoId, { estado_ayuda: 'en_transito', necesita_transporte: true });
+    showToast('🚗 Publicado en Transporte — esperando que alguien lo lleve');
+    renderAll();
+  }
 }
 async function marcarRecibido(insumoId) {
   const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
@@ -905,31 +912,15 @@ async function marcarRecibido(insumoId) {
   });
 }
 
-/* ─── MÓDULO G: Conductor ─── */
-function abrirModalConductor(insumoId) {
-  document.getElementById('cond_id_insumo').value = insumoId;
-  const ins = DB.get('insumos').find(x => x.id === insumoId);
-  if (ins) document.getElementById('cond_destino').value = ins.ciudad || '';
-  showModal('modalConductor');
-}
-function submitConductor(e) {
-  e.preventDefault();
-  const nombre   = document.getElementById('cond_nombre').value.trim();
-  const cedula   = document.getElementById('cond_cedula').value.trim();
-  const telefono = document.getElementById('cond_telefono').value.trim();
-  const origen   = document.getElementById('cond_origen').value.trim();
-  const destino  = document.getElementById('cond_destino').value.trim();
-  const insumoId = document.getElementById('cond_id_insumo').value;
-  if (!nombre || !cedula || !telefono || !origen || !destino) { showToast(t('toast_error')); return; }
-  const tel    = telefono.replace(/\D/g, '');
-  const ins    = DB.get('insumos').find(x => x.id === insumoId);
-  const waLink = `https://wa.me/${tel}?text=${encodeURIComponent(`Hola ${nombre}, quiero coordinar la entrega de: ${ins?.descripcion || ''}`)}`;
-  const cond   = DB.add('transporte', { id: uuid(), id_insumo: insumoId, nombre_conductor: nombre, cedula_conductor: cedula, telefono: tel, ciudad_origen: origen, ciudad_destino: destino, estado_traslado: 'asignado', whatsapp_link: waLink, creado_en: now() });
-  DB.update('insumos', insumoId, { estado_ayuda: 'en_transito', id_transporte: cond.id });
-  hideModal('modalConductor');
-  document.getElementById('formConductor').reset();
-  showToast(t('toast_conductor'));
-  renderAll();
+/* ─── MÓDULO G: Transporte ─── */
+function marcarTransporteEntregado(transporteId) {
+  const trans = DB.get('transporte').find(x => x.id === transporteId); if (!trans) return;
+  requestConfirmacion(`Confirma que "${trans.descripcion}" ya fue recogido / entregado.`, async (nombre, telefono) => {
+    DB.update('transporte', transporteId, { estado_traslado: 'entregado' });
+    if (trans.id_insumo) DB.update('insumos', trans.id_insumo, { estado_ayuda: 'recibido' });
+    showToast('✅ Marcado como entregado');
+    return true;
+  });
 }
 
 /* ─── MÓDULO E: Alimentación ─── */
@@ -998,7 +989,14 @@ function submitInventario(e) {
 /* ─── NUEVAS FUNCIONES PARA VENTA Y ACOPIO ─── */
 function submitVenta(e) {
   e.preventDefault();
-  // Validaciones básicas para que funcione el formulario
+  const nombre     = document.getElementById('vta_nombre').value.trim();
+  const productos  = document.getElementById('vta_productos').value.trim();
+  const ubicacion  = document.getElementById('vta_ubicacion').value.trim();
+  const telefono   = document.getElementById('vta_telefono').value.trim();
+  const lat        = parseFloat(document.getElementById('vta_lat')?.value) || null;
+  const lng        = parseFloat(document.getElementById('vta_lng')?.value) || null;
+  if (!nombre || !productos || !ubicacion || !telefono) { showToast(t('toast_error')); return; }
+  DB.add('ventas', { id: uuid(), nombre_local: nombre, productos, ubicacion, telefono, lat, lng, activo: true, creado_en: now() });
   hideModal('modalNuevaVenta');
   document.getElementById('formVenta').reset();
   const st = document.getElementById('vta_geo_status'); if(st) st.textContent = '';
@@ -1008,9 +1006,25 @@ function submitVenta(e) {
 
 function submitAcopio(e) {
   e.preventDefault();
-  // Validaciones básicas para que funcione el formulario
+  const tipo      = document.getElementById('acp_tipo').value;
+  const articulos = document.getElementById('acp_articulos').value.trim();
+  if (!tipo || !articulos) { showToast(t('toast_error')); return; }
+  const data = { id: uuid(), tipo, articulos, activo: true, creado_en: now() };
+  if (tipo === 'centro') {
+    data.origen     = document.getElementById('acp_origen').value.trim();
+    data.direccion  = document.getElementById('acp_direccion').value.trim();
+    if (!data.origen || !data.direccion) { showToast(t('toast_error')); return; }
+  } else if (tipo === 'persona') {
+    data.cedula     = document.getElementById('acp_cedula').value.trim();
+    data.telefono   = document.getElementById('acp_telefono').value.trim();
+    data.ciudad     = document.getElementById('acp_ciudad').value.trim();
+    if (!data.cedula || !data.telefono || !data.ciudad) { showToast(t('toast_error')); return; }
+  }
+  DB.add('acopio', data);
   hideModal('modalNuevoAcopio');
   document.getElementById('formAcopio').reset();
+  document.getElementById('acp_centro_fields').style.display = 'none';
+  document.getElementById('acp_persona_fields').style.display = 'none';
   showToast(t('toast_guardado'));
   renderAll();
 }
@@ -1103,18 +1117,15 @@ function renderNecesidades() {
   empty?.classList.add('hidden');
   items.forEach(item => {
     const matchData  = getMatchForInsumo(item.id);
-    const conductor  = item.id_transporte ? DB.get('transporte').find(x => x.id === item.id_transporte) : null;
     const card       = document.createElement('article');
     card.className   = 'card';
     card.setAttribute('role', 'listitem');
     const matchHtml  = matchData && item.estado_ayuda === 'necesitado'
       ? `<div class="match-badge">💡 ${matchData.inventario.nombre_local} tiene ${matchData.inventario.cantidad_disponible || ''} ${matchData.inventario.unidad || ''} disponibles</div>` : '';
-    const condHtml   = conductor && item.estado_ayuda === 'en_transito'
-      ? `<div class="conductor-info">🚗 <strong>${conductor.nombre_conductor}</strong> fue a buscarlo &nbsp;|&nbsp; <a href="${conductor.whatsapp_link}" target="_blank" rel="noopener" style="color:#25D366;font-weight:700;">💬 WhatsApp</a></div>` : '';
     let actHtml = '';
     if (item.estado_ayuda === 'necesitado') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="marcarComprado('${item.id}')">${t('btn_marcar_comprado')}</button><a href="${mapsLink(item.lat,item.lng,item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a></div>`;
-    else if (item.estado_ayuda === 'comprado') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="abrirModalConductor('${item.id}')">${t('btn_yo_traslado')}</button><a href="${mapsLink(item.lat,item.lng,item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a></div>`;
-    else if (item.estado_ayuda === 'en_transito') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="marcarRecibido('${item.id}')">${t('btn_marcar_recibido')}</button>${conductor ? `<a href="${conductor.whatsapp_link}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>` : ''}</div>`;
+    else if (item.estado_ayuda === 'comprado') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="marcarRecibido('${item.id}')">${t('btn_marcar_recibido')}</button><a href="${mapsLink(item.lat,item.lng,item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a></div>`;
+    else if (item.estado_ayuda === 'en_transito') actHtml = `<div class="card-actions"><span class="card-time">🚗 ${t('estado_necesita_transporte') || 'Esperando transporte'}</span></div>`;
     const sangreHtml = item.tipo_sangre ? ` — <strong style="color:var(--rojo)">Tipo ${item.tipo_sangre}</strong>` : '';
     card.innerHTML = `
       <div class="card-header">
@@ -1133,7 +1144,7 @@ function renderNecesidades() {
         <div class="card-time">🕐 ${timeAgo(item.creado_en)}</div>
         ${item.foto_factura_url?`<img src="${item.foto_factura_url}" alt="Factura" class="factura-thumb" loading="lazy">`:''}
       </div>
-      ${condHtml}${actHtml}`;
+      ${actHtml}`;
     lista.appendChild(card);
   });
 }
@@ -1143,8 +1154,32 @@ function renderVenta() {
   const lista = document.getElementById('listaVenta');
   const empty = document.getElementById('emptyVenta');
   if (!lista) return;
+  const items = DB.get('ventas').filter(x => x.activo !== false);
   lista.innerHTML = '';
-  emptyState(empty, t('empty_venta'));
+  if (!items.length) { emptyState(empty, t('empty_venta')); return; }
+  empty?.classList.add('hidden');
+  items.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'listitem');
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-icon">🏷️</span>
+        <div class="card-meta">
+          <div class="card-titulo">${item.nombre_local}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${(item.productos || '').replace(/\n/g,'<br>')}</p>
+        <div class="card-location">📍 ${item.ubicacion || ''}</div>
+        <div class="card-time">🕐 ${timeAgo(item.creado_en)}</div>
+      </div>
+      <div class="card-actions">
+        <a href="${mapsLink(item.lat, item.lng, item.ubicacion)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a>
+        ${item.telefono ? `<a href="https://wa.me/${item.telefono.replace(/\D/g,'')}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>` : ''}
+      </div>`;
+    lista.appendChild(card);
+  });
 }
 
 /* ─── Render: Acopio (NUEVO) ─── */
@@ -1152,8 +1187,33 @@ function renderAcopio() {
   const lista = document.getElementById('listaAcopio');
   const empty = document.getElementById('emptyAcopio');
   if (!lista) return;
+  const items = DB.get('acopio').filter(x => x.activo !== false);
   lista.innerHTML = '';
-  emptyState(empty, t('empty_acopio'));
+  if (!items.length) { emptyState(empty, t('empty_acopio')); return; }
+  empty?.classList.add('hidden');
+  items.forEach(item => {
+    const esCentro = item.tipo === 'centro';
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'listitem');
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-icon">📦</span>
+        <div class="card-meta">
+          <div class="card-titulo">${esCentro ? (item.origen || 'Centro de Acopio') : 'Persona Individual'}</div>
+          <div class="card-subtitulo">${esCentro ? t('opt_centro') : t('opt_persona')}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${item.articulos}</p>
+        ${esCentro ? `<div class="card-location">📍 ${item.direccion || ''}</div>` : `<div class="card-location">📍 ${item.ciudad || ''}</div>`}
+        <div class="card-time">🕐 ${timeAgo(item.creado_en)}</div>
+      </div>
+      <div class="card-actions">
+        ${!esCentro && item.telefono ? `<a href="https://wa.me/${item.telefono.replace(/\D/g,'')}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>` : ''}
+      </div>`;
+    lista.appendChild(card);
+  });
 }
 
 /* ─── Render: Inventario / Locales ─── */
@@ -1279,13 +1339,12 @@ function renderTransporte() {
   const lista = document.getElementById('listaTransporte');
   const empty = document.getElementById('emptyTransporte');
   if (!lista) return;
-  const activos   = DB.get('transporte').filter(x => x.estado_traslado !== 'entregado');
-  const filtered  = activos.filter(x => !filtros.ciudad || x.ciudad_origen.toLowerCase().includes(filtros.ciudad) || x.ciudad_destino.toLowerCase().includes(filtros.ciudad));
+  const activos  = DB.get('transporte').filter(x => x.estado_traslado !== 'entregado');
+  const filtered = activos.filter(x => !filtros.ciudad || (x.ciudad || '').toLowerCase().includes(filtros.ciudad));
   lista.innerHTML = '';
   if (!filtered.length) { emptyState(empty, t('empty_transporte')); return; }
   empty?.classList.add('hidden');
   filtered.forEach(item => {
-    const ins  = DB.get('insumos').find(x => x.id === item.id_insumo);
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('role', 'listitem');
@@ -1293,17 +1352,18 @@ function renderTransporte() {
       <div class="card-header">
         <span class="card-icon">🚗</span>
         <div class="card-meta">
-          <div class="card-titulo">${item.nombre_conductor}</div>
-          <div class="card-subtitulo">${item.ciudad_origen} → ${item.ciudad_destino}</div>
+          <div class="card-titulo">${(item.descripcion || '').slice(0,60)}${(item.descripcion||'').length>60?'…':''}</div>
+          <div class="card-subtitulo">${t('estado_necesita_transporte') || 'Esperando transporte'}</div>
         </div>
-        <span class="estado-badge estado-en_transito">🟠 En ruta</span>
+        <span class="estado-badge estado-en_transito">🟠 ${t('estado_en_transito')}</span>
       </div>
       <div class="card-body">
-        ${ins?`<p class="card-desc">Llevando: ${ins.descripcion.slice(0,80)}</p>`:''}
-        <div class="card-location">📍 ${item.ciudad_origen} → ${item.ciudad_destino}</div>
+        <div class="card-location">📍 ${item.ciudad || ''}</div>
+        <div class="card-time">🕐 ${timeAgo(item.creado_en)}</div>
       </div>
       <div class="card-actions">
-        <a href="${item.whatsapp_link}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>
+        ${item.telefono_contacto ? `<a href="https://wa.me/${item.telefono_contacto.replace(/\D/g,'')}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>` : ''}
+        <button class="btn-card btn-card--primary" onclick="marcarTransporteEntregado('${item.id}')">✅ Ya fue recogido / entregado</button>
       </div>`;
     lista.appendChild(card);
   });
