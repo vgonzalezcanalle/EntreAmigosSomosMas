@@ -50,7 +50,8 @@ textarea{resize:vertical;min-height:80px}
 .welcome-btn--ayudo{background:var(--verde);color:#fff}
 .welcome-btn--local{background:var(--blanco);color:var(--azul)}
 .welcome-or{font-size:.75rem;color:rgba(255,255,255,.35)}
-.welcome-skip{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:underline;cursor:pointer;margin-top:.25rem;background:none;border:none;font-family:inherit}
+.welcome-skip{font-size:.88rem;font-weight:700;color:var(--amarillo);background:rgba(255,255,255,.12);border:1.5px solid rgba(251,224,122,.4);border-radius:24px;padding:.6rem 1.4rem;cursor:pointer;margin-top:.5rem;font-family:inherit;transition:background .2s,opacity .2s;letter-spacing:.01em}
+.welcome-skip:active{opacity:.8}
  
 /* ── Banner sticky ── */
 .sticky-banner{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--bh);background:var(--amarillo);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:0 .75rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -480,6 +481,8 @@ input[type="radio"],input[type="checkbox"]{
     <button class="nav-tab" onclick="showTab('tabVoluntarios')" data-i18n="nav_voluntarios">🤝 Voluntarios</button>
     <button class="nav-tab" onclick="showTab('tabAlimentacion')" data-i18n="nav_alimentacion">🍽️ Alimentación</button>
     <button class="nav-tab" onclick="showTab('tabTransporte')" data-i18n="nav_transporte">🚗 Transporte</button>
+    <button class="nav-tab" onclick="showModal('modalInspeccion')" data-i18n="nav_inspeccion">🏗️ Inspección</button>
+    <button class="nav-tab" onclick="showModal('modalInspeccion')" data-i18n="nav_inspeccion">🏗️ Inspección</button>
   </nav>
 </header>
  
@@ -516,12 +519,15 @@ input[type="radio"],input[type="checkbox"]{
     <div class="inicio-hero">
       <div class="inicio-flag">🇻🇪</div>
       <h2 class="inicio-titulo">Entre Amigos por<br><span class="inicio-vzla">VENEZUELA</span></h2>
-      <p class="inicio-lema">Unidos por quienes más lo necesitan</p>
+      <p class="inicio-lema" data-i18n="inicio_lema">Unidos por quienes más lo necesitan</p>
     </div>
 
     <div class="inicio-about">
-      <h3 class="inicio-section-title">¿Quiénes somos?</h3>
-      <p class="inicio-p">Somos un grupo de jóvenes que, ante la emergencia causada por el terremoto en Venezuela, decidió actuar y unir esfuerzos para ayudar a las comunidades afectadas.</p><p class="inicio-p">Esta iniciativa surge con el objetivo de unir esfuerzos y trabajar de manera colaborativa junto a amigos, familiares y todas aquellas personas que desean ayudar, pero que, al encontrarse fuera del país o lejos de las zonas afectadas, no saben cómo hacerlo.</p><p class="inicio-p">Trabajamos en contacto directo con personas que se encuentran en primera línea atendiendo la emergencia y apoyando a las comunidades afectadas, lo que nos permite identificar las necesidades reales y hacer llegar la ayuda de forma rápida y directa.</p><p class="inicio-p">A través de esta plataforma compartiremos cada compra, entrega y acción realizada, garantizando total transparencia en el uso de cada donación recibida.</p>
+      <h3 class="inicio-section-title" data-i18n="inicio_quienes_title">¿Quiénes somos?</h3>
+      <p class="inicio-p" data-i18n="inicio_p1">Somos un grupo de jóvenes que, ante la emergencia causada por el terremoto en Venezuela, decidió actuar y unir esfuerzos para ayudar a las comunidades afectadas.</p>
+      <p class="inicio-p" data-i18n="inicio_p2">Esta iniciativa surge con el objetivo de unir esfuerzos y trabajar de manera colaborativa junto a amigos, familiares y todas aquellas personas que desean ayudar, pero que, al encontrarse fuera del país o lejos de las zonas afectadas, no saben cómo hacerlo.</p>
+      <p class="inicio-p" data-i18n="inicio_p3">Trabajamos en contacto directo con personas que se encuentran en primera línea atendiendo la emergencia y apoyando a las comunidades afectadas, lo que nos permite identificar las necesidades reales y hacer llegar la ayuda de forma rápida y directa.</p>
+      <p class="inicio-p" data-i18n="inicio_p4">A través de esta plataforma compartiremos cada compra, entrega y acción realizada, garantizando total transparencia en el uso de cada donación recibida.</p>
     </div>
 
     <div class="inicio-stats-row">
