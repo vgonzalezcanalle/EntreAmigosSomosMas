@@ -569,10 +569,12 @@ function compressImage(file, maxKB = 300) {
   });
 }
 
-/* ─── DB (Firebase Firestore con cache local, sincronización por polling) ─── */
-/* Usamos polling (getDocs cada X segundos) en vez de onSnapshot (conexión persistente)
-   porque onSnapshot falla en redes inestables o restringidas (común en Venezuela).
-   getDocs es una petición HTTP normal — mucho más confiable en esas condiciones. */
+/* ─── DB (Firestore vía REST API con fetch — sin SDK, sin streaming) ─── */
+/* Usamos la REST API de Firestore con peticiones fetch() normales, en vez del
+   SDK de JavaScript. El SDK abre conexiones tipo streaming (WebChannel) que
+   están bloqueadas en redes con restricciones (confirmado en Venezuela).
+   fetch() es HTTP estándar — el mismo tipo de petición que carga cualquier
+   página web, sin protocolos especiales que puedan ser bloqueados. */
 const FIRESTORE_COLLECTIONS = ['insumos','inventario','alimentacion','voluntarios_comida','transporte','solicitudes_voluntarios','respuestas_voluntarios','ventas','acopio','inspecciones','donaciones_pub'];
 const _dbCache = {};
 FIRESTORE_COLLECTIONS.forEach(c => _dbCache[c] = []);
@@ -586,14 +588,74 @@ function onDbReady(cb) {
   else _dbReadyCallbacks.push(cb);
 }
 
+function firestoreBaseUrl() {
+  const { projectId } = window.__firestoreConfig;
+  return `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
+}
+
+/* Convierte un valor JS a formato de "Value" de Firestore REST */
+function toFirestoreValue(v) {
+  if (v === null || v === undefined) return { nullValue: null };
+  if (typeof v === 'string') return { stringValue: v };
+  if (typeof v === 'boolean') return { booleanValue: v };
+  if (typeof v === 'number') {
+    return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v };
+  }
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(toFirestoreValue) } };
+  if (typeof v === 'object') {
+    const fields = {};
+    Object.entries(v).forEach(([k, val]) => { fields[k] = toFirestoreValue(val); });
+    return { mapValue: { fields } };
+  }
+  return { stringValue: String(v) };
+}
+
+/* Convierte un documento de Firestore REST de vuelta a un objeto JS plano */
+function fromFirestoreFields(fields) {
+  const obj = {};
+  if (!fields) return obj;
+  Object.entries(fields).forEach(([key, val]) => {
+    obj[key] = fromFirestoreValue(val);
+  });
+  return obj;
+}
+function fromFirestoreValue(val) {
+  if (!val) return null;
+  if ('stringValue' in val) return val.stringValue;
+  if ('integerValue' in val) return parseInt(val.integerValue, 10);
+  if ('doubleValue' in val) return val.doubleValue;
+  if ('booleanValue' in val) return val.booleanValue;
+  if ('nullValue' in val) return null;
+  if ('arrayValue' in val) return (val.arrayValue.values || []).map(fromFirestoreValue);
+  if ('mapValue' in val) return fromFirestoreFields(val.mapValue.fields);
+  if ('timestampValue' in val) return val.timestampValue;
+  return null;
+}
+
 async function fetchCollection(colName) {
-  const { fbDb, collection, getDocs } = window.__firebase;
-  const colRef = collection(fbDb, colName);
-  const snapshot = await getDocs(colRef);
-  const docs = [];
-  snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
+  const url = `${firestoreBaseUrl()}/${colName}?key=${window.__firestoreConfig.apiKey}&pageSize=300`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Firestore GET ${colName} falló: ${res.status}`);
+  const data = await res.json();
+  const docs = (data.documents || []).map(d => {
+    const id = d.name.split('/').pop();
+    return { id, ...fromFirestoreFields(d.fields) };
+  });
   docs.sort((a, b) => (b.creado_en || '').localeCompare(a.creado_en || ''));
   return docs;
+}
+
+async function writeDocument(colName, docId, data) {
+  const url = `${firestoreBaseUrl()}/${colName}/${docId}?key=${window.__firestoreConfig.apiKey}`;
+  const fields = {};
+  Object.entries(data).forEach(([k, v]) => { fields[k] = toFirestoreValue(v); });
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields })
+  });
+  if (!res.ok) throw new Error(`Firestore PATCH ${colName}/${docId} falló: ${res.status}`);
+  return res.json();
 }
 
 async function syncAllCollections({ isFirstLoad } = {}) {
@@ -626,7 +688,6 @@ async function syncAllCollections({ isFirstLoad } = {}) {
 function updateSyncStatusBanner() {
   const banner = document.getElementById('syncErrorBanner');
   if (!banner) return;
-  // Solo mostramos el aviso si fallan 3 intentos seguidos (~36 segundos sin poder conectar)
   banner.classList.toggle('hidden', _syncErrorCount < 3);
 }
 
@@ -639,16 +700,15 @@ const DB = {
   get(col) { return _dbCache[col] || []; },
   find(col, fn) { return DB.get(col).filter(fn); },
   add(col, item) {
-    const { fbDb, doc, setDoc } = window.__firebase;
     const finalItem = { ...item, id: item.id || uuid() };
-    setDoc(doc(fbDb, col, finalItem.id), finalItem)
-      .then(() => syncAllCollections({ isFirstLoad: false })) // refresca de inmediato tras publicar
+    const { id, ...dataSinId } = finalItem;
+    writeDocument(col, id, dataSinId)
+      .then(() => syncAllCollections({ isFirstLoad: false }))
       .catch(err => console.error('Error al guardar en', col, err));
     return finalItem;
   },
   update(col, id, patch) {
-    const { fbDb, doc, updateDoc } = window.__firebase;
-    updateDoc(doc(fbDb, col, id), { ...patch, actualizado_en: now() })
+    writeDocument(col, id, { ...patch, actualizado_en: now() })
       .then(() => syncAllCollections({ isFirstLoad: false }))
       .catch(err => console.error('Error al actualizar', col, id, err));
   },
@@ -1274,16 +1334,12 @@ document.addEventListener('DOMContentLoaded', () => {
     o.addEventListener('click', e => { if (e.target === o) hideModal(o.id); });
   });
 
-  function startApp() {
-    initFirestoreSync();
-    onDbReady(() => {
-      applyFilters();
-      setLang('es');
-      renderAll();
-    });
-  }
-  if (window.__firebaseReady) startApp();
-  else window.addEventListener('firebase-ready', startApp);
+  initFirestoreSync();
+  onDbReady(() => {
+    applyFilters();
+    setLang('es');
+    renderAll();
+  });
 
   // Re-render al abrir modal de transparencia
   document.getElementById('modalTransparencia')?.addEventListener('click', () => {});
