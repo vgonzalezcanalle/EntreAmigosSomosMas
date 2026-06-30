@@ -532,29 +532,29 @@ input[type="radio"],input[type="checkbox"]{
     <div class="inicio-stats-row">
       <div class="inicio-stat">
         <span class="istat-num" id="statDonaciones">0</span>
-        <span class="istat-label">Donaciones publicadas</span>
+        <span class="istat-label" data-i18n="stat_donaciones">Donaciones publicadas</span>
       </div>
       <div class="inicio-stat">
         <span class="istat-num" id="statNecesidades">0</span>
-        <span class="istat-label">Necesidades cubiertas</span>
+        <span class="istat-label" data-i18n="stat_necesidades">Necesidades cubiertas</span>
       </div>
       <div class="inicio-stat">
         <span class="istat-num" id="statInspecciones">0</span>
-        <span class="istat-label">Inspecciones solicitadas</span>
+        <span class="istat-label" data-i18n="stat_inspecciones">Inspecciones solicitadas</span>
       </div>
     </div>
 
     <div class="inicio-don-section">
       <div class="inicio-don-header">
-        <h3 class="inicio-section-title" style="margin:0">💛 Transparencia total</h3>
-        <button class="btn-primary btn-sm" onclick="showModal('modalPublicarDonacion')">+ Publicar</button>
+        <h3 class="inicio-section-title" style="margin:0" data-i18n="inicio_transparencia_title">💛 Transparencia total</h3>
+        <button class="btn-primary btn-sm" onclick="showModal('modalPublicarDonacion')" data-i18n="btn_publicar_donacion">+ Publicar</button>
       </div>
-      <p style="font-size:.8rem;color:var(--gsub);margin:.4rem 0 .85rem;line-height:1.5">Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.</p>
+      <p style="font-size:.8rem;color:var(--gsub);margin:.4rem 0 .85rem;line-height:1.5" data-i18n="inicio_transparencia_sub">Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.</p>
       <div id="listaDonacionesInicio"></div>
     </div>
 
     <div class="inicio-cta-row">
-      <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-green">
+      <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-green" data-i18n="inicio_cta_gofundme">
         💚 Donar en GoFundMe
       </a>
       <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-ig">
