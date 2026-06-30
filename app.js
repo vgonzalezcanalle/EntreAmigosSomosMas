@@ -569,44 +569,70 @@ function compressImage(file, maxKB = 300) {
   });
 }
 
-/* ─── DB (Firebase Firestore con cache local en tiempo real) ─── */
+/* ─── DB (Firebase Firestore con cache local, sincronización por polling) ─── */
+/* Usamos polling (getDocs cada X segundos) en vez de onSnapshot (conexión persistente)
+   porque onSnapshot falla en redes inestables o restringidas (común en Venezuela).
+   getDocs es una petición HTTP normal — mucho más confiable en esas condiciones. */
 const FIRESTORE_COLLECTIONS = ['insumos','inventario','alimentacion','voluntarios_comida','transporte','solicitudes_voluntarios','respuestas_voluntarios','ventas','acopio','inspecciones','donaciones_pub'];
 const _dbCache = {};
 FIRESTORE_COLLECTIONS.forEach(c => _dbCache[c] = []);
 let _dbReady = false;
 let _dbReadyCallbacks = [];
+let _syncErrorCount = 0;
+const POLL_INTERVAL_MS = 12000; // 12 segundos
 
 function onDbReady(cb) {
   if (_dbReady) cb();
   else _dbReadyCallbacks.push(cb);
 }
 
-function initFirestoreSync() {
-  const { fbDb, collection, onSnapshot } = window.__firebase;
-  let loadedCount = 0;
-  FIRESTORE_COLLECTIONS.forEach(colName => {
-    const colRef = collection(fbDb, colName);
-    onSnapshot(colRef, snapshot => {
-      const docs = [];
-      snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
-      // Más recientes primero (por creado_en si existe)
-      docs.sort((a, b) => (b.creado_en || '').localeCompare(a.creado_en || ''));
-      _dbCache[colName] = docs;
-      if (!_dbReady) {
-        loadedCount++;
-        if (loadedCount >= FIRESTORE_COLLECTIONS.length) {
-          _dbReady = true;
-          _dbReadyCallbacks.forEach(cb => cb());
-          _dbReadyCallbacks = [];
-        }
-      } else {
-        // Ya estábamos listos — esto es una actualización en tiempo real
-        renderAll();
-      }
-    }, err => {
-      console.error('Firestore sync error en', colName, err);
-    });
+async function fetchCollection(colName) {
+  const { fbDb, collection, getDocs } = window.__firebase;
+  const colRef = collection(fbDb, colName);
+  const snapshot = await getDocs(colRef);
+  const docs = [];
+  snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
+  docs.sort((a, b) => (b.creado_en || '').localeCompare(a.creado_en || ''));
+  return docs;
+}
+
+async function syncAllCollections({ isFirstLoad } = {}) {
+  let anyChanged = false;
+  const results = await Promise.allSettled(FIRESTORE_COLLECTIONS.map(colName => fetchCollection(colName)));
+  results.forEach((result, i) => {
+    const colName = FIRESTORE_COLLECTIONS[i];
+    if (result.status === 'fulfilled') {
+      const newDocs = result.value;
+      const oldStr = JSON.stringify(_dbCache[colName]);
+      const newStr = JSON.stringify(newDocs);
+      if (oldStr !== newStr) anyChanged = true;
+      _dbCache[colName] = newDocs;
+      _syncErrorCount = 0;
+    } else {
+      console.error('Error al sincronizar', colName, result.reason);
+      _syncErrorCount++;
+    }
   });
+  if (isFirstLoad) {
+    _dbReady = true;
+    _dbReadyCallbacks.forEach(cb => cb());
+    _dbReadyCallbacks = [];
+  } else if (anyChanged) {
+    renderAll();
+  }
+  updateSyncStatusBanner();
+}
+
+function updateSyncStatusBanner() {
+  const banner = document.getElementById('syncErrorBanner');
+  if (!banner) return;
+  // Solo mostramos el aviso si fallan 3 intentos seguidos (~36 segundos sin poder conectar)
+  banner.classList.toggle('hidden', _syncErrorCount < 3);
+}
+
+function initFirestoreSync() {
+  syncAllCollections({ isFirstLoad: true });
+  setInterval(() => syncAllCollections({ isFirstLoad: false }), POLL_INTERVAL_MS);
 }
 
 const DB = {
@@ -615,12 +641,16 @@ const DB = {
   add(col, item) {
     const { fbDb, doc, setDoc } = window.__firebase;
     const finalItem = { ...item, id: item.id || uuid() };
-    setDoc(doc(fbDb, col, finalItem.id), finalItem).catch(err => console.error('Error al guardar en', col, err));
+    setDoc(doc(fbDb, col, finalItem.id), finalItem)
+      .then(() => syncAllCollections({ isFirstLoad: false })) // refresca de inmediato tras publicar
+      .catch(err => console.error('Error al guardar en', col, err));
     return finalItem;
   },
   update(col, id, patch) {
     const { fbDb, doc, updateDoc } = window.__firebase;
-    updateDoc(doc(fbDb, col, id), { ...patch, actualizado_en: now() }).catch(err => console.error('Error al actualizar', col, id, err));
+    updateDoc(doc(fbDb, col, id), { ...patch, actualizado_en: now() })
+      .then(() => syncAllCollections({ isFirstLoad: false }))
+      .catch(err => console.error('Error al actualizar', col, id, err));
   },
 };
 
