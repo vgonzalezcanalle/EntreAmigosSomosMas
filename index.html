@@ -723,11 +723,6 @@ input[type="radio"],input[type="checkbox"]{
         <label id="lbl_nec_tel">Número de contacto (WhatsApp) *</label>
         <input type="tel" id="nec_telefono" required placeholder="0424-1234567">
       </div>
-      <div class="form-group">
-        <label id="lbl_nec_pin">PIN de confirmación (4 dígitos) *</label>
-        <input type="password" id="nec_pin" maxlength="4" pattern="\d{4}" required placeholder="••••" inputmode="numeric" autocomplete="off">
-        <small id="small_nec_pin">Lo usarás para confirmar cuando se compre o se reciba.</small>
-      </div>
       <div class="modal-actions">
         <button type="button" id="btn_nec_cancel" class="btn-outline" onclick="hideModal('modalNuevaNecesidad')">Cancelar</button>
         <button type="submit" id="btn_nec_submit" class="btn-primary">Publicar</button>
@@ -1115,22 +1110,26 @@ input[type="radio"],input[type="checkbox"]{
   </div>
 </div>
  
-<!-- Modal: PIN -->
-<div id="modalPin" class="modal-overlay hidden" role="dialog" aria-modal="true">
+<!-- Modal: Confirmar Acción (reemplaza PIN) -->
+<div id="modalConfirmarAccion" class="modal-overlay hidden" role="dialog" aria-modal="true">
   <div class="modal-card modal-card--sm">
     <div class="modal-header">
-      <h3 data-i18n="modal_pin">Confirmar con PIN</h3>
-      <button class="modal-close" onclick="hideModal('modalPin')">✕</button>
+      <h3 id="modal_confirmar_title">Confirmar acción</h3>
+      <button class="modal-close" onclick="hideModal('modalConfirmarAccion')">✕</button>
     </div>
-    <p id="pinMensaje" class="pin-msg"></p>
+    <p id="confirmarMensaje" class="pin-msg"></p>
     <div class="form-group">
-      <label id="lbl_pin_input">PIN de 4 dígitos *</label>
-      <input type="password" id="pinInput" maxlength="4" pattern="\d{4}" inputmode="numeric" autocomplete="off" placeholder="••••" class="pin-input">
+      <label id="lbl_confirmar_nombre">Tu nombre *</label>
+      <input type="text" id="confirmarNombre" placeholder="Tu nombre" required>
     </div>
-    <div id="pinError" class="pin-error hidden">PIN incorrecto. Inténtalo de nuevo.</div>
+    <div class="form-group">
+      <label id="lbl_confirmar_tel">Tu WhatsApp *</label>
+      <input type="tel" id="confirmarTelefono" placeholder="0424-1234567" required>
+    </div>
+    <div id="confirmarError" class="pin-error hidden">Completa tu nombre y WhatsApp.</div>
     <div class="modal-actions">
-      <button id="btn_pin_cancel" class="btn-outline" onclick="hideModal('modalPin')">Cancelar</button>
-      <button class="btn-primary" onclick="confirmPin()" data-i18n="btn_confirmar">Confirmar</button>
+      <button id="btn_confirmar_cancel" class="btn-outline" onclick="hideModal('modalConfirmarAccion')">Cancelar</button>
+      <button class="btn-primary" onclick="confirmAccion()" id="btn_confirmar_accion">Confirmar</button>
     </div>
   </div>
 </div>
@@ -1309,6 +1308,27 @@ input[type="radio"],input[type="checkbox"]{
   </div>
 </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, setDoc, updateDoc, doc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXr6vL0lbh6A8xoWCgOLCmTtkZOpYSxas",
+    authDomain: "entreamigos-venezuela.firebaseapp.com",
+    projectId: "entreamigos-venezuela",
+    storageBucket: "entreamigos-venezuela.firebasestorage.app",
+    messagingSenderId: "872105031844",
+    appId: "1:872105031844:web:3c4056abd5dd39eb4fce31"
+  };
+
+  const fbApp = initializeApp(firebaseConfig);
+  const fbDb  = getFirestore(fbApp);
+
+  // Exponer Firebase globalmente para que app.js (script normal) lo use
+  window.__firebase = { fbDb, collection, addDoc, setDoc, updateDoc, doc, onSnapshot, serverTimestamp };
+  window.__firebaseReady = true;
+  window.dispatchEvent(new Event('firebase-ready'));
+</script>
 <script src="app.js"></script>
 </body>
 </html>
